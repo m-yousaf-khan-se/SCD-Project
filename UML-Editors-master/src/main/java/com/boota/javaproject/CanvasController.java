@@ -37,6 +37,12 @@ public class CanvasController {
     private GraphicsContext gc;
     private ArrayList<Class> classes = new ArrayList<>();
     private ArrayList<Association> associations = new ArrayList<>();
+    private ArrayList<Composition> compositions = new ArrayList<>();
+    private ArrayList<Aggregation> aggregations = new ArrayList<>();
+    private ArrayList<Inheritance> inheritances = new ArrayList<>();
+
+
+
 
     private String activeTool = null;
     private Map<String, BiConsumer<Double, Double>> drawActions = new HashMap<>();
@@ -48,13 +54,21 @@ public class CanvasController {
 
     @FXML
     public void initialize() {
-        canvas = new Canvas(canvasPane.getWidth(), canvasPane.getHeight());
+        //canvas = new Canvas(canvasPane.getWidth(), canvasPane.getHeight());
+        canvas = new Canvas(1800,2200);
+
         gc = canvas.getGraphicsContext2D();
+
+        System.out.println("inside intialize");
+
         canvasPane.getChildren().add(canvas);
+
 
         drawActions.put("Class", this::drawClass);
         //drawActions.put("Comment", this::drawComment);
-        //drawActions.put("Association", this::drawAssociation);
+        drawActions.put("Association", this::drawAssociation);
+        //drawActions.put("Composition", this::drawComposition);
+
 
 
         canvasPane.setOnMouseMoved(this::trackMouseCoordinates);
@@ -72,6 +86,14 @@ public class CanvasController {
 
     public void handleCommentButtonClick() {activeTool = "Comment";}
 
+    public void handleCompositionButtonClick() {activeTool="Composition";}
+
+    public void handleAggregationButtonClick() {activeTool="Aggregation";}
+
+    public void handleInheritanceButtonClick() {activeTool="Inheritance";}
+
+
+
     private void trackMouseCoordinates(MouseEvent event) {
         double x = event.getX();
         double y = event.getY();
@@ -81,63 +103,176 @@ public class CanvasController {
     private void handleCanvasClick(MouseEvent event) {
         double x = event.getX();
         double y = event.getY();
+        if (activeTool.equals("Association")) {
+            // Handle association line drawing
+            System.out.println("Association clicked.");
+            handleAssociationClick(x, y);
+        }
+        else if (activeTool.equals("Composition")) {
+            // Handle association line drawing
+            System.out.println("Composition clicked.");
+            handleCompositionClick(x,y);
+        }
+        else if (activeTool.equals("Aggregation")) {
+            // Handle association line drawing
+            System.out.println("Aggergation clicked.");
+            handleAggregationClick(x,y);
+        }
+        else if (activeTool.equals("Inheritance")) {
+            // Handle association line drawing
+            System.out.println("Aggergation clicked.");
+            handleInheritanceClick(x,y);
+        }
 
         if (event.getClickCount() == 2) {
             handleDoubleClick(x, y);
         }
         else if (activeTool != null) {
-//            BiConsumer<Double, Double> drawAction = drawActions.get(activeTool);
-//            if (drawAction != null) {
-//                drawAction.accept(x, y);
-//            }
-            if (activeTool.equals("Association")) {
-                // Handle association line drawing
-                handleAssociationClick(x, y);
-            } else {
-                BiConsumer<Double, Double> drawAction = drawActions.get(activeTool);
-                if (drawAction != null) {
-                    drawAction.accept(x, y);
-                }
+            BiConsumer<Double, Double> drawAction = drawActions.get(activeTool);
+            if (drawAction != null) {
+                drawAction.accept(x, y);
             }
+
         }
     }
+
+
+
 
     private void handleAssociationClick(double x, double y) {
         // Find the node closest to the mouse click position
-        for (Map.Entry<Node, Object> entry : elementMap.entrySet()) {
-            Node node = entry.getKey();
-            if (isWithinBounds(node, x, y)) {
-                if (sourceNode == null) {
-                    // First click - set source node
-                    sourceNode = node;
-                } else if (targetNode == null) {
-                    // Second click - set target node
-                    targetNode = node;
-                    drawAssociationLine();
-                }
-                break;
+        Node clickedNode = findNodeAtPosition(x, y);
+        if (clickedNode != null) {
+            if (sourceNode == null) {
+                // First click - set source node
+                System.out.println("SourceNode clicked.");
+                sourceNode = clickedNode;
+            } else if (targetNode == null && clickedNode != sourceNode) {
+                // Second click - set target node and draw association line
+                System.out.println("targetNode clicked.");
+                targetNode = clickedNode;
+                drawAssociationLine(sourceNode, targetNode); // Draw the line
+                resetAssociation(); // Reset the source and target nodes for the next association
             }
         }
     }
 
-    private void drawAssociationLine() {
-        if (sourceNode != null && targetNode != null) {
-            // Get coordinates of both source and target nodes
-            double sourceX = sourceNode.getLayoutX() + sourceNode.getBoundsInParent().getWidth() / 2;
-            double sourceY = sourceNode.getLayoutY() + sourceNode.getBoundsInParent().getHeight() / 2;
-            double targetX = targetNode.getLayoutX() + targetNode.getBoundsInParent().getWidth() / 2;
-            double targetY = targetNode.getLayoutY() + targetNode.getBoundsInParent().getHeight() / 2;
 
-            // Draw the association line using GraphicsContext
-            gc.setStroke(Color.BLACK);
-            gc.setLineWidth(2);
-            gc.strokeLine(sourceX, sourceY, targetX, targetY);
 
-            // Reset source and target nodes for the next association
-            sourceNode = null;
-            targetNode = null;
+
+    private void resetAssociation() {
+        sourceNode = null;
+        targetNode = null;
+    }
+
+//composition
+
+    private void handleCompositionClick(double x, double y) {
+        // Find the node closest to the mouse click position
+        Node clickedNode = findNodeAtPosition(x, y);
+        if (clickedNode != null) {
+            if (sourceNode == null) {
+                // First click - set source node
+                System.out.println("SourceNode clicked for composition.");
+                sourceNode = clickedNode;
+            } else if (targetNode == null && clickedNode != sourceNode) {
+                // Second click - set target node and draw composition line
+                System.out.println("TargetNode clicked for composition.");
+                targetNode = clickedNode;
+
+                // Draw the composition line
+                drawCompositionLine(sourceNode, targetNode);
+
+                // Optionally, store this composition relationship
+                Class sourceClass = (Class) elementMap.get(sourceNode);
+                Class targetClass = (Class) elementMap.get(targetNode);
+                Composition composition = new Composition(sourceClass, targetClass);
+                compositions.add(composition);
+
+                // Reset the nodes for the next composition
+                resetComposition();
+            }
         }
     }
+
+    private void resetComposition() {
+        sourceNode = null;
+        targetNode = null;
+    }
+
+//Aggregation
+private void handleAggregationClick(double x, double y) {
+    // Find the node closest to the mouse click position
+    Node clickedNode = findNodeAtPosition(x, y);
+    if (clickedNode != null) {
+        if (sourceNode == null) {
+            // First click - set source node
+            System.out.println("SourceNode clicked for composition.");
+            sourceNode = clickedNode;
+        } else if (targetNode == null && clickedNode != sourceNode) {
+            // Second click - set target node and draw composition line
+            System.out.println("TargetNode clicked for composition.");
+            targetNode = clickedNode;
+
+            // Draw the composition line
+            drawAggregationLine(sourceNode, targetNode);
+
+            // Optionally, store this composition relationship
+            Class sourceClass = (Class) elementMap.get(sourceNode);
+            Class targetClass = (Class) elementMap.get(targetNode);
+            Composition composition = new Composition(sourceClass, targetClass);
+            compositions.add(composition);
+
+            // Reset the nodes for the next composition
+            resetAggregation();
+        }
+    }
+}
+
+    private void resetAggregation() {
+        sourceNode = null;
+        targetNode = null;
+    }
+
+// Inheritance
+
+    private void handleInheritanceClick(double x, double y) {
+        if (sourceNode == null) {
+            // First click to select the source (child) node
+            for (Map.Entry<Node, Object> entry : elementMap.entrySet()) {
+                Node node = entry.getKey();
+                if (isWithinBounds(node, x, y)) {
+                    sourceNode = node;
+                    break;
+                }
+            }
+        } else {
+            // Second click to select the target (parent) node
+            for (Map.Entry<Node, Object> entry : elementMap.entrySet()) {
+                Node node = entry.getKey();
+                if (isWithinBounds(node, x, y) && node != sourceNode) {
+                    targetNode = node;
+
+                    // Create Inheritance relationship
+                    Class sourceClass = (Class) elementMap.get(sourceNode); // Child class
+                    Class targetClass = (Class) elementMap.get(targetNode); // Parent class
+                    Inheritance inheritance = new Inheritance(sourceClass, targetClass);
+                    inheritances.add(inheritance);
+
+                    // Draw the inheritance line (with triangle)
+                    drawInheritanceLine(sourceNode, targetNode);
+
+                    // Reset nodes for the next interaction
+                    sourceNode = null;
+                    targetNode = null;
+
+                    break;
+                }
+            }
+        }
+    }
+
+
 
     private void handleDoubleClick(double x, double y) {
         for (Map.Entry<Node, Object> entry : elementMap.entrySet()) {
@@ -420,6 +555,7 @@ public class CanvasController {
     }
 
     public void redrawcanvas() {
+        System.out.println("Inside redraw canvas for class");
         canvasPane.getChildren().clear();
         for (Class myClass : classes) {
             redrawClass(myClass);
@@ -427,32 +563,68 @@ public class CanvasController {
     }
 
 
-//    public void redrawCanvas() {
-//        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight()); // Clear the canvas before redrawing
-//
-//        // Redraw all classes
-//        for (Class clazz : classes) {
-//            double x = clazz.getInitialPoint().getX();
-//            double y = clazz.getInitialPoint().getY();
-//           // drawClass(x, y, clazz); // Pass position and class to draw
-//            redrawClass(clazz);
-//        }
-//
-//        // Redraw all associations
-//        for (Association association : associations) {
-//            Class sourceClass = association.getInitialClass();
-//            Class targetClass = association.getFinalClass();
-//
-//            // Get the start and end points from the classes
-//            double startX = sourceClass.getInitialPoint().getX();
-//            double startY = sourceClass.getInitialPoint().getY();
-//            double endX = targetClass.getInitialPoint().getX();
-//            double endY = targetClass.getInitialPoint().getY();
-//
-//            // Draw the association between the classes
-//            drawAssociation(startY, endX); // Use start and end points
-//        }
-//    }
+    public void redrawCanvas() {
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight()); // Clear the canvas before redrawing
+
+        // Redraw all classes
+        for (Class clazz : classes) {
+            double x = clazz.getInitialPoint().getX();
+            double y = clazz.getInitialPoint().getY();
+           // drawClass(x, y, clazz); // Pass position and class to draw
+            redrawClass(clazz);
+        }
+        System.out.println("Inside redraw canvas");
+
+        // Redraw all associations
+        for (Association association : associations) {
+            Class sourceClass = association.getInitialClass();
+            Class targetClass = association.getFinalClass();
+
+            // Get the start and end points from the classes
+            double startX = sourceClass.getInitialPoint().getX();
+            double startY = sourceClass.getInitialPoint().getY();
+            double endX = targetClass.getInitialPoint().getX();
+            double endY = targetClass.getInitialPoint().getY();
+
+            // Draw the association between the classes
+            drawAssociation(startY, endX); // Use start and end points
+        }
+
+        // composition
+
+
+        for (Composition composition : compositions) {
+            // Retrieve source and target classes
+            Class sourceClass = composition.getSourceClass();
+            Class targetClass = composition.getTargetClass();
+
+            // Find the corresponding nodes (if you are storing nodes in a map)
+            Node sourceNode = findNodeForClass(sourceClass);
+            Node targetNode = findNodeForClass(targetClass);
+
+            // Ensure both nodes are valid before drawing
+            if (sourceNode != null && targetNode != null) {
+                drawCompositionLine(sourceNode, targetNode); // Pass nodes to the function
+            }
+        }
+
+        //Aggregation
+        for (Aggregation aggregation : aggregations) {
+            // Retrieve source and target classes
+            Class sourceClass = aggregation.getSourceClass();
+            Class targetClass = aggregation.getTargetClass();
+
+            // Find the corresponding nodes (if you are storing nodes in a map)
+            Node sourceNode = findNodeForClass(sourceClass);
+            Node targetNode = findNodeForClass(targetClass);
+
+            // Ensure both nodes are valid before drawing
+            if (sourceNode != null && targetNode != null) {
+                drawAggregationLine(sourceNode, targetNode); // Pass nodes to the function
+            }
+        }
+
+    }
 
 
     private void redrawClass(Class claz) {
@@ -511,55 +683,60 @@ public class CanvasController {
     }
 
 
-//    private void drawAssociation(double x, double y) {
-//        if (sourceNode == null) {
-//            for (Map.Entry<Node, Object> entry : elementMap.entrySet()) {
-//                Node node = entry.getKey();
-//                if (isWithinBounds(node, x, y)) {
-//                    sourceNode = node;
-//                    break;
-//                }
-//            }
-//        } else {
-//            for (Map.Entry<Node, Object> entry : elementMap.entrySet()) {
-//                Node node = entry.getKey();
-//                if (isWithinBounds(node, x, y) && node != sourceNode) {
-//                    targetNode = node;
-//
-//                    // Create Association
-//                    Class sourceClass = (Class) elementMap.get(sourceNode);
-//                    Class targetClass = (Class) elementMap.get(targetNode);
-//                    Association association = new Association(sourceClass, targetClass);
-//                    associations.add(association);
-//
-//                    // Draw the association (line between the two classes)
-//                    gc.setStroke(Color.BLACK);
-//                    gc.setLineWidth(2);
-//                    gc.strokeLine(sourceNode.getLayoutX() + sourceNode.getBoundsInParent().getWidth() / 2,
-//                            sourceNode.getLayoutY() + sourceNode.getBoundsInParent().getHeight() / 2,
-//                            targetNode.getLayoutX() + targetNode.getBoundsInParent().getWidth() / 2,
-//                            targetNode.getLayoutY() + targetNode.getBoundsInParent().getHeight() / 2);
-//
-//                    sourceNode = null;
-//                    targetNode = null;
-//
-//                    break;
-//                }
-//            }
-//        }
-//    }
+    private void drawAssociation(double x, double y) {
+        if (sourceNode == null) {
+            for (Map.Entry<Node, Object> entry : elementMap.entrySet()) {
+                Node node = entry.getKey();
+                if (isWithinBounds(node, x, y)) {
+                    sourceNode = node;
+                    break;
+                }
+            }
+        } else {
+            for (Map.Entry<Node, Object> entry : elementMap.entrySet()) {
+                Node node = entry.getKey();
+                if (isWithinBounds(node, x, y) && node != sourceNode) {
+                    targetNode = node;
 
-//    private void drawAssociationLine(Node sourceNode, Node targetNode) {
-//        gc.setStroke(Color.BLACK);
-//        gc.setLineWidth(2);
-//
-//        double startX = sourceNode.getLayoutX() + sourceNode.getBoundsInParent().getWidth() / 2;
-//        double startY = sourceNode.getLayoutY() + sourceNode.getBoundsInParent().getHeight() / 2;
-//        double endX = targetNode.getLayoutX() + targetNode.getBoundsInParent().getWidth() / 2;
-//        double endY = targetNode.getLayoutY() + targetNode.getBoundsInParent().getHeight() / 2;
-//
-//        gc.strokeLine(startX, startY, endX, endY);
-//    }
+                    // Create Association
+                    Class sourceClass = (Class) elementMap.get(sourceNode);
+                    Class targetClass = (Class) elementMap.get(targetNode);
+                    Association association = new Association(sourceClass, targetClass);
+                    associations.add(association);
+
+                    // Draw the association (line between the two classes)
+                    gc.setStroke(Color.BLACK);
+                    gc.setLineWidth(2);
+                    gc.strokeLine(sourceNode.getLayoutX() + sourceNode.getBoundsInParent().getWidth() / 2,
+                            sourceNode.getLayoutY() + sourceNode.getBoundsInParent().getHeight() / 2,
+                            targetNode.getLayoutX() + targetNode.getBoundsInParent().getWidth() / 2,
+                            targetNode.getLayoutY() + targetNode.getBoundsInParent().getHeight() / 2);
+
+                    sourceNode = null;
+                    targetNode = null;
+
+                    break;
+                }
+            }
+        }
+    }
+
+    private void drawAssociationLine(Node sourceNode, Node targetNode) {
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(2);
+        gc.setFill(Color.BLUE);
+        System.out.println("Inside drawAssociation function");
+
+        double startX = sourceNode.getLayoutX() + sourceNode.getBoundsInParent().getWidth() / 2;
+        double startY = sourceNode.getLayoutY() + sourceNode.getBoundsInParent().getHeight() / 2;
+        double endX = targetNode.getLayoutX() + targetNode.getBoundsInParent().getWidth() / 2;
+        double endY = targetNode.getLayoutY() + targetNode.getBoundsInParent().getHeight() / 2;
+
+        gc.strokeLine(startX, startY, endX, endY);
+        //gc.strokeLine(200,200,200,200);
+    }
+
+
 
     private Node findNodeAtPosition(double x, double y) {
         for (Node node : elementMap.keySet()) {
@@ -569,6 +746,293 @@ public class CanvasController {
         }
         return null;
     }
+
+
+// for composition
+
+
+    private void drawComposition(double x, double y) {
+        if (sourceNode == null) {
+            for (Map.Entry<Node, Object> entry : elementMap.entrySet()) {
+                Node node = entry.getKey();
+                if (isWithinBounds(node, x, y)) {
+                    sourceNode = node;
+                    break;
+                }
+            }
+        } else {
+            for (Map.Entry<Node, Object> entry : elementMap.entrySet()) {
+                Node node = entry.getKey();
+                if (isWithinBounds(node, x, y) && node != sourceNode) {
+                    targetNode = node;
+
+                    // Create Composition
+                    Class sourceClass = (Class) elementMap.get(sourceNode);
+                    Class targetClass = (Class) elementMap.get(targetNode);
+                    Composition composition = new Composition(sourceClass, targetClass);
+                    compositions.add(composition);
+
+                    // Draw the composition (line and diamond)
+                    drawCompositionLine(sourceNode, targetNode);
+
+                    sourceNode = null;
+                    targetNode = null;
+
+                    break;
+                }
+            }
+        }
+    }
+
+    private void drawCompositionLine(Node sourceNode, Node targetNode) {
+        // Calculate center points for both source and target nodes
+        double startX = sourceNode.getLayoutX() + sourceNode.getBoundsInParent().getWidth() / 2;
+        double startY = sourceNode.getLayoutY() + sourceNode.getBoundsInParent().getHeight() / 2;
+        double endX = targetNode.getLayoutX() + targetNode.getBoundsInParent().getWidth() / 2;
+        double endY = targetNode.getLayoutY() + targetNode.getBoundsInParent().getHeight() / 2;
+
+        // Draw the composition line (straight line from source to target center)
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(2);
+        gc.strokeLine(startX, startY, endX, endY);
+
+        // Diamond size (adjust as necessary)
+        double diamondSize = 15;  // Size of the diamond shape
+
+        // Calculate the position of the diamond at the boundary of the target node
+        // We need to place the diamond at the edge of the target node, not at the center
+
+        // Direction of the line from source to target (dx, dy)
+        double deltaX = endX - startX;
+        double deltaY = endY - startY;
+
+        // Normalize the direction (unit vector)
+        double length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        deltaX /= length;
+        deltaY /= length;
+
+        // Now, we calculate where to place the diamond at the target node's boundary.
+        // We will move to the edge of the target node.
+        double targetNodeEdgeX = endX - deltaX * (targetNode.getBoundsInParent().getWidth() / 2 + diamondSize);
+        double targetNodeEdgeY = endY - deltaY * (targetNode.getBoundsInParent().getHeight() / 2 + diamondSize);
+
+        // Debugging the position of the diamond at the edge of the target node
+        System.out.println("Diamond Position at Target Node Edge: (" + targetNodeEdgeX + ", " + targetNodeEdgeY + ")");
+
+        // Calculate the points for the diamond shape centered at the target node's edge
+        double[] xPoints = {
+                targetNodeEdgeX,                     // Top
+                targetNodeEdgeX - diamondSize,       // Left
+                targetNodeEdgeX,                     // Bottom
+                targetNodeEdgeX + diamondSize        // Right
+        };
+
+        double[] yPoints = {
+                targetNodeEdgeY - diamondSize,       // Top
+                targetNodeEdgeY,                     // Left
+                targetNodeEdgeY + diamondSize,       // Bottom
+                targetNodeEdgeY                      // Right
+        };
+
+        // Draw the diamond shape at the target position (edge of the target node)
+        gc.setFill(Color.BLACK);
+        gc.fillPolygon(xPoints, yPoints, 4);
+    }
+
+
+
+
+
+
+
+
+
+    private Node findNodeForClass(Class clazz) {
+        for (Map.Entry<Node, Object> entry : elementMap.entrySet()) {
+            if (entry.getValue() instanceof Class && entry.getValue().equals(clazz)) {
+                return entry.getKey();
+            }
+        }
+        return null; // Return null if no matching node is found
+    }
+
+
+    //Aggregation
+    private void drawAggregation(double x, double y) {
+        if (sourceNode == null) {
+            for (Map.Entry<Node, Object> entry : elementMap.entrySet()) {
+                Node node = entry.getKey();
+                if (isWithinBounds(node, x, y)) {
+                    sourceNode = node;
+                    break;
+                }
+            }
+        } else {
+            for (Map.Entry<Node, Object> entry : elementMap.entrySet()) {
+                Node node = entry.getKey();
+                if (isWithinBounds(node, x, y) && node != sourceNode) {
+                    targetNode = node;
+
+                    // Create Composition
+                    Class sourceClass = (Class) elementMap.get(sourceNode);
+                    Class targetClass = (Class) elementMap.get(targetNode);
+                    Composition composition = new Composition(sourceClass, targetClass);
+                    compositions.add(composition);
+
+                    // Draw the composition (line and diamond)
+                    drawCompositionLine(sourceNode, targetNode);
+
+                    sourceNode = null;
+                    targetNode = null;
+
+                    break;
+                }
+            }
+        }
+    }
+
+    private void drawAggregationLine(Node sourceNode, Node targetNode) {
+        // Calculate center points for both source and target nodes
+        double startX = sourceNode.getLayoutX() + sourceNode.getBoundsInParent().getWidth() / 2;
+        double startY = sourceNode.getLayoutY() + sourceNode.getBoundsInParent().getHeight() / 2;
+        double endX = targetNode.getLayoutX() + targetNode.getBoundsInParent().getWidth() / 2;
+        double endY = targetNode.getLayoutY() + targetNode.getBoundsInParent().getHeight() / 2;
+
+        // Draw the aggregation line (straight line from source to target center)
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(2);
+        gc.strokeLine(startX, startY, endX, endY);
+
+        // Aggregation diamond size (adjust as needed)
+        double diamondSize = 15;  // Size of the diamond shape
+
+        // Calculate the position of the hollow diamond at the boundary of the target node
+        // We need to place the diamond at the edge of the target node
+        double deltaX = endX - startX;
+        double deltaY = endY - startY;
+
+        // Normalize the direction (unit vector)
+        double length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        deltaX /= length;
+        deltaY /= length;
+
+        // Move to the edge of the target node, with some offset for the diamond size
+        double targetNodeEdgeX = endX - deltaX * (targetNode.getBoundsInParent().getWidth() / 2 + diamondSize);
+        double targetNodeEdgeY = endY - deltaY * (targetNode.getBoundsInParent().getHeight() / 2 + diamondSize);
+
+        // Debugging the position of the diamond at the edge of the target node
+        System.out.println("Aggregation Diamond Position at Target Node Edge: (" + targetNodeEdgeX + ", " + targetNodeEdgeY + ")");
+
+        // Calculate the points for the hollow diamond shape centered at the target node's edge
+        double[] xPoints = {
+                targetNodeEdgeX,                     // Top
+                targetNodeEdgeX - diamondSize,       // Left
+                targetNodeEdgeX,                     // Bottom
+                targetNodeEdgeX + diamondSize        // Right
+        };
+
+        double[] yPoints = {
+                targetNodeEdgeY - diamondSize,       // Top
+                targetNodeEdgeY,                     // Left
+                targetNodeEdgeY + diamondSize,       // Bottom
+                targetNodeEdgeY                      // Right
+        };
+
+        // Draw the hollow diamond shape at the target position (edge of the target node)
+        gc.setStroke(Color.BLACK);  // Hollow, so use stroke instead of fill
+        gc.setLineWidth(2);  // Adjust line width for visibility
+        gc.strokePolygon(xPoints, yPoints, 4);
+
+        gc.setFill(Color.WHITE);  // Fill the inside of the diamond with the background color (or transparent)
+        gc.fillPolygon(xPoints, yPoints, 4);
+    }
+
+
+    //Inheritance
+    private void drawInheritance(double x, double y) {
+        if (sourceNode == null) {
+            // First click to select the source (child) node
+            for (Map.Entry<Node, Object> entry : elementMap.entrySet()) {
+                Node node = entry.getKey();
+                if (isWithinBounds(node, x, y)) {
+                    sourceNode = node;
+                    break;
+                }
+            }
+        } else {
+            // Second click to select the target (parent) node
+            for (Map.Entry<Node, Object> entry : elementMap.entrySet()) {
+                Node node = entry.getKey();
+                if (isWithinBounds(node, x, y) && node != sourceNode) {
+                    targetNode = node;
+
+                    // Create Inheritance object
+                    Class sourceClass = (Class) elementMap.get(sourceNode);
+                    Class targetClass = (Class) elementMap.get(targetNode);
+                    Inheritance inheritance = new Inheritance(sourceClass, targetClass);
+                    inheritances.add(inheritance);
+
+                    // Draw the inheritance (line with triangle arrowhead)
+                    drawInheritanceLine(sourceNode, targetNode);
+
+                    sourceNode = null;
+                    targetNode = null;
+
+                    break;
+                }
+            }
+        }
+    }
+
+
+    private void drawInheritanceLine(Node sourceNode, Node targetNode) {
+        // Calculate center points for source and target nodes
+        double startX = sourceNode.getLayoutX() + sourceNode.getBoundsInParent().getWidth() / 2;
+        double startY = sourceNode.getLayoutY() + sourceNode.getBoundsInParent().getHeight() / 2;
+        double endX = targetNode.getLayoutX() + targetNode.getBoundsInParent().getWidth() / 2;
+        double endY = targetNode.getLayoutY() + targetNode.getBoundsInParent().getHeight() / 2;
+
+        // Draw the inheritance line (from source center to the target edge)
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(2);
+        gc.strokeLine(startX, startY, endX, endY);
+
+        // Arrowhead (triangle) size
+        double arrowSize = 15;
+
+        // Calculate direction vector
+        double deltaX = endX - startX;
+        double deltaY = endY - startY;
+
+        // Normalize the direction vector
+        double length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        deltaX /= length;
+        deltaY /= length;
+
+        // Position the triangle at the edge of the target node
+        double targetEdgeX = endX - deltaX * (targetNode.getBoundsInParent().getWidth() / 2);
+        double targetEdgeY = endY - deltaY * (targetNode.getBoundsInParent().getHeight() / 2);
+
+        // Calculate triangle vertices
+        double tipX = targetEdgeX; // Triangle tip (points to the target class)
+        double tipY = targetEdgeY;
+
+        double baseLeftX = tipX - deltaY * arrowSize - deltaX * arrowSize;
+        double baseLeftY = tipY + deltaX * arrowSize - deltaY * arrowSize;
+
+        double baseRightX = tipX + deltaY * arrowSize - deltaX * arrowSize;
+        double baseRightY = tipY - deltaX * arrowSize - deltaY * arrowSize;
+
+        // Draw the triangle (arrowhead)
+        double[] xPoints = {tipX, baseLeftX, baseRightX};
+        double[] yPoints = {tipY, baseLeftY, baseRightY};
+
+        gc.setStroke(Color.BLACK);
+        gc.setFill(Color.WHITE);
+        gc.strokePolygon(xPoints, yPoints, 3); // Draw the triangle outline
+        gc.fillPolygon(xPoints, yPoints, 3);   // Fill the inside of the triangle
+    }
+
 
 
 
