@@ -1,5 +1,7 @@
 //package com.boota.javaproject;
 //
+//import javafx.scene.canvas.GraphicsContext;
+//import javafx.scene.paint.Color;
 //
 //public class Association {
 //    Point start;
@@ -10,10 +12,14 @@
 //    Class initialClass;
 //    Class finalClass;
 //
+////    public Association(Point start, Point end, Class initialClass, Class finalClass) {
+////        this.start = start;
+////        this.end = end;
+////        this.initialClass = initialClass;
+////        this.finalClass = finalClass;
+////    }
 //
-//    public Association(Point start, Point end, Class initialClass, Class finalClass) {
-//        this.start = start;
-//        this.end = end;
+//    public Association(Class initialClass, Class finalClass) {
 //        this.initialClass = initialClass;
 //        this.finalClass = finalClass;
 //    }
@@ -89,6 +95,8 @@
 //}
 
 
+
+
 package com.boota.javaproject;
 
 import javafx.scene.canvas.GraphicsContext;
@@ -97,27 +105,21 @@ import javafx.scene.paint.Color;
 public class Association {
     Point start;
     Point end;
-    Multiplicity startMultiplicity;
-    Multiplicity endMultiplicity;
-    String text;
-    Class initialClass;
-    Class finalClass;
+    String startMultiplicity;  // Using String for multiplicity (e.g., "1", "0..*", etc.)
+    String endMultiplicity;    // Using String for multiplicity
+    String text;               // Association name (e.g., "has", "belongs to")
+    Class initialClass;        // Source class
+    Class finalClass;          // Target class
 
-//    public Association(Point start, Point end, Class initialClass, Class finalClass) {
-//        this.start = start;
-//        this.end = end;
-//        this.initialClass = initialClass;
-//        this.finalClass = finalClass;
-//    }
-
+    // Constructor to handle just the source and target classes without multiplicity
     public Association(Class initialClass, Class finalClass) {
         this.initialClass = initialClass;
         this.finalClass = finalClass;
     }
 
-    public Association(Point start, Point end, Multiplicity startMultiplicity,
-                       Multiplicity endMultiplicity, String text, Class initialClass,
-                       Class finalClass) {
+    // Constructor to handle full association details with multiplicity and text
+    public Association(Point start, Point end, String startMultiplicity, String endMultiplicity,
+                       String text, Class initialClass, Class finalClass) {
         this.start = start;
         this.end = end;
         this.startMultiplicity = startMultiplicity;
@@ -127,6 +129,7 @@ public class Association {
         this.finalClass = finalClass;
     }
 
+    // Getters and Setters
     public Point getStart() {
         return start;
     }
@@ -143,19 +146,19 @@ public class Association {
         this.end = end;
     }
 
-    public Multiplicity getStartMultiplicity() {
+    public String getStartMultiplicity() {
         return startMultiplicity;
     }
 
-    public void setStartMultiplicity(Multiplicity startMultiplicity) {
+    public void setStartMultiplicity(String startMultiplicity) {
         this.startMultiplicity = startMultiplicity;
     }
 
-    public Multiplicity getEndMultiplicity() {
+    public String getEndMultiplicity() {
         return endMultiplicity;
     }
 
-    public void setEndMultiplicity(Multiplicity endMultiplicity) {
+    public void setEndMultiplicity(String endMultiplicity) {
         this.endMultiplicity = endMultiplicity;
     }
 
@@ -182,35 +185,5 @@ public class Association {
     public void setFinalClass(Class finalClass) {
         this.finalClass = finalClass;
     }
-
-    /**
-     * Renders the association on the canvas.
-     *
-     * @param gc GraphicsContext for drawing on the canvas.
-     */
-    public void render(GraphicsContext gc) {
-        // Set the stroke color and line width
-        gc.setStroke(Color.BLACK);
-        gc.setLineWidth(2);
-
-        // Draw the line for the association
-        gc.strokeLine(start.getX(), start.getY(), end.getX(), end.getY());
-
-        // Draw the start multiplicity (if present)
-        if (startMultiplicity != null) {
-            gc.fillText(startMultiplicity.toString(), start.getX() - 10, start.getY() - 10);
-        }
-
-        // Draw the end multiplicity (if present)
-        if (endMultiplicity != null) {
-            gc.fillText(endMultiplicity.toString(), end.getX() + 10, end.getY() + 10);
-        }
-
-        // Draw the label (if text is provided)
-        if (text != null && !text.isEmpty()) {
-            double midX = (start.getX() + end.getX()) / 2;
-            double midY = (start.getY() + end.getY()) / 2;
-            gc.fillText(text, midX, midY);
-        }
-    }
 }
+
