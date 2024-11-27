@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.ScrollPane;
 
-public class ViewController {
+public class ViewController implements Controller{
 
     @FXML
     private ResourceBundle resources;

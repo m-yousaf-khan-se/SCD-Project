@@ -4,31 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6211b0b-f5e5-4fa6-8211-4c28b3274ac8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/ClassDiagramToolsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/packageDiagramControllers/PackageDiagramToolsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/UseCaseDiagramToolsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlClassViews/ClassDiagramTools.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlPackageViews/PackageDiagramTools.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/UseCaseDiagramsTools.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UML-Editors-master/target/classes/com/boota/javaproject/Association.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UML-Editors-master/target/classes/com/boota/javaproject/Attribute.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UML-Editors-master/target/classes/com/boota/javaproject/CanvasController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UML-Editors-master/target/classes/com/boota/javaproject/Class.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UML-Editors-master/target/classes/com/boota/javaproject/CommentBox.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UML-Editors-master/target/classes/com/boota/javaproject/DataAccess.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UML-Editors-master/target/classes/com/boota/javaproject/Function.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UML-Editors-master/target/classes/com/boota/javaproject/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UML-Editors-master/target/classes/com/boota/javaproject/Multiplicity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UML-Editors-master/target/classes/com/boota/javaproject/Point.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UML-Editors-master/target/classes/module-info.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/UMLClassController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/UMLClassController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/UMLclass.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlClassViews/UMLclass.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/view.fxml" afterDir="false" />
+    <list default="true" id="b6211b0b-f5e5-4fa6-8211-4c28b3274ac8" name="Changes" comment="Project Structure Updated">
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/ClassDiagramToolsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/ClassDiagramToolsController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +22,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -77,26 +59,26 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ApplicationMain.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Yousaf Khan/Desktop/SCD-Project&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ApplicationMain.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "create-class-Diagram-feature",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Yousaf Khan/Desktop/SCD-Project",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Yousaf Khan\Desktop\JAVA Projects\SCD-Project\src\main\resources\MainClass\scdprojectupdated\Views\umlUseCaseViews" />
@@ -123,6 +105,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.ApplicationMain" />
+        <item itemvalue="Application.ApplicationMain" />
+        <item itemvalue="Application.ApplicationMain" />
       </list>
     </recent_temporary>
   </component>
@@ -145,8 +129,41 @@
       <workItem from="1732462670302" duration="18915000" />
       <workItem from="1732612357516" duration="226000" />
       <workItem from="1732616113152" duration="3281000" />
-      <workItem from="1732682311328" duration="5742000" />
+      <workItem from="1732682311328" duration="9422000" />
     </task>
+    <task id="LOCAL-00001" summary="Project Structure Updated">
+      <option name="closed" value="true" />
+      <created>1732689846072</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1732689846072</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Project Structure Updated">
+      <option name="closed" value="true" />
+      <created>1732689867842</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1732689867842</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Project Structure Updated">
+      <option name="closed" value="true" />
+      <created>1732698077760</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1732698077760</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Project Structure Updated">
+      <option name="closed" value="true" />
+      <created>1732722380912</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1732722380912</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,5 +179,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Project Structure Updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="Project Structure Updated" />
   </component>
 </project>
