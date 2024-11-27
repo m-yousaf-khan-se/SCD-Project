@@ -16,7 +16,7 @@ public class ApplicationMain extends Application {
         mainScene = new Scene(fxmlLoader.load());
         stage.setTitle("UML Editor");
         stage.setScene(mainScene);
-        stage.show();
+        stage.show();// iam imran
     }
 
     public static Scene getScene()
