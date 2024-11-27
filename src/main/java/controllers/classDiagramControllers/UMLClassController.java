@@ -38,7 +38,6 @@ public class UMLClassController implements Controller {
 
     @FXML
     void addNewFieldListener(ActionEvent event) {
-
     }
 
     @FXML
@@ -59,11 +58,10 @@ public class UMLClassController implements Controller {
 
 }
 
-//    @FXML
-//    void addNewField(ActionEvent event) {
+// to add new field
 //        int newFieldindex = classVBox.getChildren().indexOf(addFieldBtn);
-//        classVBox.getChildren().add()
-//    }
+//        TextField newField =
+//        classVBox.getChildren().add(newFieldindex, );
 
 
 //______________________change listener for fields:
