@@ -23,7 +23,6 @@
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#createNewClassDiagramListener" text="Create new Class Diagram" />
                       <MenuItem mnemonicParsing="false" onAction="#createNewUseCaseDiagramListener" text="Create New Use Case Diagram" />
-                        <MenuItem mnemonicParsing="false" onAction="#createNewPackageDiagramListener" text="Create New Package Diagram" />
                     </items>
                   </Menu>
                   <MenuItem mnemonicParsing="false" onAction="#loadExistingProject" text="Load Existing Project">
