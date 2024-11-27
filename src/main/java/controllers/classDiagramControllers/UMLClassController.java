@@ -1,14 +1,16 @@
-package controllers;
+package controllers.classDiagramControllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import controllers.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-public class UMLClassController {
+public class UMLClassController implements Controller {
 
     @FXML
     private ResourceBundle resources;

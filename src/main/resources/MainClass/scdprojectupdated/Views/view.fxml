@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Group?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="433.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ViewController">
    <top>
@@ -16,16 +14,18 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#saveProject" text="save">
+              <MenuItem mnemonicParsing="false" onAction="#saveProjectListener" text="save">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" onAction="#createNewProject" text="Create new Project">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator>
-                  </MenuItem>
+                  <Menu mnemonicParsing="false" text="Create New Project">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#createNewClassDiagramListener" text="Create new Class Diagram" />
+                      <MenuItem mnemonicParsing="false" onAction="#createNewUseCaseDiagramListener" text="Create New Use Case Diagram" />
+                        <MenuItem mnemonicParsing="false" onAction="#createNewPackageDiagramListener" text="Create New Package Diagram" />
+                    </items>
+                  </Menu>
                   <MenuItem mnemonicParsing="false" onAction="#loadExistingProject" text="Load Existing Project">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="L" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
@@ -35,31 +35,19 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Export as IMG">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#exportAsPNG" text="Export as PNG" />
+              <MenuItem mnemonicParsing="false" onAction="#exportAsPNGListener" text="Export as PNG" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#aboutUMLEditor" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#aboutUMLEditorListener" text="About" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
    </top>
    <right>
-      <ScrollPane prefHeight="200.0" prefWidth="113.0" BorderPane.alignment="CENTER">
-         <content>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#createClass" prefHeight="25.0" prefWidth="185.0" text="Class" />
-                  <Button mnemonicParsing="false" onAction="#createAssociation" prefHeight="25.0" prefWidth="139.0" text="Association" />
-                  <Button mnemonicParsing="false" onAction="#createAggregation" prefHeight="25.0" prefWidth="167.0" text="Aggregation" />
-                  <Button mnemonicParsing="false" onAction="#createComposition" prefHeight="25.0" prefWidth="190.0" text="Composition" />
-                  <Button mnemonicParsing="false" onAction="#createGeneralization" prefHeight="25.0" prefWidth="111.0" text="Generalization" />
-               </children>
-            </VBox>
-         </content>
-      </ScrollPane>
+      <ScrollPane fx:id="MainViewRightBorderArea" prefHeight="200.0" prefWidth="113.0" BorderPane.alignment="CENTER" />
    </right>
    <center>
       <ScrollPane prefHeight="333.0" prefWidth="490.0" BorderPane.alignment="CENTER">

@@ -8,4 +8,10 @@ module main.scdprojectupdated {
     exports MainClass.scdprojectupdated;
     exports controllers;
     opens controllers to javafx.fxml;
+    exports controllers.classDiagramControllers;
+    opens controllers.classDiagramControllers to javafx.fxml;
+    exports controllers.packageDiagramControllers;
+    opens controllers.packageDiagramControllers to javafx.fxml;
+    exports controllers.useCaseDiagramControllers;
+    opens controllers.useCaseDiagramControllers to javafx.fxml;
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Group xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UMLClassController">
+<Group xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.classDiagramControllers.UMLClassController">
    <children>
       <VBox fx:id="classVBox" prefHeight="117.0" prefWidth="115.0">
          <children>

@@ -1,14 +1,12 @@
 package controllers;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import MainClass.scdprojectupdated.ApplicationMain;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.control.ScrollPane;
 
 public class ViewController {
 
@@ -19,47 +17,33 @@ public class ViewController {
     private URL location;
 
     @FXML
-    private Group groupCanvas;
+    private ScrollPane MainViewRightBorderArea;
 
     @FXML
-    void aboutUMLEditor(ActionEvent event) {
+    private static Group groupCanvas;
+
+    @FXML
+    void aboutUMLEditorListener(ActionEvent event) {
 
     }
 
     @FXML
-    void createAggregation(ActionEvent event) {
+    void createNewClassDiagramListener(ActionEvent event) {
 
     }
 
     @FXML
-    void createAssociation(ActionEvent event) {
+    void createNewPackageDiagramListener(ActionEvent event) {
 
     }
 
     @FXML
-    void createClass(ActionEvent event) throws IOException {
-        System.out.println("Creating empty class");
-        FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/UMLclass.fxml"));
-        groupCanvas.getChildren().add(((Group)loader.load()));
-    }
-
-    @FXML
-    void createComposition(ActionEvent event) {
+    void createNewUseCaseDiagramListener(ActionEvent event) {
 
     }
 
     @FXML
-    void createGeneralization(ActionEvent event) {
-
-    }
-
-    @FXML
-    void createNewProject(ActionEvent event) {
-
-    }
-
-    @FXML
-    void exportAsPNG(ActionEvent event) {
+    void exportAsPNGListener(ActionEvent event) {
 
     }
 
@@ -69,13 +53,18 @@ public class ViewController {
     }
 
     @FXML
-    void saveProject(ActionEvent event) {
+    void saveProjectListener(ActionEvent event) {
 
     }
 
     @FXML
     void initialize() {
-
+        assert MainViewRightBorderArea != null : "fx:id=\"MainViewRightBorderArea\" was not injected: check your FXML file 'view.fxml'.";
+        assert groupCanvas != null : "fx:id=\"groupCanvas\" was not injected: check your FXML file 'view.fxml'.";
     }
 
+    public static Group getGroupCanvas()
+    {
+        return groupCanvas;
+    }
 }
