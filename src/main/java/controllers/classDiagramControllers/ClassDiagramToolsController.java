@@ -10,6 +10,7 @@ import controllers.ViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 
 public class ClassDiagramToolsController implements Controller {
 
@@ -34,7 +35,8 @@ public class ClassDiagramToolsController implements Controller {
         //code of creating class
         System.out.println("Creating empty class");
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/UMLclass.fxml"));
-        ViewController.getGroupCanvas().getChildren().add((loader.load()));
+        ViewController viewController = loader.getController();
+        viewController.getGroupCanvas().getChildren().add((loader.load()));
     }
 
     @FXML
@@ -53,8 +55,3 @@ public class ClassDiagramToolsController implements Controller {
     }
 
 }
-
-
-//M.yousaf
-//Imuu
-

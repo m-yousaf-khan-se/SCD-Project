@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6211b0b-f5e5-4fa6-8211-4c28b3274ac8" name="Changes" comment="Added Comment" />
+    <list default="true" id="b6211b0b-f5e5-4fa6-8211-4c28b3274ac8" name="Changes" comment="Project Structure Updated-package diagram removed successfully. Loading Tools functionality now working.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/UMLClassController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/UMLClassController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,12 +36,12 @@
     &quot;assignee&quot;: &quot;m-yousaf-khan-se&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/m-yousaf-khan-se/SCD-Project.git",
-    "accountId": "a28a121c-1290-4518-8e2a-0f383e2724e4"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/m-yousaf-khan-se/SCD-Project.git&quot;,
+    &quot;accountId&quot;: &quot;a28a121c-1290-4518-8e2a-0f383e2724e4&quot;
   }
-}]]></component>
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -62,7 +65,7 @@
     "Application.ApplicationMain.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "create-class-Diagram-feature",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Yousaf Khan/Desktop/SCD-Project",
@@ -161,7 +164,31 @@
       <option name="project" value="LOCAL" />
       <updated>1732722380912</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Testing-adding comment">
+      <option name="closed" value="true" />
+      <created>1732725693882</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732725693882</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Testing-adding comment">
+      <option name="closed" value="true" />
+      <created>1732726086347</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732726086347</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Project Structure Updated-package diagram removed successfully. Loading Tools functionality now working.">
+      <option name="closed" value="true" />
+      <created>1732730277036</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1732730277036</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +207,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Project Structure Updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Project Structure Updated" />
+    <MESSAGE value="Testing-adding comment" />
+    <MESSAGE value="Project Structure Updated-package diagram removed successfully. Loading Tools functionality now working." />
+    <option name="LAST_COMMIT_MESSAGE" value="Project Structure Updated-package diagram removed successfully. Loading Tools functionality now working." />
   </component>
 </project>
