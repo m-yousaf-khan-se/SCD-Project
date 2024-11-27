@@ -5,13 +5,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import MainClass.scdprojectupdated.ApplicationMain;
+import controllers.Controller;
 import controllers.ViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 
-public class ClassDiagramToolsController {
+public class ClassDiagramToolsController implements Controller {
 
     @FXML
     private ResourceBundle resources;
@@ -34,7 +34,7 @@ public class ClassDiagramToolsController {
         //code of creating class
         System.out.println("Creating empty class");
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/UMLclass.fxml"));
-        ViewController.getGroupCanvas().getChildren().add(((Group)loader.load()));
+        ViewController.getGroupCanvas().getChildren().add((loader.load()));
     }
 
     @FXML

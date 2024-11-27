@@ -2,10 +2,12 @@ package controllers.useCaseDiagramControllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import controllers.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public class UseCaseDiagramToolsController {
+public class UseCaseDiagramToolsController implements Controller {
 
     @FXML
     private ResourceBundle resources;

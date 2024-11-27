@@ -2,10 +2,12 @@ package controllers.packageDiagramControllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import controllers.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public class PackageDiagramToolsController {
+public class PackageDiagramToolsController implements Controller{
 
     @FXML
     private ResourceBundle resources;
