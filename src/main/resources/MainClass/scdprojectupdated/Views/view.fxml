@@ -12,7 +12,7 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" onShown="#setStatusForGenerateJavaCodeFromClassDiagramStatusListener" text="File">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#saveProjectListener" text="save">
                      <accelerator>
@@ -30,6 +30,7 @@
                         <KeyCodeCombination alt="UP" code="L" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
+                  <MenuItem fx:id="generateJavaCodeFromClassDiagramMenuItem" disable="true" mnemonicParsing="false" onAction="#generateJavaCodeFromClassDiagramListener" text="Generate JAVA Code of Class Diagram" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Export as IMG">

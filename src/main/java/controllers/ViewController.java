@@ -6,10 +6,16 @@ import java.util.ResourceBundle;
 
 import MainClass.scdprojectupdated.ApplicationMain;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.VBox;
+
+import javax.swing.event.MenuEvent;
 
 public class ViewController implements Controller{
 
@@ -26,6 +32,9 @@ public class ViewController implements Controller{
     private Group groupCanvas;
 
     private static ViewController instance; //using sigleton pattern
+
+    @FXML
+    private MenuItem generateJavaCodeFromClassDiagramMenuItem; //using this fx:id just to enable and disable this option
 
     @FXML
     void aboutUMLEditorListener(ActionEvent event) {
@@ -49,9 +58,29 @@ public class ViewController implements Controller{
 
     }
 
+
     @FXML
     void loadExistingProject(ActionEvent event) {
 
+    }
+
+    @FXML
+    void generateJavaCodeFromClassDiagramListener(ActionEvent event) {
+    }
+
+    @FXML
+    void setStatusForGenerateJavaCodeFromClassDiagramStatusListener(Event event) {
+        VBox vb = (VBox) MainViewRightBorderArea.getContent();
+        if( vb != null && (((Button)vb.getChildren().get(1)).getText().equals("Class")))
+        {
+            generateJavaCodeFromClassDiagramMenuItem.setDisable(false);
+            System.out.println("Generate Code Menu enabled");
+        }
+        else
+        {
+            generateJavaCodeFromClassDiagramMenuItem.setDisable(true);
+            System.out.println("Generate Code Menu disabled");
+        }
     }
 
     @FXML
