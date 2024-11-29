@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 
-<Pane fx:id="ActorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="128.0" prefWidth="98.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.useCaseDiagramControllers.ActorController">
+<AnchorPane fx:id="ActorPane" prefHeight="135.0" prefWidth="119.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.useCaseDiagramControllers.ActorController">
    <children>
-      <Circle fill="DODGERBLUE" layoutX="49.0" layoutY="29.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-      <Line endX="15.0" endY="-44.0000114440918" layoutX="34.0" layoutY="88.0" startX="14.999984741210938" startY="-1.52587890625E-5" />
-      <Line endX="95.69288635253906" endY="-6.5999908447265625" layoutX="-49.0" layoutY="95.0" startX="72.20002746582031" startY="12.999984741210938" />
-      <Line endX="97.80000305175781" endY="31.599990844726562" layoutX="-21.0" layoutY="74.0" startX="70.00001525878906" startY="13.599990844726562" />
-      <Line endX="95.69288635253906" endY="-6.5999908447265625" layoutX="-28.0" layoutY="72.0" startX="58.39997482299805" startY="-6.5999908447265625" />
+      <Circle fx:id="head" fill="DODGERBLUE" layoutX="59.0" layoutY="40.0" radius="15.0" stroke="BLACK" />
+      <Line fx:id="body" endX="0" endY="40" layoutX="59.0" layoutY="57.0" startX="0" startY="0" stroke="BLACK" />
+      <Line fx:id="leftArm" endX="-22.10709571838379" endY="21.0928955078125" layoutX="54.0" layoutY="98.0" startX="4.292869567871094" startY="-0.707122802734375" stroke="BLACK" />
+      <Line fx:id="rightArm" endX="32.092918395996094" layoutX="42.0" layoutY="77.0" startX="0" startY="0" stroke="BLACK" />
+      <Line fx:id="rightLeg" endX="21.092880249023438" endY="21.292877197265625" layoutX="59.0" layoutY="98.0" startX="0" startY="0" stroke="BLACK" />
    </children>
-</Pane>
+</AnchorPane>
