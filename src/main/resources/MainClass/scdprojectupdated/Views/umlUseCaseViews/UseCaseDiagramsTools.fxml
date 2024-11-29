@@ -15,9 +15,9 @@
       <Button mnemonicParsing="false" onAction="#createActorListener" prefHeight="25.0" prefWidth="185.0" text="Actor" />
       <Button mnemonicParsing="false" onAction="#createUseCaseLIstener" prefHeight="25.0" prefWidth="139.0" text="Use Case" />
       <Button mnemonicParsing="false" onAction="#createIncludeListener" prefHeight="25.0" prefWidth="167.0" text="Include" />
-      <Button mnemonicParsing="false" onAction="#createExcludeListener" prefHeight="25.0" prefWidth="190.0" text="Exclude" />
-      <Button mnemonicParsing="false" onAction="#createGeneralizationListener" prefHeight="25.0" prefWidth="111.0" text="Generalization" />
-      <Button mnemonicParsing="false" onAction="#createSystemBoundaryListener" prefHeight="25.0" prefWidth="100.0" text="System Boundary">
+      <Button mnemonicParsing="false" onAction="#createExtendListener" prefHeight="25.0" prefWidth="190.0" text="Extend" />
+      <Button mnemonicParsing="false" onAction="#createAssociationListener" prefHeight="25.0" prefWidth="111.0" text="Association" />
+      <Button mnemonicParsing="false" onAction="#createMultiplicityListener" prefHeight="25.0" prefWidth="100.0" text="Multiplicity">
          <font>
             <Font size="11.0" />
          </font>
