@@ -22,38 +22,38 @@ public class UseCaseDiagramToolsController implements Controller {
     @FXML
     void createActorListener(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlUseCaseViews/actor.fxml"));
-        ViewController.getGroupCanvas().getChildren().add(loader.load());
+        ViewController.getPaneCanvas().getChildren().add(loader.load());
     }
 
     @FXML
     void createExtendListener(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlUseCaseViews/extend.fxml"));
-        ViewController.getGroupCanvas().getChildren().add(loader.load());
+        ViewController.getPaneCanvas().getChildren().add(loader.load());
     }
 
     @FXML
     void createAssociationListener(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlUseCaseViews/association.fxml"));
-        ViewController.getGroupCanvas().getChildren().add(loader.load());
+        ViewController.getPaneCanvas().getChildren().add(loader.load());
     }
 
     @FXML
     void createIncludeListener(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlUseCaseViews/include.fxml"));
-        ViewController.getGroupCanvas().getChildren().add(loader.load());
+        ViewController.getPaneCanvas().getChildren().add(loader.load());
     }
 
     @FXML
     void createMultiplicityListener(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlUseCaseViews/multiplicity.fxml"));
-        ViewController.getGroupCanvas().getChildren().add(loader.load());
+        ViewController.getPaneCanvas().getChildren().add(loader.load());
     }
 
     @FXML
     void createUseCaseLIstener(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlUseCaseViews/useCasePane.fxml"));
-        ViewController.getGroupCanvas().getChildren().add(loader.load());
+        ViewController.getPaneCanvas().getChildren().add(loader.load());
 
     }
 
