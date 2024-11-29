@@ -4,18 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6211b0b-f5e5-4fa6-8211-4c28b3274ac8" name="Changes" comment="updated project structure for the MVP Architecture.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/DragAndDropHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/data/IDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/presenter/IPresenter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/presenter/Presenter.java" afterDir="false" />
+    <list default="true" id="b6211b0b-f5e5-4fa6-8211-4c28b3274ac8" name="Changes" comment="Drag and Drop Funtionality added. Class Digram Components are still in progress.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/AggregationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/AssociationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/CompositionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/GeneralizationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlClassViews/aggregation.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlClassViews/association.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlClassViews/composition.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlClassViews/generalizaion.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/ClassDiagramToolsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/ClassDiagramToolsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/UMLClassController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/UMLClassController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/UseCaseDiagramToolsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/UseCaseDiagramToolsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlClassViews/UMLclass.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlClassViews/UMLclass.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Interface" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -74,7 +73,7 @@
     "Application.ApplicationMain.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "create-class-Diagram-feature",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Yousaf Khan/Desktop/SCD-Project",
@@ -172,6 +171,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add method and add fields functionality added to the classes" />
     <MESSAGE value="updated project structure for the MVP Architecture." />
-    <option name="LAST_COMMIT_MESSAGE" value="updated project structure for the MVP Architecture." />
+    <MESSAGE value="Drag and Drop Funtionality added. Class Digram Components are still in progress." />
+    <option name="LAST_COMMIT_MESSAGE" value="Drag and Drop Funtionality added. Class Digram Components are still in progress." />
   </component>
 </project>
