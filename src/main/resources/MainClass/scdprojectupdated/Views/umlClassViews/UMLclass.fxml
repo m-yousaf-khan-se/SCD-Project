@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Separator?>
@@ -9,12 +10,14 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <Group xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.classDiagramControllers.UMLClassController">
    <children>
       <VBox fx:id="classVBox" alignment="TOP_CENTER" prefHeight="117.0" prefWidth="115.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="11.0" stroke="BLACK" strokeType="INSIDE" width="115.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="11.0" stroke="BLACK" strokeType="INSIDE" width="115.0">
+               <cursor>
+                  <Cursor fx:constant="MOVE" />
+               </cursor></Rectangle>
             <TextField fx:id="classNameField" alignment="CENTER" promptText="class name">
                <font>
                   <Font name="System Bold" size="10.0" />
