@@ -5,7 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6211b0b-f5e5-4fa6-8211-4c28b3274ac8" name="Changes" comment="workspace.xml updated">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/ActorController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/UMLUseCaseController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/extendController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/includeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/useCaseAssociationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/useCaseController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/useCaseMultiplicityController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/actor.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/association.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/extend.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/include.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/multiplicity.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/useCasePane.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/UseCaseDiagramToolsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/UseCaseDiagramToolsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/UseCaseDiagramsTools.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/UseCaseDiagramsTools.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +30,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Interface" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -114,7 +129,6 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
         <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
       </set>
     </attachedChunks>
@@ -133,6 +147,8 @@
       <workItem from="1732682311328" duration="9422000" />
       <workItem from="1732782828709" duration="13000" />
       <workItem from="1732782870573" duration="8000" />
+      <workItem from="1732858235078" duration="19000" />
+      <workItem from="1732861943885" duration="5498000" />
     </task>
     <task id="LOCAL-00001" summary="Project Structure Updated">
       <option name="closed" value="true" />
