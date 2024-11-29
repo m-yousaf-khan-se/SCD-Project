@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6211b0b-f5e5-4fa6-8211-4c28b3274ac8" name="Changes" comment="add method and add fields functionality added to the classes">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="b6211b0b-f5e5-4fa6-8211-4c28b3274ac8" name="Changes" comment="updated project structure for the MVP Architecture.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/DragAndDropHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/data/IDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/presenter/IPresenter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/presenter/Presenter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/ViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/ClassDiagramToolsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/ClassDiagramToolsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/UMLClassController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/UMLClassController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/UseCaseDiagramToolsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/UseCaseDiagramToolsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlClassViews/UMLclass.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlClassViews/UMLclass.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +86,7 @@
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -135,7 +144,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732891749497</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="updated project structure for the MVP Architecture.">
+      <option name="closed" value="true" />
+      <created>1732894282616</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1732894282616</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,6 +171,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add method and add fields functionality added to the classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="add method and add fields functionality added to the classes" />
+    <MESSAGE value="updated project structure for the MVP Architecture." />
+    <option name="LAST_COMMIT_MESSAGE" value="updated project structure for the MVP Architecture." />
   </component>
 </project>
