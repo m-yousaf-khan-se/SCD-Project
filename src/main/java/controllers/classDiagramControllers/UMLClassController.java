@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 
 import controllers.Controller;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
