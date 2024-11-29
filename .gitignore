@@ -1,16 +1,27 @@
+### General ###
+# Node modules (if applicable)
+node_modules/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+### Maven ###
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
+.idea/
+*.iml
+*.iws
+*.ipr
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
-*.iws
-*.iml
-*.ipr
+.idea/workspace.xml  # Ignore workspace.xml, it's user-specific
 
 ### Eclipse ###
 .apt_generated
@@ -31,8 +42,37 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
+### Visual Studio Code ###
 .vscode/
 
-### Mac OS ###
-.DS_Store
+### JetBrains Rider ###
+.idea/.idea_modules/
+
+### RubyMine ###
+.idea/.idea_ruby/
+
+### Android Studio ###
+.idea/caches/
+.idea/.gradle/
+.gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### Xcode ###
+# Xcode specific files
+*.xccheckout
+*.xcworkspace
+*.xcodeproj/project.xcworkspace
+*.xcuserstate
+
+### Python ###
+# Python specific files
+*.pyc
+*.pyo
+__pycache__
+
+### Misc ###
+*.log
+*.bak
+*.swp
