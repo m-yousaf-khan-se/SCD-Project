@@ -20,6 +20,7 @@ public class useCaseController {
     void initialize() {
         assert useCasePane != null : "fx:id=\"useCasePane\" was not injected: check your FXML file 'useCasePane.fxml'.";
 
+
     }
 
 }

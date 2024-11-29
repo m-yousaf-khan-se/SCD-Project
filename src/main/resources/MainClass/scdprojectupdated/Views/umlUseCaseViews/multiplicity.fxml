@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Group?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
 
-<Group xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.useCaseDiagramControllers.useCaseMultiplicityController">
+<AnchorPane fx:id="multiplicityPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane layoutX="6.0" layoutY="2.0" prefHeight="19.0" prefWidth="28.0" />
-      <Text fx:id="multiplicityPane" layoutX="6.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Multiplicity" wrappingWidth="76.53667736053467" />
+      <TextField layoutX="-1.0" layoutY="1.0" prefHeight="22.0" prefWidth="29.0" />
    </children>
-</Group>
+</AnchorPane>
