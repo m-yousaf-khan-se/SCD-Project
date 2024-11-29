@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polygon?>
+
+<Group xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.useCaseDiagramControllers.useCaseAssociationController">
+   <children>
+      <Pane fx:id="useCaseAssociationPane" layoutX="5.0" layoutY="3.0" prefHeight="69.0" prefWidth="285.0">
+         <children>
+            <Line endX="100.0" layoutX="115.0" layoutY="38.0" startX="-37.600013732910156" />
+            <Polygon fill="DODGERBLUE" layoutX="201.0" layoutY="8.0" points="5.9999847412109375, 17.79999542236328, 5.9999847412109375, 41.00000762939453, 23.799972534179688, 29.00000762939453" stroke="BLACK" strokeType="INSIDE" />
+         </children>
+      </Pane>
+   </children>
+</Group>
