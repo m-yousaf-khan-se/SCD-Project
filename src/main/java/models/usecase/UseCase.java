@@ -1,11 +1,12 @@
 package models.usecase;
 
 import models.Component;
+import java.io.Serializable;
 
 
 import models.Component;
 
-public class UseCase implements Component {
+public class UseCase implements Component,Serializable {
     private String name;
     private String description;
     private int x; // X coordinate
