@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6211b0b-f5e5-4fa6-8211-4c28b3274ac8" name="Changes" comment="Drag and Drop. Association feature for the classes added." />
+    <list default="true" id="b6211b0b-f5e5-4fa6-8211-4c28b3274ac8" name="Changes" comment="Drag and Drop. Association feature for the classes added.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/ActorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/ActorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/useCaseAssociationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/useCaseAssociationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/useCaseMultiplicityController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/UseCaseDiagramsTools.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/UseCaseDiagramsTools.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/actor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/actor.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/association.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/association.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/multiplicity.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/useCasePane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/useCasePane.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,27 +67,27 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ApplicationMain.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;create-class-Diagram-feature&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Yousaf Khan/Desktop/SCD-Project&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ApplicationMain.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "UsecaseBranch",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Yousaf Khan/Desktop/SCD-Project",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Yousaf Khan\Desktop\JAVA Projects\SCD-Project\src\main\resources\MainClass\scdprojectupdated\Views\umlUseCaseViews" />
