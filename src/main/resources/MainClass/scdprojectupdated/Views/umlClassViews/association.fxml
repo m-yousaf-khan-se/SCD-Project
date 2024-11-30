@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="207.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.classDiagramControllers.AssociationController">
+<Group fx:id="associationGroup" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.classDiagramControllers.AssociationController">
    <children>
-      <Line endX="100.0" layoutX="106.0" layoutY="34.0" startX="-100.0" />
-      <ChoiceBox fx:id="multiplicity1ChoiceBox" layoutX="14.0" layoutY="7.0" prefHeight="25.0" prefWidth="48.0" />
-      <ChoiceBox fx:id="multiplicity2ChoiceBox" layoutX="145.0" layoutY="7.0" prefHeight="25.0" prefWidth="48.0" />
+      <Circle fx:id="corner1" fill="DODGERBLUE" layoutX="15.0" layoutY="52.0" radius="5.0" stroke="BLACK" strokeType="INSIDE">
+         <cursor>
+            <Cursor fx:constant="CROSSHAIR" />
+         </cursor>
+      </Circle>
+      <Circle fx:id="corner2" fill="DODGERBLUE" layoutX="135.0" layoutY="51.0" radius="5.0" stroke="BLACK" strokeType="INSIDE">
+         <cursor>
+            <Cursor fx:constant="CROSSHAIR" />
+         </cursor>
+      </Circle>
+      <Line fx:id="associationLine" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" />
+      <ChoiceBox fx:id="multiplicity1ChoiceBox" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="48.0" />
+      <ChoiceBox fx:id="multiplicity2ChoiceBox" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="48.0" />
    </children>
-</Pane>
+</Group>

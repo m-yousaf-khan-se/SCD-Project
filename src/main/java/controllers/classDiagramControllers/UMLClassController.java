@@ -4,8 +4,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import controllers.Controller;
-import controllers.DragAndDropHandler;
-import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -45,6 +43,10 @@ public class UMLClassController implements Controller {
     private String initialText = "";
     private String className = "";
 
+    public String getClassName()
+    {
+        return className;
+    }
     private ContextMenu createContextMenu(TextField textField) {
         ContextMenu contextMenu = new ContextMenu();
         MenuItem deleteItem = new MenuItem("Delete");
@@ -115,13 +117,14 @@ public class UMLClassController implements Controller {
         assert variableNameField != null : "fx:id=\"variableNameField\" was not injected: check your FXML file 'UMLclass.fxml'.";
 
         // Attach listeners to predefined fields
-        setupTextField(variableNameField, "Variable Name");
-        setupTextField(methodNameField, "Method Name");
+        setupTextField(variableNameField, "(+/-/#):variable name:returnType");
+        setupTextField(methodNameField, "(+/#/-):method name:returnType");
 
         // Automatically attach to all TextFields in VBox (useful for FXML-defined TextFields)
         classVBox.getChildren().stream()
                 .filter(node -> node instanceof TextField)
                 .map(node -> (TextField) node)
                 .forEach(this::attachFocusChangeListener);
+
     }
 }

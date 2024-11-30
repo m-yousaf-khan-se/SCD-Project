@@ -10,15 +10,15 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Group xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.classDiagramControllers.UMLClassController">
+<Group styleClass="uml-class" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.classDiagramControllers.UMLClassController">
    <children>
-      <VBox fx:id="classVBox" alignment="TOP_CENTER" prefHeight="117.0" prefWidth="115.0">
+      <VBox fx:id="classVBox" alignment="TOP_CENTER" fillWidth="false" prefHeight="122.0" prefWidth="159.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="11.0" stroke="BLACK" strokeType="INSIDE" width="115.0">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="11.0" stroke="BLACK" strokeType="INSIDE" width="156.0">
                <cursor>
                   <Cursor fx:constant="MOVE" />
                </cursor></Rectangle>
-            <TextField fx:id="classNameField" alignment="CENTER" promptText="class name">
+            <TextField fx:id="classNameField" alignment="CENTER" prefHeight="21.0" prefWidth="158.0" promptText="class name">
                <font>
                   <Font name="System Bold" size="10.0" />
                </font>
@@ -28,12 +28,12 @@
                   <Shadow height="6.34" radius="1.085" width="0.0" />
                </effect>
             </Separator>
-            <TextField fx:id="variableNameField" alignment="CENTER" promptText="Enter variable name">
+            <TextField fx:id="variableNameField" alignment="CENTER" prefHeight="21.0" prefWidth="158.0" promptText="(+/-/#):variable name:returnType">
                <font>
                   <Font size="10.0" />
                </font>
             </TextField>
-            <Button fx:id="addFieldBtn" mnemonicParsing="false" onAction="#addNewFieldListener" prefHeight="17.0" prefWidth="120.0" text="add field">
+            <Button fx:id="addFieldBtn" mnemonicParsing="false" onAction="#addNewFieldListener" prefHeight="6.0" prefWidth="159.0" text="add field">
                <font>
                   <Font size="10.0" />
                </font>
@@ -43,12 +43,12 @@
                   <Shadow height="6.34" radius="1.085" width="0.0" />
                </effect>
             </Separator>
-            <TextField fx:id="methodNameField" alignment="CENTER" promptText="Enter method name">
+            <TextField fx:id="methodNameField" alignment="CENTER" prefHeight="21.0" prefWidth="159.0" promptText="(+/#/-):method name:returnType">
                <font>
                   <Font size="10.0" />
                </font>
             </TextField>
-            <Button fx:id="addMethodBtn" mnemonicParsing="false" onAction="#addNewMethodListener" prefHeight="25.0" prefWidth="123.0" text="add method">
+            <Button fx:id="addMethodBtn" mnemonicParsing="false" onAction="#addNewMethodListener" prefHeight="0.0" prefWidth="159.0" text="add method">
                <font>
                   <Font size="10.0" />
                </font>

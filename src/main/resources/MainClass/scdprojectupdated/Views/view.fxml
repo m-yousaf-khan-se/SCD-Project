@@ -52,7 +52,7 @@
    <center>
       <ScrollPane prefHeight="333.0" prefWidth="490.0" BorderPane.alignment="CENTER">
          <content>
-            <Pane fx:id="paneCanvas" minHeight="-Infinity" minWidth="-Infinity" prefHeight="406.0" prefWidth="488.0" />
+            <Pane fx:id="paneCanvas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="406.0" prefWidth="488.0" />
          </content>
       </ScrollPane>
    </center>
