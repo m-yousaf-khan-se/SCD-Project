@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Group?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="433.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ViewController">
    <top>
@@ -52,7 +52,7 @@
    <center>
       <ScrollPane prefHeight="333.0" prefWidth="490.0" BorderPane.alignment="CENTER">
          <content>
-            <Group fx:id="groupCanvas" />
+            <Pane fx:id="paneCanvas" minHeight="-Infinity" minWidth="-Infinity" prefHeight="406.0" prefWidth="488.0" />
          </content>
       </ScrollPane>
    </center>

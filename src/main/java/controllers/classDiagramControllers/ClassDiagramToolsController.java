@@ -6,11 +6,12 @@ import java.util.ResourceBundle;
 
 import MainClass.scdprojectupdated.ApplicationMain;
 import controllers.Controller;
+import controllers.DragAndDropHandler;
 import controllers.ViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
+import javafx.scene.Parent;
 
 public class ClassDiagramToolsController implements Controller {
 
@@ -35,8 +36,8 @@ public class ClassDiagramToolsController implements Controller {
         //code of creating class
         System.out.println("Creating empty class");
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/UMLclass.fxml"));
-        ViewController viewController = loader.getController();
-        viewController.getGroupCanvas().getChildren().add((loader.load()));
+        Parent container = loader.load();
+        ViewController.getPaneCanvas().getChildren().add(container);
     }
 
     @FXML

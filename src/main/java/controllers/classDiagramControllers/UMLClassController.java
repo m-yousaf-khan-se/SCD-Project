@@ -4,8 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import controllers.Controller;
+import controllers.DragAndDropHandler;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -42,82 +42,66 @@ public class UMLClassController implements Controller {
     @FXML
     private TextField variableNameField;
 
-    private ContextMenu getRightClickDeleteOption(TextField targetField) {
-        ContextMenu rightClickOptions = new ContextMenu();
+    private String initialText = "";
+    private String className = "";
+
+    private ContextMenu createContextMenu(TextField textField) {
+        ContextMenu contextMenu = new ContextMenu();
         MenuItem deleteItem = new MenuItem("Delete");
-
-        // Pass the target field directly to the action listener
-        deleteItem.setOnAction(event -> rightClickDeleteOptionListener(event, targetField));
-
-        rightClickOptions.getItems().add(deleteItem);
-
-        return rightClickOptions;
+        deleteItem.setOnAction(event -> handleDeleteField(textField));
+        contextMenu.getItems().add(deleteItem);
+        return contextMenu;
     }
 
-    private void rightClickDeleteOptionListener(ActionEvent event, TextField targetField) {
-        if (targetField == null) {
-            System.out.println("Error: targetField is null.");
-            return;
-        }
-
-        VBox parent = (VBox) targetField.getParent();
-        if (parent != null) {
-            parent.getChildren().remove(targetField);
-            System.out.println("TextField deleted: " + targetField.getPromptText());
-        } else {
-            System.out.println("Error: Parent VBox is null.");
+    private void handleDeleteField(TextField textField) {
+        if (textField != null && textField.getParent() instanceof VBox) {
+            VBox parent = (VBox) textField.getParent();
+            parent.getChildren().remove(textField);
+            System.out.println("TextField deleted: " + textField.getPromptText() + " from the class : " + className);
         }
     }
 
-    // Create a ChangeListener to track text changes
-    private ChangeListener<String> textChangeListener = new ChangeListener<String>() {
-        @Override
-        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-            // The observable is the textProperty of the TextField, which is the source
-            TextField sourceField = (TextField) ((javafx.beans.property.StringProperty) observable).getBean(); // Accessing the source TextField
+    private void attachFocusChangeListener(TextField textField) {
+        textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                // Field gained focus
+                initialText = textField.getText();
+            } else {
+                // Field lost focus
+                if (!initialText.equals(textField.getText())) {
+                    if(textField.getPromptText().contains("class name"))
+                    {
+                        className = textField.getText();
+                    }
+                    System.out.println("Text changed in: " + textField.getPromptText() + " (of the class: " + className + ")");
+                    System.out.println("Old Value: " + initialText);
+                    System.out.println("New Value: " + textField.getText());
+                }
+            }
+        });
+    }
 
-            // Print text changes for debugging or handling purposes
-            System.out.println("Text changed in: " + sourceField.getPromptText());
-            System.out.println("Old Value: " + oldValue);
-            System.out.println("New Value: " + newValue);
-        }
-    };
+    private void setupTextField(TextField textField, String prompt) {
+        textField.setAlignment(Pos.CENTER);
+        textField.setFont(Font.font(10));
+        textField.setPromptText(prompt);
+        attachFocusChangeListener(textField);
+        textField.setContextMenu(createContextMenu(textField));
+    }
 
     @FXML
     void addNewFieldListener(ActionEvent event) {
-        int newFieldIndex = classVBox.getChildren().indexOf(addFieldBtn);  // Get index of the button
         TextField newField = new TextField();
-
-        newField.setAlignment(Pos.CENTER);
-        newField.setFont(Font.font(10));
-        newField.setPromptText("Enter Variable Name");
-
-        // Add ChangeListener to dynamically created fields
-        newField.textProperty().addListener(textChangeListener);
-
-        // Pass the new field directly to the getRightClickDeleteOption method
-        newField.setContextMenu(getRightClickDeleteOption(newField));
-
-        classVBox.getChildren().add(newFieldIndex, newField);  // Add new field
+        setupTextField(newField, "Enter Variable Name");
+        classVBox.getChildren().add(classVBox.getChildren().indexOf(addFieldBtn), newField);
         System.out.println("New empty field added to the class");
     }
 
     @FXML
     void addNewMethodListener(ActionEvent event) {
-        int newFieldIndex = classVBox.getChildren().indexOf(addMethodBtn);  // Get index of the button
         TextField newField = new TextField();
-
-        newField.setAlignment(Pos.CENTER);
-        newField.setFont(Font.font(10));
-        newField.setPromptText("Enter Method Name");
-
-        // Add ChangeListener to dynamically created fields
-        newField.textProperty().addListener(textChangeListener);
-
-        // Pass the new field directly to the getRightClickDeleteOption method
-        newField.setContextMenu(getRightClickDeleteOption(newField));
-
-        classVBox.getChildren().add(newFieldIndex, newField);  // Add new method
+        setupTextField(newField, "Enter Method Name");
+        classVBox.getChildren().add(classVBox.getChildren().indexOf(addMethodBtn), newField);
         System.out.println("New empty method added to the class");
     }
 
@@ -130,12 +114,14 @@ public class UMLClassController implements Controller {
         assert methodNameField != null : "fx:id=\"methodNameField\" was not injected: check your FXML file 'UMLclass.fxml'.";
         assert variableNameField != null : "fx:id=\"variableNameField\" was not injected: check your FXML file 'UMLclass.fxml'.";
 
-        // Add ChangeListener to predefined fields
-        variableNameField.textProperty().addListener(textChangeListener);
-        methodNameField.textProperty().addListener(textChangeListener);
+        // Attach listeners to predefined fields
+        setupTextField(variableNameField, "Variable Name");
+        setupTextField(methodNameField, "Method Name");
 
-        // Ensure context menus for predefined fields are set correctly
-        variableNameField.setContextMenu(getRightClickDeleteOption(variableNameField));
-        methodNameField.setContextMenu(getRightClickDeleteOption(methodNameField));
+        // Automatically attach to all TextFields in VBox (useful for FXML-defined TextFields)
+        classVBox.getChildren().stream()
+                .filter(node -> node instanceof TextField)
+                .map(node -> (TextField) node)
+                .forEach(this::attachFocusChangeListener);
     }
 }
