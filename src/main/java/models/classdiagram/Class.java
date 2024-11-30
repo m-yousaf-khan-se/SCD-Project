@@ -1,11 +1,14 @@
 package models.classdiagram;
 
 import models.Component;
+import java.io.Serializable;
 
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Class implements Component {
+public class Class implements Component, Serializable {
     private String name;
     private List<String> attributes;
     private List<String> methods;

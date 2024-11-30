@@ -1,8 +1,10 @@
 package models.usecase;
 
 import models.Component;
+import java.io.Serializable;
 
-public class Actor implements Component {
+
+public class Actor implements Component,Serializable {
     private String name;
     private int x; // X coordinate
     private int y; // Y coordinate
