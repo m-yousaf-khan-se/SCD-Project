@@ -2,10 +2,12 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import MainClass.scdprojectupdated.ApplicationMain;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -31,10 +33,32 @@ public class ViewController implements Controller{
     @FXML
     private Pane paneCanvas;
 
+    HashMap<Node, Controller> canvasNodes = new HashMap<Node, Controller>();
+
     private static ViewController instance; //using sigleton pattern
+
+    public static void storeController(Node node, Controller controller)
+    {
+        instance.canvasNodes.put(node, controller);
+    }
+
+    public static Controller getController(Node node)
+    {
+        return instance.canvasNodes.get(node);
+    }
+
+    public static void removeNode(Node node)
+    {
+        if(instance.canvasNodes.get(node) != null)
+            instance.canvasNodes.remove(node);
+    }
 
     @FXML
     private MenuItem generateJavaCodeFromClassDiagramMenuItem; //using this fx:id just to enable and disable this option
+
+    public static ObservableList<Node> getCanvasChildren() {
+        return instance.paneCanvas.getChildren();
+    }
 
     @FXML
     void aboutUMLEditorListener(ActionEvent event) {
@@ -105,6 +129,7 @@ public class ViewController implements Controller{
                         DragAndDropHandler.add(newChild);
                         System.out.println("A new child was added: " + newChild.getClass().getName());
                         // You can perform additional actions based on the type of the new child, etc.
+
                     }
                 }
                 if (change.wasRemoved()) {
