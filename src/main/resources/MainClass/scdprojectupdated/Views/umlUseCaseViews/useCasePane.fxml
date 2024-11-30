@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Ellipse?>
-<?import javafx.scene.text.Text?>
 
-
-<AnchorPane fx:id="useCase" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="131.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="useCase" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="81.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.useCaseDiagramControllers.useCaseController">
    <children>
-      <Ellipse fill="DODGERBLUE" layoutX="63.0" layoutY="35.0" radiusX="53.0" radiusY="23.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text layoutX="52.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Ellipse fill="DODGERBLUE" layoutX="109.0" layoutY="41.0" radiusX="99.0" radiusY="29.0" stroke="BLACK" strokeType="INSIDE" />
+      <TextField fx:id="useCaseTextField" layoutX="29.0" layoutY="28.0" prefHeight="26.0" prefWidth="159.0" />
    </children>
 </AnchorPane>

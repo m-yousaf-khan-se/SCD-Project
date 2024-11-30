@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane fx:id="ActorPane" prefHeight="135.0" prefWidth="119.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.useCaseDiagramControllers.ActorController">
+<AnchorPane fx:id="ActorPane" prefHeight="168.0" prefWidth="119.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.useCaseDiagramControllers.ActorController">
    <children>
       <Circle fx:id="head" fill="DODGERBLUE" layoutX="59.0" layoutY="40.0" radius="15.0" stroke="BLACK" />
       <Line fx:id="body" endX="0" endY="40" layoutX="59.0" layoutY="57.0" startX="0" startY="0" stroke="BLACK" />
       <Line fx:id="leftArm" endX="-22.10709571838379" endY="21.0928955078125" layoutX="54.0" layoutY="98.0" startX="4.292869567871094" startY="-0.707122802734375" stroke="BLACK" />
       <Line fx:id="rightArm" endX="32.092918395996094" layoutX="42.0" layoutY="77.0" startX="0" startY="0" stroke="BLACK" />
       <Line fx:id="rightLeg" endX="21.092880249023438" endY="21.292877197265625" layoutX="59.0" layoutY="98.0" startX="0" startY="0" stroke="BLACK" />
+      <TextField fx:id="actorNameTextField" layoutX="3.0" layoutY="127.0" prefHeight="26.0" prefWidth="109.0" promptText="Enter Actor Name" />
    </children>
 </AnchorPane>
