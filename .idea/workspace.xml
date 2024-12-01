@@ -4,8 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6211b0b-f5e5-4fa6-8211-4c28b3274ac8" name="Changes" comment="class diagram tools implementation completed.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="b6211b0b-f5e5-4fa6-8211-4c28b3274ac8" name="Changes" comment="Drag and Drop. Association feature for the classes added.">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/main/java/com/boota/javaproject/Aggregation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/main/java/com/boota/javaproject/Association.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/main/java/com/boota/javaproject/Attribute.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/main/java/com/boota/javaproject/CanvasController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/main/java/com/boota/javaproject/Class.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/main/java/com/boota/javaproject/CommentBox.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/main/java/com/boota/javaproject/Composition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/main/java/com/boota/javaproject/DataAccess.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/main/java/com/boota/javaproject/Function.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/main/java/com/boota/javaproject/Inheritance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/main/java/com/boota/javaproject/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/main/java/com/boota/javaproject/Multiplicity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/main/java/com/boota/javaproject/Point.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/main/java/module-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/main/resources/com/boota/javaproject/Canvas.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/main/resources/com/boota/javaproject/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/test/java/com/boota/javaproject/AttributeTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/test/java/com/boota/javaproject/CanvasControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/test/java/com/boota/javaproject/ClassTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/test/java/com/boota/javaproject/CommentBoxTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/test/java/com/boota/javaproject/FunctionTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/src/test/java/com/boota/javaproject/PointTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/target/classes/com/boota/javaproject/Canvas.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML-Editors-master/target/classes/com/boota/javaproject/styles.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,27 +97,27 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ApplicationMain.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "#18 on create-class-Diagram-feature",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Yousaf Khan/Desktop/SCD-Project",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ApplicationMain.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;#18 on create-class-Diagram-feature&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Yousaf Khan/Desktop/SCD-Project&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Yousaf Khan\Desktop\JAVA Projects\SCD-Project\src\main\resources\MainClass\scdprojectupdated\Views\umlUseCaseViews" />
@@ -230,8 +258,8 @@
     <MESSAGE value="add method and add fields functionality added to the classes" />
     <MESSAGE value="updated project structure for the MVP Architecture." />
     <MESSAGE value="Drag and Drop Funtionality added. Class Digram Components are still in progress." />
-    <MESSAGE value="Drag and Drop. Association feature for the classes added." />
     <MESSAGE value="class diagram tools implementation completed." />
-    <option name="LAST_COMMIT_MESSAGE" value="class diagram tools implementation completed." />
+    <MESSAGE value="Drag and Drop. Association feature for the classes added." />
+    <option name="LAST_COMMIT_MESSAGE" value="Drag and Drop. Association feature for the classes added." />
   </component>
 </project>
