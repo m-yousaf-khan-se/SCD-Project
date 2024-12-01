@@ -4,7 +4,7 @@ import models.Component;
 import java.io.Serializable;
 
 
-import models.Component;
+//import models.Component;
 
 public class UseCase implements Component,Serializable {
     private String name;
@@ -19,10 +19,10 @@ public class UseCase implements Component,Serializable {
         this.y = y;
     }
 
-    @Override
-    public void display() {
-        System.out.println("UseCase: " + name + " - " + description + " at coordinates (" + x + ", " + y + ")");
-    }
+//    @Override
+//    public void display() {
+//        System.out.println("UseCase: " + name + " - " + description + " at coordinates (" + x + ", " + y + ")");
+//    }
 
     @Override
     public String getDetails() {

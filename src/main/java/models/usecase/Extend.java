@@ -9,9 +9,9 @@ public class Extend extends Relationship {
         super(from, to, "Extend", label);
     }
 
-    @Override
-    public void display() {
-        System.out.println("Displaying Extend from " + getFrom().getDetails() + " to " + getTo().getDetails() +
-                " with label: " + getLabel() + " at (" + getLabelX() + ", " + getLabelY() + ")");
-    }
+//    @Override
+//    public void display() {
+//        System.out.println("Displaying Extend from " + getFrom().getDetails() + " to " + getTo().getDetails() +
+//                " with label: " + getLabel() + " at (" + getLabelX() + ", " + getLabelY() + ")");
+//    }
 }

@@ -9,9 +9,9 @@ public class Aggregation extends Relationship {
         super(from, to, "Aggregation", label);
     }
 
-    @Override
-    public void display() {
-        System.out.println("Displaying Aggregation from " + getFrom().getDetails() + " to " + getTo().getDetails() +
-                " with label: " + getLabel() + " at (" + getLabelX() + ", " + getLabelY() + ")");
-    }
+//    @Override
+//    public void display() {
+//        System.out.println("Displaying Aggregation from " + getFrom().getDetails() + " to " + getTo().getDetails() +
+//                " with label: " + getLabel() + " at (" + getLabelX() + ", " + getLabelY() + ")");
+//    }
 }
