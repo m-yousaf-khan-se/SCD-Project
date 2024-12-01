@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Polygon?>
 
-
-<AnchorPane fx:id="association" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="176.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Group fx:id="useCaseAssociationGroup" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.useCaseDiagramControllers.useCaseAssociationController">
    <children>
-      <Line endX="100.0" layoutX="55.0" layoutY="28.0" startX="-37.600013732910156" />
-      <Polygon fill="DODGERBLUE" layoutX="141.0" layoutY="-2.0" points="5.9999847412109375, 17.79999542236328, 5.9999847412109375, 41.00000762939453, 23.799972534179688, 29.00000762939453" stroke="BLACK" strokeType="INSIDE" />
+      <!-- Updated Line definition -->
+      <Line fx:id="associationLine" endX="135.0" endY="51.0" startX="15.0" startY="52.0" stroke="BLACK" />
+
+      <Circle fx:id="actorCircle" fill="DODGERBLUE" layoutX="15.0" layoutY="52.0" radius="5.0" stroke="BLACK" strokeType="INSIDE">
+         <cursor>
+            <Cursor fx:constant="CROSSHAIR" />
+         </cursor>
+      </Circle>
+      <Circle fx:id="useCaseCircle" fill="DODGERBLUE" layoutX="135.0" layoutY="51.0" radius="5.0" stroke="BLACK" strokeType="INSIDE">
+         <cursor>
+            <Cursor fx:constant="CROSSHAIR" />
+         </cursor>
+      </Circle>
    </children>
-</AnchorPane>
+</Group>
