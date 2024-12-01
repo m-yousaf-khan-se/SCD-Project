@@ -1,9 +1,15 @@
 package controllers;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import javafx.scene.image.WritableImage;
+import javafx.embed.swing.SwingFXUtils;
+
+
 
 import MainClass.scdprojectupdated.ApplicationMain;
 import javafx.collections.ListChangeListener;
@@ -16,8 +22,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+
+import javax.imageio.ImageIO;
 
 public class ViewController implements Controller{
 
@@ -79,7 +89,32 @@ public class ViewController implements Controller{
 
     @FXML
     void exportAsPNGListener(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Diagram as PNG");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("PNG Files", "*.png")
+        );
 
+        File file = fileChooser.showSaveDialog(null);
+
+        if (file != null) {
+            try {
+                // Capture the diagram as an image
+                WritableImage image = paneCanvas.snapshot(null, null);
+                // Convert JavaFX WritableImage to BufferedImage
+                BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+
+                // Write the image to the selected file
+                ImageIO.write(bufferedImage, "png", file);
+
+                System.out.println("Diagram exported successfully to " + file.getAbsolutePath());
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Display an error message to the user
+                System.out.println("Error exporting diagram: " + e.getMessage());
+            }
+        }
     }
 
 
