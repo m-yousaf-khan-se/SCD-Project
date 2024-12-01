@@ -73,5 +73,5 @@ public abstract class Relationship implements Serializable {
     }
 
     // Abstract method to render the relationship visually
-    public abstract void display();
+    //public abstract void display();
 }

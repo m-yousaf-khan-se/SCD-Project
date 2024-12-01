@@ -51,13 +51,13 @@ public class Class implements Component, Serializable {
         this.y = y;
     }
 
-    @Override
-    public void display() {
-        System.out.println("Class: " + name);
-        System.out.println("Attributes: " + attributes);
-        System.out.println("Methods: " + methods);
-        System.out.println("Position: (" + x + ", " + y + ")");
-    }
+//    @Override
+//    public void display() {
+//        System.out.println("Class: " + name);
+//        System.out.println("Attributes: " + attributes);
+//        System.out.println("Methods: " + methods);
+//        System.out.println("Position: (" + x + ", " + y + ")");
+//    }
 
     @Override
     public String getDetails() {

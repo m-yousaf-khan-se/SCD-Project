@@ -9,10 +9,10 @@ public class Include extends Relationship {
         super(from, to, "Include", label);
     }
 
-    @Override
-    public void display() {
-        System.out.println("Displaying Include from " + getFrom().getDetails() + " to " + getTo().getDetails() +
-                " with label: " + getLabel() + " at (" + getLabelX() + ", " + getLabelY() + ")");
-    }
+//    @Override
+//    public void display() {
+//        System.out.println("Displaying Include from " + getFrom().getDetails() + " to " + getTo().getDetails() +
+//                " with label: " + getLabel() + " at (" + getLabelX() + ", " + getLabelY() + ")");
+//    }
 }
 
