@@ -183,5 +183,4 @@ public class ViewController implements Controller{
         return instance.paneCanvas;
     }
 
-// hello
 }
