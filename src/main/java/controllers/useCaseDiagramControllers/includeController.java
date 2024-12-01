@@ -12,7 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 
 public class includeController implements Controller {
@@ -30,10 +29,16 @@ public class includeController implements Controller {
     private Line includeLine;
 
     @FXML
+    private Line arrowLineLeft;
+
+    @FXML
+    private Line arrowLineRight;
+
+    @FXML
     private Circle startCircle;
 
     @FXML
-    private Polygon arrowPolygon;
+    private Circle endCircle;
 
     @FXML
     private Text includeText; // The text node for "<<include>>"
@@ -52,9 +57,16 @@ public class includeController implements Controller {
         includeLine.startXProperty().bind(startCircle.layoutXProperty());
         includeLine.startYProperty().bind(startCircle.layoutYProperty());
 
-        // Bind the end of the line to the polygon's position
-        includeLine.endXProperty().bind(arrowPolygon.layoutXProperty());
-        includeLine.endYProperty().bind(arrowPolygon.layoutYProperty());
+        // Update arrowhead lines when the main line changes
+        includeLine.endXProperty().addListener((observable, oldValue, newValue) -> updateArrowLines());
+        includeLine.endYProperty().addListener((observable, oldValue, newValue) -> updateArrowLines());
+        includeLine.startXProperty().addListener((observable, oldValue, newValue) -> updateArrowLines());
+        includeLine.startYProperty().addListener((observable, oldValue, newValue) -> updateArrowLines());
+        includeLine.endXProperty().bind(endCircle.layoutXProperty());
+        includeLine.endYProperty().bind(endCircle.layoutYProperty());
+
+        // Initial position of the arrowhead
+        updateArrowLines();
 
         // Bind the text position to the midpoint of the line
         includeLine.startXProperty().addListener((observable, oldValue, newValue) -> updateTextPosition());
@@ -66,9 +78,103 @@ public class includeController implements Controller {
         updateTextPosition();
     }
 
+    private void updateArrowLines() {
+        // Calculate angle of the line
+        double deltaX = includeLine.getEndX() - includeLine.getStartX();
+        double deltaY = includeLine.getEndY() - includeLine.getStartY();
+        double angle = Math.atan2(deltaY, deltaX);
+
+        // Arrowhead line length
+        double arrowLength = 15; // Adjust based on your preference
+        double arrowAngle = Math.PI / 6; // 30 degrees for the arrowhead
+
+        // Calculate points for left arrow line
+        double leftX = includeLine.getEndX() - arrowLength * Math.cos(angle - arrowAngle);
+        double leftY = includeLine.getEndY() - arrowLength * Math.sin(angle - arrowAngle);
+
+        // Calculate points for right arrow line
+        double rightX = includeLine.getEndX() - arrowLength * Math.cos(angle + arrowAngle);
+        double rightY = includeLine.getEndY() - arrowLength * Math.sin(angle + arrowAngle);
+
+        // Update arrowhead line positions
+        arrowLineLeft.setStartX(includeLine.getEndX());
+        arrowLineLeft.setStartY(includeLine.getEndY());
+        arrowLineLeft.setEndX(leftX);
+        arrowLineLeft.setEndY(leftY);
+
+        arrowLineRight.setStartX(includeLine.getEndX());
+        arrowLineRight.setStartY(includeLine.getEndY());
+        arrowLineRight.setEndX(rightX);
+        arrowLineRight.setEndY(rightY);
+    }
+
+    private void updateTextPosition() {
+        // Calculate the midpoint of the line
+        double midX = (includeLine.getStartX() + includeLine.getEndX()) / 2;
+        double midY = (includeLine.getStartY() + includeLine.getEndY()) / 2;
+
+        // Position the text slightly above the line midpoint
+        includeText.setLayoutX(midX - includeText.getBoundsInLocal().getWidth() / 2);
+        includeText.setLayoutY(midY - 10); // Offset the text above the line
+    }
+
     private void setupDragHandlers() {
         startCircle.setOnMouseDragged(event -> onNodeDragged(startCircle, event, true));
-        arrowPolygon.setOnMouseDragged(event -> onNodeDragged(arrowPolygon, event, false));
+        endCircle.setOnMouseDragged(event -> onNodeDragged(endCircle, event, false));
+        includeLine.setOnMouseDragged(this::onLineDragged);
+        arrowLineLeft.setOnMouseDragged(event -> onArrowDragged(event, true));
+        arrowLineRight.setOnMouseDragged(event -> onArrowDragged(event, false));
+    }
+
+    private void onLineDragged(MouseEvent event) {
+        double newX = includeGroup.sceneToLocal(event.getSceneX(), event.getSceneY()).getX();
+        double newY = includeGroup.sceneToLocal(event.getSceneX(), event.getSceneY()).getY();
+
+        double deltaX = Math.abs(includeLine.getStartX() - newX);
+        double deltaY = Math.abs(includeLine.getStartY() - newY);
+
+        if (deltaX > 1 || deltaY > 1) {
+            includeLine.setEndX(newX);
+            includeLine.setEndY(newY);
+            updateArrowLines(); // Update arrow position based on new line coordinates
+            updateTextPosition(); // Update text position for the line
+        }
+
+        event.consume();
+    }
+
+    private void onArrowDragged(MouseEvent event, boolean isLeftArrow) {
+        // Get the current drag position
+        double newX = includeGroup.sceneToLocal(event.getSceneX(), event.getSceneY()).getX();
+        double newY = includeGroup.sceneToLocal(event.getSceneX(), event.getSceneY()).getY();
+
+        // Update the appropriate arrow position based on the dragging direction
+        if (isLeftArrow) {
+            // Set the new endpoint of the left arrow
+            arrowLineLeft.setEndX(newX);
+            arrowLineLeft.setEndY(newY);
+        } else {
+            // Set the new endpoint of the right arrow
+            arrowLineRight.setEndX(newX);
+            arrowLineRight.setEndY(newY);
+        }
+
+        // Update the line’s endpoint to the new arrow position
+        if (isLeftArrow) {
+            includeLine.setStartX(newX);
+            includeLine.setStartY(newY);
+        } else {
+            includeLine.setEndX(newX);
+            includeLine.setEndY(newY);
+        }
+
+        // Update both arrows after moving the main line
+        updateArrowLines();
+
+        // Recalculate the text position based on the new line endpoint
+        updateTextPosition();
+
+        event.consume();
     }
 
     private void onNodeDragged(Node node, MouseEvent event, boolean isStart) {
@@ -89,18 +195,8 @@ public class includeController implements Controller {
         event.consume();
     }
 
-    private void updateTextPosition() {
-        // Calculate the midpoint of the line
-        double midX = (includeLine.getStartX() + includeLine.getEndX()) / 2;
-        double midY = (includeLine.getStartY() + includeLine.getEndY()) / 2;
-
-        // Position the text slightly above the line midpoint
-        includeText.setLayoutX(midX - includeText.getBoundsInLocal().getWidth() / 2);
-        includeText.setLayoutY(midY - 10); // Offset the text above the line
-    }
-
     private void snapToNearestNodeEdge(Node node, boolean isStart) {
-        Node nearestNode = findNearestNode(node);
+        Node nearestNode = findNearestUseCaseNode(node);
 
         if (nearestNode != null) {
             double threshold = 20; // Adjust this value as needed
@@ -113,13 +209,13 @@ public class includeController implements Controller {
         }
     }
 
-    private Node findNearestNode(Node node) {
+    private Node findNearestUseCaseNode(Node node) {
         Node nearestNode = null;
         double nearestDistance = Double.MAX_VALUE;
 
         for (Node canvasNode : ViewController.getCanvasChildren()) {
-            if (!(canvasNode.getStyleClass().contains("usecase-actor") || canvasNode.getStyleClass().contains("uml-useCase"))) {
-                continue; // Skip irrelevant nodes
+            if (!(canvasNode.getStyleClass().contains("uml-useCase"))) {
+                continue; // Skip non-usecase nodes
             }
 
             Bounds bounds = canvasNode.getBoundsInParent();
@@ -138,33 +234,60 @@ public class includeController implements Controller {
         double nearestX = Math.max(bounds.getMinX(), Math.min(node.getLayoutX(), bounds.getMaxX()));
         double nearestY = Math.max(bounds.getMinY(), Math.min(node.getLayoutY(), bounds.getMaxY()));
 
-        return Math.hypot(node.getLayoutX() - nearestX, node.getLayoutY() - nearestY);
+        double deltaX = node.getLayoutX() - nearestX;
+        double deltaY = node.getLayoutY() - nearestY;
+
+        return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
     }
 
-    private void updateNodePositionToEdge(Node node, Node targetNode) {
-        Bounds bounds = targetNode.getBoundsInParent();
-        double centerX = (bounds.getMinX() + bounds.getMaxX()) / 2;
-        double centerY = (bounds.getMinY() + bounds.getMaxY()) / 2;
+    private void updateNodePositionToEdge(Node node, Node nearestNode) {
+        Bounds bounds = nearestNode.getBoundsInParent();
 
-        double angle = Math.atan2(node.getLayoutY() - centerY, node.getLayoutX() - centerX);
+        double nodeX = node.getLayoutX();
+        double nodeY = node.getLayoutY();
 
-        double radiusX = (bounds.getMaxX() - bounds.getMinX()) / 2;
-        double radiusY = (bounds.getMaxY() - bounds.getMinY()) / 2;
+        // Calculate distances to each edge
+        double distanceToLeft = Math.abs(nodeX - bounds.getMinX());
+        double distanceToRight = Math.abs(nodeX - bounds.getMaxX());
+        double distanceToTop = Math.abs(nodeY - bounds.getMinY());
+        double distanceToBottom = Math.abs(nodeY - bounds.getMaxY());
 
-        double edgeX = centerX + radiusX * Math.cos(angle);
-        double edgeY = centerY + radiusY * Math.sin(angle);
+        // Find the edge with the minimum distance
+        double minDistance = Math.min(Math.min(distanceToLeft, distanceToRight), Math.min(distanceToTop, distanceToBottom));
 
-        node.setLayoutX(edgeX);
-        node.setLayoutY(edgeY);
-    }
-
-    private void updateAttachedNode(Node node, Node targetNode, boolean isStart) {
-        if (isStart) {
-            attachedStartNode = targetNode;
-        } else {
-            attachedEndNode = targetNode;
+        if (minDistance == distanceToLeft) {
+            // Snap to left edge
+            node.setLayoutX(bounds.getMinX());
+            node.setLayoutY(clamp(nodeY, bounds.getMinY(), bounds.getMaxY()));
+        } else if (minDistance == distanceToRight) {
+            // Snap to right edge
+            node.setLayoutX(bounds.getMaxX());
+            node.setLayoutY(clamp(nodeY, bounds.getMinY(), bounds.getMaxY()));
+        } else if (minDistance == distanceToTop) {
+            // Snap to top edge
+            node.setLayoutX(clamp(nodeX, bounds.getMinX(), bounds.getMaxX()));
+            node.setLayoutY(bounds.getMinY());
+        } else if (minDistance == distanceToBottom) {
+            // Snap to bottom edge
+            node.setLayoutX(clamp(nodeX, bounds.getMinX(), bounds.getMaxX()));
+            node.setLayoutY(bounds.getMaxY());
         }
+    }
 
-        System.out.println((isStart ? "Start" : "End") + " node snapped to: " + targetNode.getId());
+    /**
+     * Clamps a value between a minimum and a maximum.
+     */
+    private double clamp(double value, double min, double max) {
+        return Math.max(min, Math.min(value, max));
+    }
+
+
+    private void updateAttachedNode(Node node, Node nearestNode, boolean isStart) {
+        if (isStart) {
+            attachedStartNode = nearestNode;
+        } else {
+            attachedEndNode = nearestNode;
+        }
+        System.out.println((node.getStyleClass().contains("usecase-actor") ? "Actor" : "Use Case") + " snapped to node: " + node.getId());
     }
 }
