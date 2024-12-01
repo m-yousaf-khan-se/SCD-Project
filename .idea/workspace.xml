@@ -5,25 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6211b0b-f5e5-4fa6-8211-4c28b3274ac8" name="Changes" comment="Drag and Drop. Association feature for the classes added.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/data/DiagramSerializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/presenter/DiagramDisplay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Component.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/Diagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Diagram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/DiagramModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/DiagramModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/Relationship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Relationship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/classdiagram/Aggregation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/classdiagram/Aggregation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/classdiagram/Association.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/classdiagram/Association.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/classdiagram/Class.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/classdiagram/Class.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/classdiagram/ClassDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/classdiagram/ClassDiagram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/classdiagram/Inherritance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/classdiagram/Inherritance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/classdiagram/generalization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/classdiagram/generalization.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/usecase/Actor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/usecase/Actor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/usecase/Extend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/usecase/Extend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/usecase/Include.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/usecase/Include.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/usecase/UseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/usecase/UseCase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/usecase/UseCaseDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/usecase/UseCaseDiagram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/AggregationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/AggregationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/AssociationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/AssociationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/CompositionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/CompositionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/GeneralizationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/classDiagramControllers/GeneralizationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlClassViews/aggregation.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlClassViews/aggregation.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlClassViews/association.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlClassViews/association.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlClassViews/composition.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlClassViews/composition.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlClassViews/generalization.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlClassViews/generalization.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,8 +24,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -53,12 +43,22 @@
     &quot;assignee&quot;: &quot;m-yousaf-khan-se&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/m-yousaf-khan-se/SCD-Project.git&quot;,
-    &quot;accountId&quot;: &quot;b0bf0d9a-8706-4403-830e-bfc92b8ab2d6&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/m-yousaf-khan-se/SCD-Project.git",
+    "accountId": "8bd99f4f-b6c3-46ce-b9b9-ef13c7f1f931"
+  },
+  "recentNewPullRequestHead": {
+    "server": {
+      "useHttp": false,
+      "host": "github.com",
+      "port": null,
+      "suffix": null
+    },
+    "owner": "m-yousaf-khan-se",
+    "repository": "SCD-Project"
   }
-}</component>
+}]]></component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>

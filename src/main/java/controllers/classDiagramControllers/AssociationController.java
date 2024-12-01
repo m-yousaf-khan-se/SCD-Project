@@ -49,6 +49,8 @@ public class AssociationController implements Controller {
     private Node attachedNode1;
     private Node attachedNode2;
 
+    private static final double SNAP_THRESHOLD = 20.0;
+
     @FXML
     void initialize() {
         setupMultiplicityChoiceBoxes();
@@ -123,10 +125,9 @@ public class AssociationController implements Controller {
         Node nearestNode = findNearestUMLClass(corner);
 
         if (nearestNode != null) {
-            double threshold = 20; // Adjust this value as needed
-            double distance = calculateDistanceToNode(corner, nearestNode.getBoundsInParent());
+            double SNAP_THRESHOLD = calculateDistanceToNode(corner, nearestNode.getBoundsInParent());
 
-            if (distance < threshold) { // Only snap if the distance is less than the threshold
+            if (SNAP_THRESHOLD < AssociationController.SNAP_THRESHOLD) { // Only snap if the SNAP_THRESHOLD is less than the threshold
                 updateCornerPosition(corner, nearestNode);
                 updateAttachedClass(corner, nearestNode);
             }

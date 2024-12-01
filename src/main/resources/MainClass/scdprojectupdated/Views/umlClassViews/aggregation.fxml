@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polygon?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.classDiagramControllers.AggregationController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<Group fx:id="aggregationGroup" styleClass="aggregation-arrow" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.classDiagramControllers.AggregationController">
+   <children>
+      <Circle fx:id="corner1" fill="DODGERBLUE" layoutX="15.0" layoutY="52.0" radius="5.0" stroke="BLACK" strokeType="INSIDE">
+         <cursor>
+            <Cursor fx:constant="CROSSHAIR" />
+         </cursor>
+      </Circle>
+      <Circle fx:id="corner2" fill="DODGERBLUE" layoutX="89.0" layoutY="52.0" radius="5.0" stroke="BLACK" strokeType="INSIDE">
+         <cursor>
+            <Cursor fx:constant="CROSSHAIR" />
+         </cursor>
+      </Circle>
+      <Polygon fx:id="aggregationArrow" fill="#2197ff25" layoutX="135.0" layoutY="51.0" points="13.0, 20.0, -4.0, 11.79290771484375, 13.0, 3.0, 34.0, 11.79290771484375" stroke="BLACK" strokeType="INSIDE" />
+      <Line fx:id="aggregationLine" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" />
+   </children>
+</Group>
