@@ -15,10 +15,10 @@ public class Actor implements Component,Serializable {
         this.y = y;
     }
 
-    @Override
-    public void display() {
-        System.out.println("Actor: " + name + " at coordinates (" + x + ", " + y + ")");
-    }
+//    @Override
+//    public void display() {
+//        System.out.println("Actor: " + name + " at coordinates (" + x + ", " + y + ")");
+//    }
 
     @Override
     public String getDetails() {

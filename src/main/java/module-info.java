@@ -7,6 +7,11 @@ module main.scdprojectupdated {
 
 
 
+    requires com.fasterxml.jackson.databind;
+    requires com.fasterxml.jackson.core;
+    requires com.fasterxml.jackson.annotation;
+
+
     opens MainClass.scdprojectupdated to javafx.fxml;
     exports MainClass.scdprojectupdated;
     exports controllers;

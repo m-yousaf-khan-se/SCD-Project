@@ -9,10 +9,10 @@ public class Association extends Relationship {
         super(from, to, "Association", label);
     }
 
-    @Override
-    public void display() {
-        System.out.println("Displaying Association from " + getFrom().getDetails() + " to " + getTo().getDetails() +
-                " with label: " + getLabel() + " at (" + getLabelX() + ", " + getLabelY() + ")");
-    }
+//    @Override
+//    public void display() {
+//        System.out.println("Displaying Association from " + getFrom().getDetails() + " to " + getTo().getDetails() +
+//                " with label: " + getLabel() + " at (" + getLabelX() + ", " + getLabelY() + ")");
+//    }
 }
 
