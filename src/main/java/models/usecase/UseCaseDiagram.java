@@ -12,15 +12,15 @@ public class UseCaseDiagram implements Diagram {
         this.model = new DiagramModel();
     }
 
-    @Override
-    public void display() {
-        for (Component component : model.getComponents()) {
-            component.display();
-        }
-        for (Relationship relationship : model.getRelationships()) {
-            relationship.display();
-        }
-    }
+//    @Override
+//    public void display() {
+//        for (Component component : model.getComponents()) {
+//            component.display();
+//        }
+//        for (Relationship relationship : model.getRelationships()) {
+//            relationship.display();
+//        }
+//    }
 
     @Override
     public void addComponent(Component component) {

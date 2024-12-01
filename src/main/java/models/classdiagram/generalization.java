@@ -11,9 +11,9 @@ public class generalization extends Relationship {
         super(from, to, "generalization", label);
     }
 
-    @Override
-    public void display() {
-        System.out.println("Displaying generalization from " + getFrom().getDetails() + " to " + getTo().getDetails() +
-                " with label: " + getLabel() + " at (" + getLabelX() + ", " + getLabelY() + ")");
-    }
+//    @Override
+//    public void display() {
+//        System.out.println("Displaying generalization from " + getFrom().getDetails() + " to " + getTo().getDetails() +
+//                " with label: " + getLabel() + " at (" + getLabelX() + ", " + getLabelY() + ")");
+//    }
 }

@@ -10,9 +10,9 @@ public class Inherritance extends Relationship {
         super(from, to, "Inherritance", label);
     }
 
-    @Override
-    public void display() {
-        System.out.println("Displaying Inherritance from " + getFrom().getDetails() + " to " + getTo().getDetails() +
-                " with label: " + getLabel() + " at (" + getLabelX() + ", " + getLabelY() + ")");
-    }
+//    @Override
+//    public void display() {
+//        System.out.println("Displaying Inherritance from " + getFrom().getDetails() + " to " + getTo().getDetails() +
+//                " with label: " + getLabel() + " at (" + getLabelX() + ", " + getLabelY() + ")");
+//    }
 }

@@ -10,7 +10,7 @@
 package models;
 
 public interface Diagram {
-    void display(); // Display the diagram
+    //void display(); // Display the diagram
     void addComponent(Component component); // Add a component to the diagram
     void removeComponent(Component component); // Remove a component from the diagram
     void addRelationship(Relationship relationship); // Add a relationship between components
