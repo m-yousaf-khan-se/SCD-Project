@@ -3,6 +3,8 @@ module main.scdprojectupdated {
     requires javafx.fxml;
     requires javafx.graphics;
     requires java.desktop;
+    requires javafx.swing; // This allows access to javafx.embed.swing
+
 
 
     opens MainClass.scdprojectupdated to javafx.fxml;
