@@ -9,8 +9,8 @@
 <Group fx:id="includeGroup" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.useCaseDiagramControllers.includeController">
    <children>
       <Line fx:id="includeLine" endX="-13.599990844726562" endY="7.62939453125E-6" layoutX="10.0" layoutY="10.0" startX="-112.20001220703125" startY="1.1444091796875E-5" style="-fx-stroke-dash-array: 4 8; -fx-stroke-width: 1.5;" />
-      <Polygon fx:id="arrowPolygon" fill="DODGERBLUE" layoutX="121.0" layoutY="8.0" points="5.9999847412109375, 17.79999542236328, 5.9999847412109375, 41.00000762939453, 23.799972534179688, 29.00000762939453" stroke="BLACK" strokeType="INSIDE" />
-      <Text fx:id="includeText" layoutX="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;&lt;include&gt;&gt;" />
+      <Polygon fx:id="arrowPolygon" fill="DODGERBLUE" layoutX="120.0" layoutY="7.0" points="5.9999847412109375, 17.79999542236328, 5.9999847412109375, 41.00000762939453, 23.799972534179688, 29.00000762939453" stroke="BLACK" strokeType="INSIDE" />
+      <Text fx:id="includeText" layoutX="39.0" layoutY="-1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;&lt;include&gt;&gt;" />
       <Circle fx:id="startCircle" fill="DODGERBLUE" layoutX="16.0" layoutY="42.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </Group>
