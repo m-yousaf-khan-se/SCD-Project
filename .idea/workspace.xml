@@ -5,15 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6211b0b-f5e5-4fa6-8211-4c28b3274ac8" name="Changes" comment="Drag and Drop. Association feature for the classes added.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/ActorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/ActorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/useCaseAssociationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/useCaseAssociationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/useCaseDiagramControllers/useCaseMultiplicityController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/UseCaseDiagramsTools.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/UseCaseDiagramsTools.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/actor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/actor.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/association.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/association.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/multiplicity.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/useCasePane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainClass/scdprojectupdated/Views/umlUseCaseViews/useCasePane.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/data/DiagramSerializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/presenter/DiagramDisplay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Component.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Diagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Diagram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/DiagramModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/DiagramModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Relationship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Relationship.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/classdiagram/Aggregation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/classdiagram/Aggregation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/classdiagram/Association.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/classdiagram/Association.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/classdiagram/Class.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/classdiagram/Class.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/classdiagram/ClassDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/classdiagram/ClassDiagram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/classdiagram/Inherritance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/classdiagram/Inherritance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/classdiagram/generalization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/classdiagram/generalization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/usecase/Actor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/usecase/Actor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/usecase/Extend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/usecase/Extend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/usecase/Include.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/usecase/Include.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/usecase/UseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/usecase/UseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/usecase/UseCaseDiagram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/usecase/UseCaseDiagram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +82,7 @@
     "Application.ApplicationMain.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "UsecaseBranch",
+    "git-widget-placeholder": "ClassModels",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Yousaf Khan/Desktop/SCD-Project",
