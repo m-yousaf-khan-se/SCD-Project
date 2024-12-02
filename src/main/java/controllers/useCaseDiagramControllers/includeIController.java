@@ -3,8 +3,8 @@ package controllers.useCaseDiagramControllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import controllers.Controller;
-import controllers.ViewController;
+import controllers.IController;
+import controllers.ViewIController;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
@@ -14,7 +14,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
-public class includeController implements Controller {
+public class includeIController implements IController {
 
     @FXML
     private ResourceBundle resources;
@@ -213,7 +213,7 @@ public class includeController implements Controller {
         Node nearestNode = null;
         double nearestDistance = Double.MAX_VALUE;
 
-        for (Node canvasNode : ViewController.getCanvasChildren()) {
+        for (Node canvasNode : ViewIController.getCanvasChildren()) {
             if (!(canvasNode.getStyleClass().contains("uml-useCase"))) {
                 continue; // Skip non-usecase nodes
             }

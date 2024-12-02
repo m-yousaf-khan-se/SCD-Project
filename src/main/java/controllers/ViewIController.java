@@ -22,14 +22,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
 import javax.imageio.ImageIO;
 
-public class ViewController implements Controller{
+public class ViewIController implements IController {
 
     @FXML
     private ResourceBundle resources;
@@ -43,16 +42,16 @@ public class ViewController implements Controller{
     @FXML
     private Pane paneCanvas;
 
-    HashMap<Node, Controller> canvasNodes = new HashMap<Node, Controller>();
+    HashMap<Node, IController> canvasNodes = new HashMap<Node, IController>();
 
-    private static ViewController instance; //using sigleton pattern
+    private static ViewIController instance; //using sigleton pattern
 
-    public static void storeController(Node node, Controller controller)
+    public static void storeController(Node node, IController controller)
     {
         instance.canvasNodes.put(node, controller);
     }
 
-    public static Controller getController(Node node)
+    public static IController getController(Node node)
     {
         return instance.canvasNodes.get(node);
     }

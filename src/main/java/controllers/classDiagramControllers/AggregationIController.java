@@ -1,7 +1,7 @@
 package controllers.classDiagramControllers;
 
-import controllers.Controller;
-import controllers.ViewController;
+import controllers.IController;
+import controllers.ViewIController;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
@@ -15,7 +15,7 @@ import javafx.scene.shape.Polygon;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GeneralizationController implements Controller {
+public class AggregationIController implements IController {
 
     @FXML
     private ResourceBundle resources;
@@ -24,13 +24,13 @@ public class GeneralizationController implements Controller {
     private URL location;
 
     @FXML
-    private Polygon generalizationArrow;
+    private Polygon aggregationArrow;
 
     @FXML
-    private Line generalizationLine;
+    private Line aggregationLine;
 
     @FXML
-    private Group generalizationGroup;
+    private Group aggregationGroup;
 
     @FXML
     private Circle corner1;
@@ -48,45 +48,45 @@ public class GeneralizationController implements Controller {
 
     @FXML
     void initialize() {
-        assert generalizationLine != null : "fx:id=\"generalizationLine\" was not injected: check your FXML file 'generalization.fxml'.";
-        assert generalizationGroup != null : "fx:id=\"generalizationGroup\" was not injected: check your FXML file 'generalization.fxml'.";
-        assert corner1 != null : "fx:id=\"corner1\" was not injected: check your FXML file 'generalization.fxml'.";
-        assert corner2 != null : "fx:id=\"corner2\" was not injected: check your FXML file 'generalization.fxml'.";
+        assert aggregationLine != null : "fx:id=\"aggregationLine\" was not injected: check your FXML file 'aggregation.fxml'.";
+        assert aggregationGroup != null : "fx:id=\"aggregationGroup\" was not injected: check your FXML file 'aggregation.fxml'.";
+        assert corner1 != null : "fx:id=\"corner1\" was not injected: check your FXML file 'aggregation.fxml'.";
+        assert corner2 != null : "fx:id=\"corner2\" was not injected: check your FXML file 'aggregation.fxml'.";
 
-        setupgeneralizationLineBindings();
+        setupAggregationLineBindings();
         setupCornerDragHandlers();
     }
 
-    private void setupgeneralizationLineBindings() {
-        // Bind generalization line's start and end points to the corners
-        generalizationLine.startXProperty().bind(
+    private void setupAggregationLineBindings() {
+        // Bind aggregation line's start and end points to the corners
+        aggregationLine.startXProperty().bind(
                 Bindings.subtract(corner1.layoutXProperty(), 10)
         );
-        generalizationLine.startYProperty().bind(
+        aggregationLine.startYProperty().bind(
                 Bindings.subtract(corner1.layoutYProperty(), 10)
         );
 
-        generalizationLine.endXProperty().bind(
-                Bindings.subtract(generalizationArrow.layoutXProperty(), 10)
+        aggregationLine.endXProperty().bind(
+                Bindings.subtract(aggregationArrow.layoutXProperty(), 10)
         );
-        generalizationLine.endYProperty().bind(
-                Bindings.add(generalizationArrow.layoutYProperty(), 2)
+        aggregationLine.endYProperty().bind(
+                Bindings.add(aggregationArrow.layoutYProperty(), 2)
         );
 
 
-        generalizationArrow.layoutXProperty().bind(
+        aggregationArrow.layoutXProperty().bind(
                 Bindings.subtract(corner2.layoutXProperty(), 37)
         );
-        generalizationArrow.layoutYProperty().bind(
+        aggregationArrow.layoutYProperty().bind(
                 Bindings.subtract(corner2.layoutYProperty(), 11)
         );
 
         //alternate2
 //        // Add listeners to update the arrowhead rotation
-//        generalizationLine.startXProperty().addListener((observable, oldValue, newValue) -> rotateArrowhead(corner2));
-//        generalizationLine.startYProperty().addListener((observable, oldValue, newValue) -> rotateArrowhead(corner2));
-//        generalizationLine.endXProperty().addListener((observable, oldValue, newValue) -> rotateArrowhead(corner1));
-//        generalizationLine.endYProperty().addListener((observable, oldValue, newValue) -> rotateArrowhead(corner1));
+//        aggregationLine.startXProperty().addListener((observable, oldValue, newValue) -> rotateArrowhead(corner2));
+//        aggregationLine.startYProperty().addListener((observable, oldValue, newValue) -> rotateArrowhead(corner2));
+//        aggregationLine.endXProperty().addListener((observable, oldValue, newValue) -> rotateArrowhead(corner1));
+//        aggregationLine.endYProperty().addListener((observable, oldValue, newValue) -> rotateArrowhead(corner1));
     }
 
     private void setupCornerDragHandlers() {
@@ -96,8 +96,8 @@ public class GeneralizationController implements Controller {
 
     private void onCornerDragged(MouseEvent event) {
         Circle corner = (Circle) event.getSource();
-        double newX = generalizationGroup.sceneToLocal(event.getSceneX(), event.getSceneY()).getX();
-        double newY = generalizationGroup.sceneToLocal(event.getSceneY(), event.getSceneY()).getY();
+        double newX = aggregationGroup.sceneToLocal(event.getSceneX(), event.getSceneY()).getX();
+        double newY = aggregationGroup.sceneToLocal(event.getSceneY(), event.getSceneY()).getY();
 
         double deltaX = Math.abs(corner.getLayoutX() - newX);
         double deltaY = Math.abs(corner.getLayoutY() - newY);
@@ -140,10 +140,10 @@ public class GeneralizationController implements Controller {
         Node nearestNode = null;
         double nearestDistance = Double.MAX_VALUE;
 
-        for (Node node : ViewController.getCanvasChildren()) {
+        for (Node node : ViewIController.getCanvasChildren()) {
             if (!node.getStyleClass().contains("uml-class")) continue;
 
-            UMLClassController ctrl = (UMLClassController) ViewController.getController(node);
+            UMLClassIController ctrl = (UMLClassIController) ViewIController.getController(node);
             String currentClassName = ctrl.getClassName();
 
             // Ensure the corner is not snapping to the already attached class
@@ -181,7 +181,7 @@ public class GeneralizationController implements Controller {
     }
 
     private void updateAttachedClass(Circle corner, Node node) {
-        UMLClassController ctrl = (UMLClassController) ViewController.getController(node);
+        UMLClassIController ctrl = (UMLClassIController) ViewIController.getController(node);
 
         if (corner == corner1) {
             className1 = ctrl.getClassName();
@@ -219,20 +219,20 @@ public class GeneralizationController implements Controller {
     }
 
 //    private void rotateArrowhead(Node pivot) {
-//        double startX = generalizationLine.getStartX();
-//        double startY = generalizationLine.getStartY();
-//        double endX = generalizationLine.getEndX();
-//        double endY = generalizationLine.getEndY();
+//        double startX = aggregationLine.getStartX();
+//        double startY = aggregationLine.getStartY();
+//        double endX = aggregationLine.getEndX();
+//        double endY = aggregationLine.getEndY();
 //
 //        // Calculate the angle in degrees
 //        double angle = Math.toDegrees(Math.atan2(endY - startY, endX - startX));
 //
 //        // Set the rotation angle
-//        generalizationArrow.setRotate(angle);
+//        aggregationArrow.setRotate(angle);
 //
 //        // Adjust the pivot point for rotation by translating the group
-//        generalizationArrow.setTranslateX(pivot.getLayoutX() / (generalizationArrow.getBoundsInParent().getWidth()+2));
-//        generalizationArrow.setTranslateY(pivot.getLayoutY() / (generalizationArrow.getBoundsInParent().getHeight()+2));
+//        aggregationArrow.setTranslateX(pivot.getLayoutX() / (aggregationArrow.getBoundsInParent().getWidth()+2));
+//        aggregationArrow.setTranslateY(pivot.getLayoutY() / (aggregationArrow.getBoundsInParent().getHeight()+2));
 //    }
 
 

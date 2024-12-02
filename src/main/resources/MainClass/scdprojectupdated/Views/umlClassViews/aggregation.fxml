@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Polygon?>
 
-<Group fx:id="aggregationGroup" styleClass="aggregation-arrow" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.classDiagramControllers.AggregationController">
+<Group fx:id="aggregationGroup" styleClass="aggregation-arrow" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.classDiagramControllers.AggregationIController">
    <children>
       <Circle fx:id="corner1" fill="DODGERBLUE" layoutX="15.0" layoutY="52.0" radius="5.0" stroke="BLACK" strokeType="INSIDE">
          <cursor>

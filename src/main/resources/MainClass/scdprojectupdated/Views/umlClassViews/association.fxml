@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 
-<Group fx:id="associationGroup" styleClass="composition-line" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.classDiagramControllers.AssociationController">
+<Group fx:id="associationGroup" styleClass="composition-line" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.classDiagramControllers.AssociationIController">
    <children>
       <Circle fx:id="corner1" fill="DODGERBLUE" layoutX="15.0" layoutY="52.0" radius="5.0" stroke="BLACK" strokeType="INSIDE">
          <cursor>
