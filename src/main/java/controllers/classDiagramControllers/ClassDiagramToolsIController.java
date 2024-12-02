@@ -5,15 +5,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import MainClass.scdprojectupdated.ApplicationMain;
-import controllers.Controller;
-import controllers.DragAndDropHandler;
-import controllers.ViewController;
+import controllers.IController;
+import controllers.ViewIController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
-public class ClassDiagramToolsController implements Controller {
+public class ClassDiagramToolsIController implements IController {
 
     @FXML
     private ResourceBundle resources;
@@ -26,8 +25,8 @@ public class ClassDiagramToolsController implements Controller {
         System.out.println("Creating Aggregation");
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/aggregation.fxml"));
         Parent container = loader.load();
-        ViewController.getPaneCanvas().getChildren().add(container);
-        ViewController.storeController(container, loader.getController());
+        ViewIController.getPaneCanvas().getChildren().add(container);
+        ViewIController.storeController(container, loader.getController());
     }
 
     @FXML
@@ -35,8 +34,8 @@ public class ClassDiagramToolsController implements Controller {
         System.out.println("Creating Association");
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/association.fxml"));
         Parent container = loader.load();
-        ViewController.getPaneCanvas().getChildren().add(container);
-        ViewController.storeController(container, loader.getController());
+        ViewIController.getPaneCanvas().getChildren().add(container);
+        ViewIController.storeController(container, loader.getController());
     }
 
     @FXML
@@ -45,8 +44,8 @@ public class ClassDiagramToolsController implements Controller {
         System.out.println("Creating empty class");
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/UMLclass.fxml"));
         Parent container = loader.load();
-        ViewController.getPaneCanvas().getChildren().add(container);
-        ViewController.storeController(container, loader.getController());
+        ViewIController.getPaneCanvas().getChildren().add(container);
+        ViewIController.storeController(container, loader.getController());
     }
 
     @FXML
@@ -54,8 +53,8 @@ public class ClassDiagramToolsController implements Controller {
         System.out.println("Creating Composition");
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/composition.fxml"));
         Parent container = loader.load();
-        ViewController.getPaneCanvas().getChildren().add(container);
-        ViewController.storeController(container, loader.getController());
+        ViewIController.getPaneCanvas().getChildren().add(container);
+        ViewIController.storeController(container, loader.getController());
     }
 
     @FXML
@@ -63,8 +62,8 @@ public class ClassDiagramToolsController implements Controller {
         System.out.println("Creating Generalization");
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/generalization.fxml"));
         Parent container = loader.load();
-        ViewController.getPaneCanvas().getChildren().add(container);
-        ViewController.storeController(container, loader.getController());
+        ViewIController.getPaneCanvas().getChildren().add(container);
+        ViewIController.storeController(container, loader.getController());
     }
 
     @FXML

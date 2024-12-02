@@ -1,8 +1,7 @@
 package controllers;
 
-import controllers.classDiagramControllers.UMLClassController;
+import controllers.classDiagramControllers.UMLClassIController;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.Node;
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class DragAndDropHandler {
 
             if(draggedNode.getStyleClass().contains("uml-class"))
             {
-                System.out.println("uml-class: " + ((UMLClassController)ViewController.getController(draggedNode)).getClassName());
+                System.out.println("uml-class: " + ((UMLClassIController) ViewIController.getController(draggedNode)).getClassName());
             }
         }
     }

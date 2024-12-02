@@ -5,7 +5,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 
-<Group fx:id="useCaseAssociationGroup" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.useCaseDiagramControllers.useCaseAssociationController">
+<Group fx:id="useCaseAssociationGroup" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.useCaseDiagramControllers.useCaseAssociationIController">
    <children>
       <!-- Updated Line definition -->
       <Line fx:id="associationLine" endX="135.0" endY="51.0" startX="15.0" startY="52.0" stroke="BLACK" />

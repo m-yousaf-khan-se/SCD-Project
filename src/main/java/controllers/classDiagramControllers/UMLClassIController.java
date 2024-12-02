@@ -3,7 +3,7 @@ package controllers.classDiagramControllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import controllers.Controller;
+import controllers.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public class UMLClassController implements Controller {
+public class UMLClassIController implements IController {
 
     @FXML
     private ResourceBundle resources;

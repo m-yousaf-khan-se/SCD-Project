@@ -1,11 +1,10 @@
-package presenter;
+package presenter.classDiagramPresenters;
+
+import presenter.IPresenter;
 
 import java.util.List;
 
-public interface IPresenter {
- //methods related to IClassDiagramPresenter
-
-    //from view to models
+public interface IClassDiagramPresenter extends IPresenter {
     public void addClass(String name);
     public void removeClass(String name);
     public void addMethod(String className, String methodDetail);
@@ -16,9 +15,4 @@ public interface IPresenter {
     public List<String> getClassNames();
     public List<String> getMethodDetail(String className);
     public List<String> getFieldDetail(String className);
-
- //methods related to IUseCaseDiagramPresenter
-    public void addUseCase(String useCaseName);
-    public void removeUseCase(String useCaseName);
-
 }
