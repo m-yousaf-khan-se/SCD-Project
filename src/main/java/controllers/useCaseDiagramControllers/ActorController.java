@@ -3,6 +3,7 @@ package controllers.useCaseDiagramControllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import controllers.ControllerClass;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -11,7 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
-public class ActorController {
+public class ActorController extends ControllerClass {
 
     @FXML
     private ResourceBundle resources;
@@ -41,12 +42,14 @@ public class ActorController {
     private TextField actorNameTextField;
 
     @FXML
-    void initialize() {
+    @Override
+    public void initialize() {
         setupActorBindings();
         setupDragHandlers();
     }
 
-    private void setupActorBindings() {
+    @Override
+    public void setupActorBindings() {
         // Body
         body.startXProperty().bind(head.centerXProperty());
         body.startYProperty().bind(Bindings.add(head.centerYProperty(), head.getRadius())); // Start just below the head
@@ -77,12 +80,14 @@ public class ActorController {
     }
 
 
-    private void setupDragHandlers() {
+    @Override
+    public void setupDragHandlers() {
         // Enable dragging the actor (dragging the head moves the entire actor)
         head.setOnMouseDragged(this::onActorDragged);
     }
 
-    private void onActorDragged(MouseEvent event) {
+    @Override
+    public void onActorDragged(MouseEvent event) {
         // Convert scene coordinates to local coordinates for dragging
         double newX = ActorGroup.sceneToLocal(event.getSceneX(), event.getSceneY()).getX();
         double newY = ActorGroup.sceneToLocal(event.getSceneX(), event.getSceneY()).getY();
