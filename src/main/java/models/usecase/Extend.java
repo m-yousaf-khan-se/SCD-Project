@@ -5,8 +5,8 @@ import models.Relationship;
 
 public class Extend extends Relationship {
 
-    public Extend(Component from, Component to, String label) {
-        super(from, to, "Extend", label);
+    public Extend(Component from, Component to, String label,int x,int y) {
+        super(from, to, "Extend", label,x,y);
     }
 
 //    @Override

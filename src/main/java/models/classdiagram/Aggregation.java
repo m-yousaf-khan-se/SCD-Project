@@ -5,8 +5,8 @@ import models.Relationship;
 
 public class Aggregation extends Relationship {
 
-    public Aggregation(Component from, Component to, String label) {
-        super(from, to, "Aggregation", label);
+    public Aggregation(Component from, Component to, String label,int x,int y) {
+        super(from, to, "Aggregation", label,x,y);
     }
 
 //    @Override

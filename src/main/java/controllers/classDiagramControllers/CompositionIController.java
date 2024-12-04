@@ -1,7 +1,7 @@
 package controllers.classDiagramControllers;
 
-import controllers.Controller;
-import controllers.ViewController;
+import controllers.IController;
+import controllers.ViewIController;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
@@ -15,7 +15,7 @@ import javafx.scene.shape.Polygon;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AggregationController implements Controller {
+public class CompositionIController implements IController {
 
     @FXML
     private ResourceBundle resources;
@@ -24,13 +24,13 @@ public class AggregationController implements Controller {
     private URL location;
 
     @FXML
-    private Polygon aggregationArrow;
+    private Polygon compositionArrow;
 
     @FXML
-    private Line aggregationLine;
+    private Line compositionLine;
 
     @FXML
-    private Group aggregationGroup;
+    private Group compositionGroup;
 
     @FXML
     private Circle corner1;
@@ -48,45 +48,45 @@ public class AggregationController implements Controller {
 
     @FXML
     void initialize() {
-        assert aggregationLine != null : "fx:id=\"aggregationLine\" was not injected: check your FXML file 'aggregation.fxml'.";
-        assert aggregationGroup != null : "fx:id=\"aggregationGroup\" was not injected: check your FXML file 'aggregation.fxml'.";
-        assert corner1 != null : "fx:id=\"corner1\" was not injected: check your FXML file 'aggregation.fxml'.";
-        assert corner2 != null : "fx:id=\"corner2\" was not injected: check your FXML file 'aggregation.fxml'.";
+        assert compositionLine != null : "fx:id=\"compositionLine\" was not injected: check your FXML file 'composition.fxml'.";
+        assert compositionGroup != null : "fx:id=\"compositionGroup\" was not injected: check your FXML file 'composition.fxml'.";
+        assert corner1 != null : "fx:id=\"corner1\" was not injected: check your FXML file 'composition.fxml'.";
+        assert corner2 != null : "fx:id=\"corner2\" was not injected: check your FXML file 'composition.fxml'.";
 
-        setupAggregationLineBindings();
+        setupcompositionLineBindings();
         setupCornerDragHandlers();
     }
 
-    private void setupAggregationLineBindings() {
-        // Bind aggregation line's start and end points to the corners
-        aggregationLine.startXProperty().bind(
+    private void setupcompositionLineBindings() {
+        // Bind composition line's start and end points to the corners
+        compositionLine.startXProperty().bind(
                 Bindings.subtract(corner1.layoutXProperty(), 10)
         );
-        aggregationLine.startYProperty().bind(
+        compositionLine.startYProperty().bind(
                 Bindings.subtract(corner1.layoutYProperty(), 10)
         );
 
-        aggregationLine.endXProperty().bind(
-                Bindings.subtract(aggregationArrow.layoutXProperty(), 10)
+        compositionLine.endXProperty().bind(
+                Bindings.subtract(compositionArrow.layoutXProperty(), 10)
         );
-        aggregationLine.endYProperty().bind(
-                Bindings.add(aggregationArrow.layoutYProperty(), 2)
+        compositionLine.endYProperty().bind(
+                Bindings.add(compositionArrow.layoutYProperty(), 2)
         );
 
 
-        aggregationArrow.layoutXProperty().bind(
+        compositionArrow.layoutXProperty().bind(
                 Bindings.subtract(corner2.layoutXProperty(), 37)
         );
-        aggregationArrow.layoutYProperty().bind(
+        compositionArrow.layoutYProperty().bind(
                 Bindings.subtract(corner2.layoutYProperty(), 11)
         );
 
         //alternate2
 //        // Add listeners to update the arrowhead rotation
-//        aggregationLine.startXProperty().addListener((observable, oldValue, newValue) -> rotateArrowhead(corner2));
-//        aggregationLine.startYProperty().addListener((observable, oldValue, newValue) -> rotateArrowhead(corner2));
-//        aggregationLine.endXProperty().addListener((observable, oldValue, newValue) -> rotateArrowhead(corner1));
-//        aggregationLine.endYProperty().addListener((observable, oldValue, newValue) -> rotateArrowhead(corner1));
+//        compositionLine.startXProperty().addListener((observable, oldValue, newValue) -> rotateArrowhead(corner2));
+//        compositionLine.startYProperty().addListener((observable, oldValue, newValue) -> rotateArrowhead(corner2));
+//        compositionLine.endXProperty().addListener((observable, oldValue, newValue) -> rotateArrowhead(corner1));
+//        compositionLine.endYProperty().addListener((observable, oldValue, newValue) -> rotateArrowhead(corner1));
     }
 
     private void setupCornerDragHandlers() {
@@ -96,8 +96,8 @@ public class AggregationController implements Controller {
 
     private void onCornerDragged(MouseEvent event) {
         Circle corner = (Circle) event.getSource();
-        double newX = aggregationGroup.sceneToLocal(event.getSceneX(), event.getSceneY()).getX();
-        double newY = aggregationGroup.sceneToLocal(event.getSceneY(), event.getSceneY()).getY();
+        double newX = compositionGroup.sceneToLocal(event.getSceneX(), event.getSceneY()).getX();
+        double newY = compositionGroup.sceneToLocal(event.getSceneY(), event.getSceneY()).getY();
 
         double deltaX = Math.abs(corner.getLayoutX() - newX);
         double deltaY = Math.abs(corner.getLayoutY() - newY);
@@ -140,10 +140,10 @@ public class AggregationController implements Controller {
         Node nearestNode = null;
         double nearestDistance = Double.MAX_VALUE;
 
-        for (Node node : ViewController.getCanvasChildren()) {
+        for (Node node : ViewIController.getCanvasChildren()) {
             if (!node.getStyleClass().contains("uml-class")) continue;
 
-            UMLClassController ctrl = (UMLClassController) ViewController.getController(node);
+            UMLClassIController ctrl = (UMLClassIController) ViewIController.getController(node);
             String currentClassName = ctrl.getClassName();
 
             // Ensure the corner is not snapping to the already attached class
@@ -181,7 +181,7 @@ public class AggregationController implements Controller {
     }
 
     private void updateAttachedClass(Circle corner, Node node) {
-        UMLClassController ctrl = (UMLClassController) ViewController.getController(node);
+        UMLClassIController ctrl = (UMLClassIController) ViewIController.getController(node);
 
         if (corner == corner1) {
             className1 = ctrl.getClassName();
@@ -219,20 +219,20 @@ public class AggregationController implements Controller {
     }
 
 //    private void rotateArrowhead(Node pivot) {
-//        double startX = aggregationLine.getStartX();
-//        double startY = aggregationLine.getStartY();
-//        double endX = aggregationLine.getEndX();
-//        double endY = aggregationLine.getEndY();
+//        double startX = compositionLine.getStartX();
+//        double startY = compositionLine.getStartY();
+//        double endX = compositionLine.getEndX();
+//        double endY = compositionLine.getEndY();
 //
 //        // Calculate the angle in degrees
 //        double angle = Math.toDegrees(Math.atan2(endY - startY, endX - startX));
 //
 //        // Set the rotation angle
-//        aggregationArrow.setRotate(angle);
+//        compositionArrow.setRotate(angle);
 //
 //        // Adjust the pivot point for rotation by translating the group
-//        aggregationArrow.setTranslateX(pivot.getLayoutX() / (aggregationArrow.getBoundsInParent().getWidth()+2));
-//        aggregationArrow.setTranslateY(pivot.getLayoutY() / (aggregationArrow.getBoundsInParent().getHeight()+2));
+//        compositionArrow.setTranslateX(pivot.getLayoutX() / (compositionArrow.getBoundsInParent().getWidth()+2));
+//        compositionArrow.setTranslateY(pivot.getLayoutY() / (compositionArrow.getBoundsInParent().getHeight()+2));
 //    }
 
 

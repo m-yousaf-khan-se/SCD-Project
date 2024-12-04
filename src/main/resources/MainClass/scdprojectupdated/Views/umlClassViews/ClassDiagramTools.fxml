@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="200.0" prefWidth="100.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.classDiagramControllers.ClassDiagramToolsController">
+<VBox prefHeight="200.0" prefWidth="100.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.classDiagramControllers.ClassDiagramToolsIController">
    <children>
       <Label alignment="CENTER" prefHeight="37.0" prefWidth="100.0" text="Tools" textAlignment="CENTER">
          <font>
