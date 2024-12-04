@@ -5,8 +5,8 @@ import models.Relationship;
 
 public class Association extends Relationship {
 
-    public Association(Component from, Component to, String label) {
-        super(from, to, "Association", label);
+    public Association(Component from, Component to, String label,int x, int y) {
+        super(from, to, "Association", label,x,y);
     }
 
 //    @Override

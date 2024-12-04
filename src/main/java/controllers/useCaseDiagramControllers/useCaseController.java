@@ -2,11 +2,13 @@ package controllers.useCaseDiagramControllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import controllers.ControllerClass;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
-public class useCaseController {
+public class useCaseController extends ControllerClass {
 
     @FXML
     private ResourceBundle resources;
@@ -20,7 +22,8 @@ public class useCaseController {
     private TextField useCaseTextField;
 
     @FXML
-    void initialize() {
+    @Override
+    public void initialize() {
         assert useCasePane != null : "fx:id=\"useCasePane\" was not injected: check your FXML file 'useCasePane.fxml'.";
 
         assert useCaseTextField != null : "fx:id=\"useCaseTextField\" was not injected: check your FXML file 'useCasePane.fxml'.";

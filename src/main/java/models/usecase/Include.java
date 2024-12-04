@@ -5,8 +5,8 @@ import models.Relationship;
 
 public class Include extends Relationship {
 
-    public Include(Component from, Component to, String label) {
-        super(from, to, "Include", label);
+    public Include(Component from, Component to, String label,int x,int y) {
+        super(from, to, "Include", label,x,y);
     }
 
 //    @Override
