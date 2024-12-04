@@ -155,15 +155,15 @@ public class ViewIController implements IController {
         instance = this;
 
         // Adding a listener to the children list of the paneCanvas
+
+//For Delete functionality of nodes.
         paneCanvas.getChildren().addListener((ListChangeListener<Node>) change -> {
             while (change.next()) {
                 if (change.wasAdded()) {
-                    // Process newly added children
                     for (Node newChild : change.getAddedSubList()) {
-                        DragAndDropHandler.add(newChild);
+                        DragAndDropHandler.add(newChild); // Add drag-and-drop functionality
+                        DeleteHandler.add(newChild, paneCanvas, paneCanvas.getScene()); // Add delete functionality
                         System.out.println("A new child was added: " + newChild.getClass().getName());
-                        // You can perform additional actions based on the type of the new child, etc.
-
                     }
                 }
                 if (change.wasRemoved()) {

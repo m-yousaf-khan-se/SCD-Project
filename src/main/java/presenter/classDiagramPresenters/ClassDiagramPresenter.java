@@ -37,7 +37,7 @@ public class ClassDiagramPresenter implements IClassDiagramPresenter{
     @Override
     public List<String> getClassNames() {
         //model funtion to get class name
-        return "";
+        return null;
     }
 
     @Override
