@@ -21,19 +21,31 @@ public class Class implements Component, Serializable {
         this.attributes = new ArrayList<>();
         this.methods = new ArrayList<>();
         this.x = x;  // Set the initial x-coordinate
-        this.y = y;  // Set the initial y-coordinate
+        this.y = y;// Set the initial y-coordinate
+        System.out.println("Inside model class constructor");
     }
 
+
+    public void setName(String name)
+    {
+        this.name=name;
+    }
+    public String getName()
+    {
+        return name;
+    }
     // Method to add an attribute
     public void addAttribute(String attribute) {
         attributes.add(attribute);
     }
+    public void removeAttribute(String attribute){attributes.remove(attribute);}
 
     // Method to add a method
     public void addMethod(String method) {
         methods.add(method);
     }
 
+    public void removeMethod(String method){methods.remove(method);}
     // Getter and setter for coordinates
     public int getX() {
         return x;
@@ -49,6 +61,15 @@ public class Class implements Component, Serializable {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public List<String> getAttributes()
+    {
+        return attributes;
+    }
+    public List<String> getMethods()
+    {
+        return methods;
     }
 
 //    @Override

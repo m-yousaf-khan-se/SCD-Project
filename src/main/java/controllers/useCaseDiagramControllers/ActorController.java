@@ -12,7 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
-public class ActorController extends ControllerClass {
+public abstract class ActorController extends ControllerClass {
 
     @FXML
     private ResourceBundle resources;
