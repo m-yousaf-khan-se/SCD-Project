@@ -74,7 +74,7 @@ public class ControllerClass {
     };
 
     //UML class Controller
-    // public String getClassName()
+    // public String getUMLClassName()
 //    {
 //        return className;
 //    }
@@ -142,7 +142,7 @@ public class ControllerClass {
     //ViewController
     public static void storeController(Node node, ControllerClass controller){};
 
-  //public static Controller getController(Node node){};
+  //public static Controller getClassController(Node node){};
     public static void removeNode(Node node){};
     @FXML
     public void aboutUMLEditorListener(ActionEvent event){};

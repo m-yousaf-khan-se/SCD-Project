@@ -41,7 +41,7 @@ public class DragAndDropHandler extends ControllerClass {
 
             if(draggedNode.getStyleClass().contains("uml-class"))
             {
-                System.out.println("uml-class: " + ((UMLClassIController) ViewIController.getController(draggedNode)).getClassName());
+                System.out.println("uml-class: " + ((UMLClassIController) ViewIController.getClassController(draggedNode)).getUMLClassName());
             }
         }
     }

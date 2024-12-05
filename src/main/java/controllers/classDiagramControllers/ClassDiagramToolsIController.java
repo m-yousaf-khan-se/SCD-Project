@@ -12,7 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
-public class ClassDiagramToolsIController implements IController {
+public abstract class ClassDiagramToolsIController implements IController {
 
     @FXML
     private ResourceBundle resources;
@@ -26,7 +26,7 @@ public class ClassDiagramToolsIController implements IController {
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/aggregation.fxml"));
         Parent container = loader.load();
         ViewIController.getPaneCanvas().getChildren().add(container);
-        ViewIController.storeController(container, loader.getController());
+        ViewIController.storeClassController(container, loader.getController());
     }
 
     @FXML
@@ -35,7 +35,7 @@ public class ClassDiagramToolsIController implements IController {
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/association.fxml"));
         Parent container = loader.load();
         ViewIController.getPaneCanvas().getChildren().add(container);
-        ViewIController.storeController(container, loader.getController());
+        ViewIController.storeClassController(container, loader.getController());
     }
 
     @FXML
@@ -45,7 +45,7 @@ public class ClassDiagramToolsIController implements IController {
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/UMLclass.fxml"));
         Parent container = loader.load();
         ViewIController.getPaneCanvas().getChildren().add(container);
-        ViewIController.storeController(container, loader.getController());
+        ViewIController.storeClassController(container, loader.getController());
     }
 
     @FXML
@@ -54,7 +54,7 @@ public class ClassDiagramToolsIController implements IController {
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/composition.fxml"));
         Parent container = loader.load();
         ViewIController.getPaneCanvas().getChildren().add(container);
-        ViewIController.storeController(container, loader.getController());
+        ViewIController.storeClassController(container, loader.getController());
     }
 
     @FXML
@@ -63,7 +63,7 @@ public class ClassDiagramToolsIController implements IController {
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/generalization.fxml"));
         Parent container = loader.load();
         ViewIController.getPaneCanvas().getChildren().add(container);
-        ViewIController.storeController(container, loader.getController());
+        ViewIController.storeClassController(container, loader.getController());
     }
 
     @FXML
