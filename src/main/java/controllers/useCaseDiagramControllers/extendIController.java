@@ -14,7 +14,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
-public class extendIController implements IController {
+public abstract class extendIController implements IController {
 
     @FXML
     private ResourceBundle resources;

@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
-public class useCaseController extends ControllerClass {
+public abstract class useCaseController extends ControllerClass {
 
     @FXML
     private ResourceBundle resources;
