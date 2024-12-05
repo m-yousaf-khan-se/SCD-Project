@@ -7,6 +7,7 @@ import controllers.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -14,7 +15,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public class UMLClassIController implements IController {
+public abstract class UMLClassIController implements IController {
+
+    @FXML
+    public Group umlClassGroup;
 
     @FXML
     private ResourceBundle resources;
@@ -43,7 +47,8 @@ public class UMLClassIController implements IController {
     private String initialText = "";
     private String className = "";
 
-    public String getClassName()
+    @Override
+    public String getUMLClassName()
     {
         return className;
     }
@@ -74,6 +79,7 @@ public class UMLClassIController implements IController {
                     if(textField.getPromptText().contains("class name"))
                     {
                         className = textField.getText();
+                        addOrUpdateClassName(className);
                     }
                     System.out.println("Text changed in: " + textField.getPromptText() + " (of the class: " + className + ")");
                     System.out.println("Old Value: " + initialText);
@@ -127,4 +133,13 @@ public class UMLClassIController implements IController {
                 .forEach(this::attachFocusChangeListener);
 
     }
+
+    @Override
+    public Double[] getCoordinates() {
+        Double []classCoordinates = new Double[2];
+        classCoordinates[0] = umlClassGroup.getLayoutX();
+        classCoordinates[1] = umlClassGroup.getLayoutY();
+        return classCoordinates;
+    }
+
 }

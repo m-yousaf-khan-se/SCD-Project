@@ -5,7 +5,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
+
+import controllers.classDiagramControllers.UMLClassIController;
 import javafx.scene.image.WritableImage;
 import javafx.embed.swing.SwingFXUtils;
 
@@ -25,6 +28,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import presenter.classDiagramPresenters.ClassDiagramPresenter;
+import presenter.useCaseDiagramPresenters.UseCaseDiagramPresenter;
 
 import javax.imageio.ImageIO;
 
@@ -42,24 +47,169 @@ public class ViewIController implements IController {
     @FXML
     private Pane paneCanvas;
 
-    HashMap<Node, IController> canvasNodes = new HashMap<Node, IController>();
+    HashMap<Node, IController> canvasClassNodes = new HashMap<Node, IController>();
+    HashMap<Node, IController> canvasUseCaseNodes = new HashMap<Node, IController>();
 
-    private static ViewIController instance; //using sigleton pattern
+    private static ViewIController instance; //for using sigleton pattern
 
-    public static void storeController(Node node, IController controller)
-    {
-        instance.canvasNodes.put(node, controller);
+    private ClassDiagramPresenter classDiagramPresenter;
+    private UseCaseDiagramPresenter useCaseDiagramPresenter;
+
+    // ------------------------Not useable
+    @Override
+    public Double[] getCoordinates(){
+        throw new UnsupportedOperationException("get coordinates is not Implemented for ViewController.java");
     }
 
-    public static IController getController(Node node)
+    @Override
+    public String[] getClassesName() {
+        throw new UnsupportedOperationException("get coordinates is not Implemented for ViewController.java");
+    }
+
+    @Override
+    public String getUMLClassName() {
+        throw new UnsupportedOperationException("get coordinates is not Implemented for ViewController.java");
+    }
+    // ------------------------------------
+
+    //----------------------------of Classe Diagram------------------------------------
+    public static void storeClassController(Node node, IController controller)
     {
-        return instance.canvasNodes.get(node);
+        instance.canvasClassNodes.put(node, controller);
+        if(controller instanceof UMLClassIController)
+        {
+            UMLClassIController classController = (UMLClassIController)controller;
+            instance.classDiagramPresenter.addClass(classController.getUMLClassName());
+
+        }
+    }
+
+    //fetch only the components of class
+    public Double[] getComponentCoordinates(String styleClass, String className)
+    {
+        for(Map.Entry<Node, IController> entry : canvasClassNodes.entrySet())
+        {
+            if(!entry.getKey().getStyleClass().contains(styleClass))
+                continue;
+
+            if(entry.getValue().getClassesName().equals(className))
+                return entry.getValue().getCoordinates();
+        }
+        return null;
+    }
+    //can fetch all the components of class Diagram through their styleClass and their connected classes
+    public Double[] getComponentCoordinates(String styleClass, String className1, String className2)
+    {
+        for(Map.Entry<Node, IController> entry : canvasClassNodes.entrySet())
+        {
+            if(!entry.getKey().getStyleClass().contains(styleClass))
+                continue;
+
+            String []classesNames = entry.getValue().getClassesName();
+
+            if(classesNames != null &&
+                    (classesNames[0].equals(className1) && classesNames[1].equals(className2)) ||
+                        (classesNames[1].equals(className1) && classesNames[2].equals(className2)))
+            {
+                return entry.getValue().getCoordinates();
+            }
+        }
+        return null;
+    }
+
+    //----------------------of Classes
+    @Override
+    public void addOrUpdateClassName(String name) {
+        classDiagramPresenter.updateClassName(name);
+    }
+
+    @Override
+    public void addMethodToClass(String className, String methodDetails) {
+        classDiagramPresenter.addMethod(className, methodDetails);
+    }
+
+    @Override
+    public void addFieldToClass(String className, String fieldName) {
+        classDiagramPresenter.addField(className, fieldName);
+    }
+
+    @Override
+    public void removeMethodFromClass(String className, String methodDetails) {
+        classDiagramPresenter.removeMethod(className, methodDetails);
+    }
+
+    @Override
+    public void removeFieldFromClass(String className, String fieldName) {
+        classDiagramPresenter.removeField(className, fieldName);
+    }
+    //----------------------of Aggregation
+    @Override
+    public void addAggregation(String className1, String className2) {
+    }
+
+    @Override
+    public void updateAggregation(String className1, String newClassName1, String className2, String newClassName2) {
+    }
+
+    //----------------------of Association
+    @Override
+    public void addAssociation(String className1, String className2) {
+
+    }
+
+    @Override
+    public void updateAssociation(String className1, String newClassName1, String className2, String newClassName2) {
+
+    }
+
+    @Override
+    public Double[] updateMultiplicity(String className1, String className2) {
+        return new Double[0];
+    }
+
+    //----------------------of Composition
+    @Override
+    public void addComposition(String className1, String className2) {
+
+    }
+
+    @Override
+    public void updateComposition(String className1, String newClassName1, String className2, String newClassName2) {
+
+    }
+
+    //----------------------of Generalization
+    @Override
+    public void addGeneratlization(String className1, String className2) {
+
+    }
+
+    @Override
+    public void updateGeneratlization(String className1, String newClassName1, String className2, String newClassName2) {
+
+    }
+
+    //----------------------------------------------------------------
+    public static void storeUseCaseController(Node node, IController controller)
+    {
+        instance.canvasUseCaseNodes.put(node, controller);
+    }
+
+    public static IController getClassController(Node node)
+    {
+        return instance.canvasClassNodes.get(node);
+    }
+    public static IController getUseCaseController(Node node)
+    {
+        return instance.canvasUseCaseNodes.get(node);
     }
 
     public static void removeNode(Node node)
     {
-        if(instance.canvasNodes.get(node) != null)
-            instance.canvasNodes.remove(node);
+        if(instance.canvasClassNodes.get(node) != null)
+            instance.canvasClassNodes.remove(node);
+        else if(instance.canvasUseCaseNodes.get(node) != null)
+            instance.canvasUseCaseNodes.remove(node);
     }
 
     @FXML
@@ -180,6 +330,12 @@ public class ViewIController implements IController {
             throw new IllegalStateException("ViewController has not been initialized yet.");
         }
         return instance.paneCanvas;
+    }
+
+    public void setPresenter(ClassDiagramPresenter classDiagramPresenter, UseCaseDiagramPresenter useCaseDiagramPresenter) {}
+    {
+        this.classDiagramPresenter = classDiagramPresenter;
+        this.useCaseDiagramPresenter = useCaseDiagramPresenter;
     }
 
 }

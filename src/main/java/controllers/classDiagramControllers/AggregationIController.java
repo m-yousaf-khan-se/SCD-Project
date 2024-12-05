@@ -15,7 +15,7 @@ import javafx.scene.shape.Polygon;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AggregationIController implements IController {
+public abstract class AggregationIController implements IController {
 
     @FXML
     private ResourceBundle resources;
@@ -143,8 +143,8 @@ public class AggregationIController implements IController {
         for (Node node : ViewIController.getCanvasChildren()) {
             if (!node.getStyleClass().contains("uml-class")) continue;
 
-            UMLClassIController ctrl = (UMLClassIController) ViewIController.getController(node);
-            String currentClassName = ctrl.getClassName();
+            UMLClassIController ctrl = (UMLClassIController) ViewIController.getClassController(node);
+            String currentClassName = ctrl.getUMLClassName();
 
             // Ensure the corner is not snapping to the already attached class
             if ((corner == corner1 && currentClassName.equals(className1)) ||
@@ -181,20 +181,20 @@ public class AggregationIController implements IController {
     }
 
     private void updateAttachedClass(Circle corner, Node node) {
-        UMLClassIController ctrl = (UMLClassIController) ViewIController.getController(node);
+        UMLClassIController ctrl = (UMLClassIController) ViewIController.getClassController(node);
 
         if (corner == corner1) {
-            className1 = ctrl.getClassName();
+            className1 = ctrl.getUMLClassName();
             attachedNode1 = node;
             bindCornerToNode(corner1, attachedNode1);
         } else if (corner == corner2) {
-            className2 = ctrl.getClassName();
+            className2 = ctrl.getUMLClassName();
             attachedNode2 = node;
             bindCornerToNode(corner2, attachedNode2);
         }
 
         System.out.println("Snapped " + (corner == corner1 ? "Corner 1" : "Corner 2")
-                + " to UML Class: " + ctrl.getClassName());
+                + " to UML Class: " + ctrl.getUMLClassName());
     }
 
     private void bindCornerToNode(Circle corner, Node node) {
@@ -216,6 +216,19 @@ public class AggregationIController implements IController {
                 updateCornerPosition(corner, node);
             }
         });
+    }
+
+    @Override
+    public Double[] getCoordinates() {
+        Double []classCoordinates = new Double[2];
+        classCoordinates[0] = aggregationGroup.getLayoutX();
+        classCoordinates[1] = aggregationGroup.getLayoutY();
+        return classCoordinates;
+    }
+
+    @Override
+    public String[] getClassesName(){
+        return new String[]{className1, className2};
     }
 
 //    private void rotateArrowhead(Node pivot) {
