@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import controllers.ControllerClass;
+import controllers.IController;
+import controllers.ViewIController;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -12,7 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
-public abstract class ActorController extends ControllerClass {
+public abstract class ActorController extends ViewIController implements IController {
 
     @FXML
     private ResourceBundle resources;
@@ -40,15 +42,20 @@ public abstract class ActorController extends ControllerClass {
 
     @FXML
     private TextField actorNameTextField;
+    private String initialText = "";
+    private String actorName = "";
+
+    public String getActorName() {
+        return actorName;
+    }
 
     @FXML
-    @Override
     public void initialize() {
         setupActorBindings();
         setupDragHandlers();
     }
 
-    @Override
+
     public void setupActorBindings() {
         // Body
         body.startXProperty().bind(head.centerXProperty());
@@ -80,13 +87,14 @@ public abstract class ActorController extends ControllerClass {
     }
 
 
-    @Override
+
+
     public void setupDragHandlers() {
         // Enable dragging the actor (dragging the head moves the entire actor)
         head.setOnMouseDragged(this::onActorDragged);
     }
 
-    @Override
+
     public void onActorDragged(MouseEvent event) {
         // Convert scene coordinates to local coordinates for dragging
         double newX = ActorGroup.sceneToLocal(event.getSceneX(), event.getSceneY()).getX();
@@ -97,5 +105,27 @@ public abstract class ActorController extends ControllerClass {
         head.setCenterY(newY);
 
         event.consume();
+    }
+
+    private void attachFocusChangeListener(TextField textField) {
+        textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                // Field gained focus
+                initialText = textField.getText();
+            } else {
+                // Field lost focus
+                if (!initialText.equals(textField.getText())) {
+                    if(textField.getPromptText().contains("actor name"))
+                    {
+                        actorName = textField.getText();
+                        addOrUpdateActorName(initialText, actorName);
+                    }
+
+                    System.out.println("Text changed in: " + textField.getPromptText() + " (of the actor: " + actorName + ")");
+                    System.out.println("Old Value: " + initialText);
+                    System.out.println("New Value: " + textField.getText());
+                }
+            }
+        });
     }
 }

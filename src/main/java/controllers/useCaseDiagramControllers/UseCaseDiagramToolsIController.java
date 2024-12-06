@@ -12,7 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
-public abstract class UseCaseDiagramToolsIController implements IController {
+public abstract class UseCaseDiagramToolsIController {
 
     @FXML
     private ResourceBundle resources;
@@ -26,7 +26,7 @@ public abstract class UseCaseDiagramToolsIController implements IController {
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlUseCaseViews/actor.fxml"));
         Parent container = loader.load();
         ViewIController.getPaneCanvas().getChildren().add(container);
-        ViewIController.storeClassController(container, loader.getController());
+        ViewIController.storeUseCaseController(container, loader.getController());
     }
 
     @FXML
@@ -35,7 +35,7 @@ public abstract class UseCaseDiagramToolsIController implements IController {
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlUseCaseViews/extend.fxml"));
         Parent container = loader.load();
         ViewIController.getPaneCanvas().getChildren().add(container);
-        ViewIController.storeClassController(container, loader.getController());
+        ViewIController.storeUseCaseController(container, loader.getController());
     }
 
     @FXML
@@ -45,7 +45,7 @@ public abstract class UseCaseDiagramToolsIController implements IController {
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlUseCaseViews/association.fxml"));
         Parent container = loader.load();
         ViewIController.getPaneCanvas().getChildren().add(container);
-        ViewIController.storeClassController(container, loader.getController());
+        ViewIController.storeUseCaseController(container, loader.getController());
     }
 
     @FXML
@@ -54,7 +54,7 @@ public abstract class UseCaseDiagramToolsIController implements IController {
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlUseCaseViews/include.fxml"));
         Parent container = loader.load();
         ViewIController.getPaneCanvas().getChildren().add(container);
-        ViewIController.storeClassController(container, loader.getController());
+        ViewIController.storeUseCaseController(container, loader.getController());
 
     }
 
@@ -65,7 +65,7 @@ public abstract class UseCaseDiagramToolsIController implements IController {
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlUseCaseViews/useCasePane.fxml"));
         Parent container = loader.load();
         ViewIController.getPaneCanvas().getChildren().add(container);
-        ViewIController.storeClassController(container, loader.getController());
+        ViewIController.storeUseCaseController(container, loader.getController());
 
     }
 

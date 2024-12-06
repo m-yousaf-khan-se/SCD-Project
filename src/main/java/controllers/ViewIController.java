@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import controllers.classDiagramControllers.UMLClassIController;
+import controllers.useCaseDiagramControllers.ActorController;
+import controllers.useCaseDiagramControllers.includeIController;
+import controllers.useCaseDiagramControllers.useCaseController;
 import javafx.scene.image.WritableImage;
 import javafx.embed.swing.SwingFXUtils;
 
@@ -167,16 +170,57 @@ public class ViewIController{
     }
 
     //----------------------------------------------------------------UseCase----------
-    protected static void storeUseCaseController(Node node, IController controller)
+    public static void storeUseCaseController(Node node, IController controller)
     {
         //Stores nodes in useCase HashMap
         instance.canvasUseCaseNodes.put(node, controller);
-        //Stores Actors in
-        if(controller instanceof UMLClassIController)
+        //Stores Actors in arraylist and respective diagram model.
+        if(controller instanceof ActorController)
         {
-            UMLClassIController classController = (UMLClassIController)controller;
-            instance.classDiagramPresenter.addClass(classController.getUMLClassName());
+            ActorController actorController = (ActorController)controller;
+            instance.useCaseDiagramPresenter.addActor(actorController.getActorName());
         }
+        if(controller instanceof useCaseController)
+        {
+            useCaseController useCase_Controller = (useCaseController)controller;
+            instance.useCaseDiagramPresenter.addUseCase(useCase_Controller.getUseCaseName());
+        }
+
+
+    }
+    //----------------------------------------------------------------For Actor----------
+    protected void addOrUpdateActorName(String oldName, String newName) {
+        useCaseDiagramPresenter.updateActorName(oldName, newName);
+    }
+    //----------------------------------------------------------------For UseCase----------
+    protected void addOrUpdateUseCaseName(String oldName, String newName) {
+        useCaseDiagramPresenter.updateUseCaseName(oldName, newName);
+    }
+    //----------------------------------------------------------------For UseCaseAssociation----------
+    protected void addUseCaseAssociation(String actorName, String useCaseName) {
+
+    }
+
+    protected void updateUseCaseAssociation(String oldActorName, String newactorName, String olduseCaseName, String newuseCaseName) {
+
+    }
+    //----------------------------------------------------------------For Include Link----------
+
+    protected void addIncludeLink(String useCaseName1, String useCaseName2) {
+
+    }
+
+    protected void updateIncludeLink(String oldUseCaseName1, String newUseCaseName1, String oldUseCaseName2, String newUseCaseName2) {
+
+    }
+
+    //----------------------------------------------------------------For Extend Link----------
+
+    protected void addExtendLink(String useCaseName1, String useCaseName2) {
+
+    }
+
+    protected void updateExtendLink(String oldUseCaseName1, String newUseCaseName1, String oldUseCaseName2, String newUseCaseName2) {
 
     }
 
