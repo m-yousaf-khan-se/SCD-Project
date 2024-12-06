@@ -16,12 +16,12 @@ public class Class implements Component, Serializable {
     private int y;  // Y-coordinate for positioning the component
 
     // Constructor
-    public Class(String name, int x, int y) {
+    public Class(String name) {
         this.name = name;
         this.attributes = new ArrayList<>();
         this.methods = new ArrayList<>();
-        this.x = x;  // Set the initial x-coordinate
-        this.y = y;// Set the initial y-coordinate
+        this.x = 0;  // Set the initial x-coordinate
+        this.y = 0;// Set the initial y-coordinate
         System.out.println("Inside model class constructor");
     }
 

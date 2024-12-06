@@ -40,8 +40,8 @@ public class ClassDiagramPresenter {
     }
 
     //----------------------related to Classes------------------------------
-    public void addClass(String name, int x, int y) {
-        Class clazz = new Class(name, x, y);
+    public void addClass(String name) {
+        Class clazz = new Class(name);
 
         // Add the class to the local list
         classes.add(clazz);
