@@ -29,13 +29,20 @@ public class ClassDiagramPresenter {
 
     List<Class> classes = new ArrayList<>();
     private DiagramModel model; // Reference to the DiagramModel
+//clazz,aggregation,association,generalizations,inherritance,classes
 
-
-    public ClassDiagramPresenter(IModel model1, ViewIController view) {
+    public ClassDiagramPresenter(DiagramModel model,Class clazz,Aggregation aggregation,Association association,generalization generalizations,Inherritance inherritance,List<Class> classes , ViewIController view) {
 
 
         //initialize models
-        this.model = (DiagramModel)model1;
+//        this.model = (DiagramModel)model1;
+        this.model=model;
+        this.clazz=clazz;
+        this.aggregation=aggregation;
+        this.association=association;
+        this.generalizations=generalizations;
+        this.inherritance=inherritance;
+        this.classes=classes;
         this.view = view;
     }
 
@@ -52,6 +59,7 @@ public class ClassDiagramPresenter {
 
     // Update the class name in the DiagramModel
     public void updateClassName(String oldName, String newName) {
+        System.out.println("Inside UpdateClassName");
         for (Class clazz : classes) {
             if (clazz.getName().equals(oldName)) {
                 clazz.setName(newName);

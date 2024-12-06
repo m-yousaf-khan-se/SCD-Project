@@ -16,6 +16,8 @@ public class Class implements Component, Serializable {
     private int y;  // Y-coordinate for positioning the component
 
     // Constructor
+    public Class()
+    {}
     public Class(String name) {
         this.name = name;
         this.attributes = new ArrayList<>();
