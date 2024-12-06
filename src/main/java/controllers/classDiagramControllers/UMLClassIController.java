@@ -65,6 +65,7 @@ public class UMLClassIController extends ViewIController implements IController 
         if (textField != null && textField.getParent() instanceof VBox) {
             VBox parent = (VBox) textField.getParent();
             parent.getChildren().remove(textField);
+            removeFieldFromClass(className, textField.getText());
             System.out.println("TextField deleted: " + textField.getPromptText() + " from the class : " + className);
         }
     }
