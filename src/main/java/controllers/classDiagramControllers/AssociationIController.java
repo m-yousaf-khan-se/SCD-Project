@@ -16,7 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
-public abstract class AssociationIController implements IController {
+public class AssociationIController  extends ViewIController implements IController {
     private static final String[] MULTIPLICITY_CHOICES = {"0..1", "1..1", "0..*", "1..*"};
 
     @FXML

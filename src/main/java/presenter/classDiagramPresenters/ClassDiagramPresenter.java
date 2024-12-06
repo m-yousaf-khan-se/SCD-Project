@@ -31,17 +31,17 @@ public class ClassDiagramPresenter {
     private DiagramModel model; // Reference to the DiagramModel
 
 
-    ClassDiagramPresenter(IModel model1, IController view) {
+    public ClassDiagramPresenter(IModel model1, ViewIController view) {
 
 
         //initialize models
-        this.model1 = model1;
-        this.view = (ViewIController) view;
+        this.model = (DiagramModel)model1;
+        this.view = view;
     }
 
     //----------------------related to Classes------------------------------
-    public void addClass(String name, int x, int y) {
-        Class clazz = new Class(name, x, y);
+    public void addClass(String name) {
+        Class clazz = new Class(name);
 
         // Add the class to the local list
         classes.add(clazz);

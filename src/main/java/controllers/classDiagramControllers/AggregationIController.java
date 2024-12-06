@@ -15,7 +15,7 @@ import javafx.scene.shape.Polygon;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public abstract class AggregationIController implements IController {
+public class AggregationIController extends ViewIController implements IController {
 
     @FXML
     private ResourceBundle resources;

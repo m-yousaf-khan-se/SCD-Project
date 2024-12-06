@@ -33,7 +33,7 @@ import presenter.useCaseDiagramPresenters.UseCaseDiagramPresenter;
 
 import javax.imageio.ImageIO;
 
-public class ViewIController implements IController {
+public class ViewIController{
 
     @FXML
     private ResourceBundle resources;
@@ -56,20 +56,8 @@ public class ViewIController implements IController {
     private UseCaseDiagramPresenter useCaseDiagramPresenter;
 
     // ------------------------Not useable
-    @Override
-    public Double[] getCoordinates(){
-        throw new UnsupportedOperationException("get coordinates is not Implemented for ViewController.java");
-    }
 
-    @Override
-    public String[] getClassesName() {
-        throw new UnsupportedOperationException("get coordinates is not Implemented for ViewController.java");
-    }
 
-    @Override
-    public String getUMLClassName() {
-        throw new UnsupportedOperationException("get coordinates is not Implemented for ViewController.java");
-    }
     // ------------------------------------
 
     //----------------------------of Classe Diagram------------------------------------
@@ -117,79 +105,67 @@ public class ViewIController implements IController {
     }
 
     //----------------------of Classes
-    @Override
-    public void addOrUpdateClassName(String oldName, String newName) {
+    protected void addOrUpdateClassName(String oldName, String newName) {
         classDiagramPresenter.updateClassName(oldName, newName);
     }
 
-    @Override
-    public void addOrUpdateMethodToClass(String className, String oldMethodDetails, String newMethodDetails) {
+    protected void addOrUpdateMethodToClass(String className, String oldMethodDetails, String newMethodDetails) {
         classDiagramPresenter.addClassMethod(className, oldMethodDetails ,newMethodDetails);
     }
 
-    @Override
-    public void addOrUpdateFieldToClass(String className, String oldFieldName, String newFieldName) {
+    protected void addOrUpdateFieldToClass(String className, String oldFieldName, String newFieldName) {
         classDiagramPresenter.addOrUpdateClassField(className, oldFieldName, newFieldName);
     }
 
-    @Override
-    public void removeMethodFromClass(String className, String methodDetails) {
+    protected void removeMethodFromClass(String className, String methodDetails) {
         classDiagramPresenter.removeClassMethod(className, methodDetails);
     }
 
-    @Override
-    public void removeFieldFromClass(String className, String fieldName) {
+    protected void removeFieldFromClass(String className, String fieldName) {
         classDiagramPresenter.removeClassField(className, fieldName);
     }
     //----------------------of Aggregation
-    @Override
-    public void addAggregation(String className1, String className2) {
+    protected void addAggregation(String className1, String className2) {
     }
 
-    @Override
-    public void updateAggregation(String className1, String newClassName1, String className2, String newClassName2) {
+    protected void updateAggregation(String className1, String newClassName1, String className2, String newClassName2) {
     }
 
     //----------------------of Association
-    @Override
-    public void addAssociation(String className1, String className2) {
+    protected void addAssociation(String className1, String className2) {
 
     }
 
-    @Override
-    public void updateAssociation(String className1, String newClassName1, String className2, String newClassName2) {
+    protected void updateAssociation(String className1, String newClassName1, String className2, String newClassName2) {
 
     }
 
-    @Override
-    public Double[] updateMultiplicity(String className1, String className2) {
+    protected Double[] updateMultiplicity(String className1, String className2) {
         return new Double[0];
     }
 
     //----------------------of Composition
-    @Override
-    public void addComposition(String className1, String className2) {
+
+    protected void addComposition(String className1, String className2) {
 
     }
 
-    @Override
-    public void updateComposition(String className1, String newClassName1, String className2, String newClassName2) {
+    protected void updateComposition(String className1, String newClassName1, String className2, String newClassName2) {
 
     }
 
     //----------------------of Generalization
-    @Override
-    public void addGeneratlization(String className1, String className2) {
+
+    protected void addGeneratlization(String className1, String className2) {
 
     }
 
-    @Override
-    public void updateGeneratlization(String className1, String newClassName1, String className2, String newClassName2) {
+    protected void updateGeneratlization(String className1, String newClassName1, String className2, String newClassName2) {
 
     }
 
     //----------------------------------------------------------------
-    public static void storeUseCaseController(Node node, IController controller)
+    protected static void storeUseCaseController(Node node, IController controller)
     {
         instance.canvasUseCaseNodes.put(node, controller);
     }
@@ -219,24 +195,24 @@ public class ViewIController implements IController {
     }
 
     @FXML
-    void aboutUMLEditorListener(ActionEvent event) {
+    private void aboutUMLEditorListener(ActionEvent event) {
 
     }
 
     @FXML
-    void createNewClassDiagramListener(ActionEvent event) throws IOException {
+    private void createNewClassDiagramListener(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/ClassDiagramTools.fxml"));
         MainViewRightBorderArea.setContent(loader.load());
     }
 
     @FXML
-    void createNewUseCaseDiagramListener(ActionEvent event) throws IOException {
+    private void createNewUseCaseDiagramListener(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlUseCaseViews/UseCaseDiagramsTools.fxml"));
         MainViewRightBorderArea.setContent(loader.load());
     }
 
     @FXML
-    void exportAsPNGListener(ActionEvent event) {
+    private void exportAsPNGListener(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Diagram as PNG");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -267,16 +243,16 @@ public class ViewIController implements IController {
 
 
     @FXML
-    void loadExistingProject(ActionEvent event) {
+    private void loadExistingProject(ActionEvent event) {
 
     }
 
     @FXML
-    void generateJavaCodeFromClassDiagramListener(ActionEvent event) {
+    private void generateJavaCodeFromClassDiagramListener(ActionEvent event) {
     }
 
     @FXML
-    void setStatusForGenerateJavaCodeFromClassDiagramStatusListener(Event event) {
+    private void setStatusForGenerateJavaCodeFromClassDiagramStatusListener(Event event) {
         VBox vb = (VBox) MainViewRightBorderArea.getContent();
         if( vb != null && (((Button)vb.getChildren().get(1)).getText().equals("Class")))
         {
@@ -291,7 +267,7 @@ public class ViewIController implements IController {
     }
 
     @FXML
-    void saveProjectListener(ActionEvent event) {
+    private void saveProjectListener(ActionEvent event) {
 
     }
 
@@ -331,10 +307,10 @@ public class ViewIController implements IController {
         return instance.paneCanvas;
     }
 
-    public void setPresenter(ClassDiagramPresenter classDiagramPresenter, UseCaseDiagramPresenter useCaseDiagramPresenter) {}
-    {
-        this.classDiagramPresenter = classDiagramPresenter;
-        this.useCaseDiagramPresenter = useCaseDiagramPresenter;
+    public void setPresenter(ClassDiagramPresenter classPresenter, UseCaseDiagramPresenter useCasePresenter) {
+        this.classDiagramPresenter = classPresenter;
+        this.useCaseDiagramPresenter = useCasePresenter;
     }
+
 
 }

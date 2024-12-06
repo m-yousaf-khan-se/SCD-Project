@@ -15,7 +15,7 @@ import javafx.scene.shape.Polygon;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public abstract class CompositionIController implements IController {
+public class CompositionIController  extends ViewIController implements IController {
 
     @FXML
     private ResourceBundle resources;
