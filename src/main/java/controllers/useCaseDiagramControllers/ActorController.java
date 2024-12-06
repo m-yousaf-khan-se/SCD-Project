@@ -14,7 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
-public abstract class ActorController extends ViewIController implements IController {
+public  class ActorController extends ViewIController implements IController {
 
     @FXML
     private ResourceBundle resources;
@@ -53,6 +53,7 @@ public abstract class ActorController extends ViewIController implements IContro
     public void initialize() {
         setupActorBindings();
         setupDragHandlers();
+        attachFocusChangeListener(actorNameTextField);
     }
 
 
@@ -127,5 +128,18 @@ public abstract class ActorController extends ViewIController implements IContro
                 }
             }
         });
+    }
+
+    @Override
+    public Double[] getCoordinates() {
+        Double []actorCoordinates = new Double[2];
+        actorCoordinates[0] = ActorGroup.getLayoutX();
+        actorCoordinates[1] = ActorGroup.getLayoutY();
+        return actorCoordinates;
+    }
+
+    @Override
+    public String[] getClassesName() {
+        throw new UnsupportedOperationException("Not implemented! as it has one actor only right now");
     }
 }

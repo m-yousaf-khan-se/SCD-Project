@@ -7,10 +7,11 @@ import controllers.ControllerClass;
 import controllers.IController;
 import controllers.ViewIController;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
-public abstract class useCaseController extends ViewIController implements IController {
+public  class useCaseController extends ViewIController implements IController {
 
     @FXML
     private ResourceBundle resources;
@@ -22,9 +23,15 @@ public abstract class useCaseController extends ViewIController implements ICont
     private Pane useCasePane;
     @FXML
     private TextField useCaseTextField;
+    @FXML
+    private Group useCaseGroup;
 
     private String initialText = "";
     private String useCaseName = "";
+
+    public String getUseCaseName() {
+        return useCaseName;
+    }
 
     @FXML
     public void initialize() {
@@ -32,18 +39,13 @@ public abstract class useCaseController extends ViewIController implements ICont
 
         assert useCaseTextField != null : "fx:id=\"useCaseTextField\" was not injected: check your FXML file 'useCasePane.fxml'.";
 
-        // Add an action listener for the TextField
-        useCaseTextField.setOnAction(event -> {
-            String inputText = useCaseTextField.getText();
-            System.out.println("Entered UseCase Text: " + inputText);
-
-            // Optional: Clear the text field after pressing Enter
-           // useCaseTextField.clear();
-        });
+        //This is slightly different from Class focusListener
+        attachFocusChangeListener(useCaseTextField);
 
         //Use case textField is working properly (after typing any input just press enter then input will be accessed through above function)
     }
 
+    //attach this listener to textField.
     private void attachFocusChangeListener(TextField textField) {
         textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
@@ -64,6 +66,19 @@ public abstract class useCaseController extends ViewIController implements ICont
                 }
             }
         });
+    }
+
+    @Override
+    public Double[] getCoordinates() {
+        Double []useCaseCoordinates = new Double[2];
+        useCaseCoordinates[0] = useCaseGroup.getLayoutX();
+        useCaseCoordinates[1] = useCaseGroup.getLayoutY();
+        return useCaseCoordinates;
+    }
+
+    @Override
+    public String[] getClassesName() {
+        throw new UnsupportedOperationException("Not implemented! as it has one actor only right now");
     }
 
 }
