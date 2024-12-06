@@ -6,8 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.DiagramModel;
-import models.IModel;
 import models.classdiagram.*;
+import models.classdiagram.Aggregation;
 import models.classdiagram.Class;
 import models.usecase.Actor;
 import models.usecase.Extend;
@@ -91,7 +91,7 @@ public class ApplicationMain extends Application {
 
         stage.setTitle("UML Editor");
         stage.setScene(mainScene);
-        stage.show();// iam imran
+        stage.show();
     }
 
     public static Scene getScene()

@@ -8,9 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import controllers.classDiagramControllers.UMLClassIController;
+import controllers.classDiagramControllers.*;
 import controllers.useCaseDiagramControllers.ActorController;
-import controllers.useCaseDiagramControllers.includeIController;
 import controllers.useCaseDiagramControllers.useCaseController;
 import javafx.scene.image.WritableImage;
 import javafx.embed.swing.SwingFXUtils;
@@ -64,16 +63,33 @@ public class ViewIController{
     // ------------------------------------
 
     //----------------------------of Classe Diagram------------------------------------
-    public static void storeClassController(Node node, IController controller)
-    {
+    public static void storeClassController(Node node, IController controller) {
         instance.canvasClassNodes.put(node, controller);
-        if(controller instanceof UMLClassIController)
-        {
-            UMLClassIController classController = (UMLClassIController)controller;
+
+        if (controller instanceof UMLClassIController) {
+            UMLClassIController classController = (UMLClassIController) controller;
             instance.classDiagramPresenter.addClass(classController.getUMLClassName());
+        } else if (controller instanceof AggregationIController) {
+            AggregationIController aggregationController = (AggregationIController) controller;
+            String[] classes = aggregationController.getClassesName();
+            instance.classDiagramPresenter.addAggregation(classes[0], classes[1]);
+        } else if (controller instanceof AssociationIController) {
+            AssociationIController associationController = (AssociationIController) controller;
+            String[] classes = associationController.getClassesName();
+            String[] multiplicities = associationController.getMultiplicities();
+            instance.classDiagramPresenter.addAssociation(classes[0], multiplicities[0], classes[1], multiplicities[1]);
+        } else if (controller instanceof CompositionIController) {
+            CompositionIController compositionController = (CompositionIController) controller;
+            String[] classes = compositionController.getClassesName();
+            instance.classDiagramPresenter.addComposition(classes[0], classes[1]);
+        } else if (controller instanceof GeneralizationIController) {
+            GeneralizationIController generalizationController = (GeneralizationIController) controller;
+            String[] classes = generalizationController.getClassesName();
+            instance.classDiagramPresenter.addInherritance(classes[0], classes[1]);
+        } else {
+            System.err.println("Unsupported controller type: " + controller.getClass().getName());
         }
     }
-
 
 
     //fetch only the components of class
@@ -130,43 +146,28 @@ public class ViewIController{
         classDiagramPresenter.removeClassField(className, fieldName);
     }
     //----------------------of Aggregation
-    protected void addAggregation(String className1, String className2) {
-    }
-
     protected void updateAggregation(String className1, String newClassName1, String className2, String newClassName2) {
+        classDiagramPresenter.updateAggregation(className1, newClassName1, className2, newClassName2);
     }
 
     //----------------------of Association
-    protected void addAssociation(String className1, String className2) {
-
-    }
-
     protected void updateAssociation(String className1, String newClassName1, String className2, String newClassName2) {
-
+        classDiagramPresenter.updateAssociation(className1, newClassName1, className2, newClassName2);
     }
 
-    protected Double[] updateMultiplicity(String className1, String className2) {
-        return new Double[0];
+    protected void updateAssociationMultiplicity(String className1, String multiplicity1, String className2, String multiplicity2){
+        classDiagramPresenter.updateAssociationMultiplicity(className1, multiplicity1, className2, multiplicity2);
     }
 
     //----------------------of Composition
-
-    protected void addComposition(String className1, String className2) {
-
-    }
-
     protected void updateComposition(String className1, String newClassName1, String className2, String newClassName2) {
-
+        classDiagramPresenter.updateComposition(className1, newClassName1, className2, newClassName2);
     }
 
     //----------------------of Generalization
 
-    protected void addGeneratlization(String className1, String className2) {
-
-    }
-
     protected void updateGeneratlization(String className1, String newClassName1, String className2, String newClassName2) {
-
+        classDiagramPresenter.updateinherritance(className1, newClassName1, className2, newClassName2);
     }
 
     //----------------------------------------------------------------UseCase----------
@@ -180,7 +181,7 @@ public class ViewIController{
             ActorController actorController = (ActorController)controller;
             instance.useCaseDiagramPresenter.addActor(actorController.getActorName());
         }
-        if(controller instanceof useCaseController)
+        else if(controller instanceof useCaseController)
         {
             useCaseController useCase_Controller = (useCaseController)controller;
             instance.useCaseDiagramPresenter.addUseCase(useCase_Controller.getUseCaseName());
