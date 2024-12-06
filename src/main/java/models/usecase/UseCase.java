@@ -8,18 +8,33 @@ import java.io.Serializable;
 
 public class UseCase implements Component,Serializable {
     private String name;
-    private String description;
     private int x; // X coordinate
     private int y; // Y coordinate
 
-    public UseCase(String name, String description, int x, int y) {
+    public UseCase(String name) {
         this.name = name;
-        this.description = description;
-        this.x = x;
-        this.y = y;
+        this.x = 0;  // Set the initial x-coordinate
+        this.y = 0;// Set the initial y-coordinate
+        System.out.println("Inside model UseCase constructor");
     }
 
 //    @Override
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 //    public void display() {
 //        System.out.println("UseCase: " + name + " - " + description + " at coordinates (" + x + ", " + y + ")");
 //    }

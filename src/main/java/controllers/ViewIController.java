@@ -71,6 +71,8 @@ public class ViewIController{
         }
     }
 
+
+
     //fetch only the components of class
     public Double[] getClassComponentCoordinates(String styleClass, String className)
     {
@@ -103,7 +105,7 @@ public class ViewIController{
         }
         return null;
     }
-
+//Protected methods are being called in respective Controller Class( for now UMLClassController)
     //----------------------of Classes
     protected void addOrUpdateClassName(String oldName, String newName) {
         classDiagramPresenter.updateClassName(oldName, newName);
@@ -164,10 +166,18 @@ public class ViewIController{
 
     }
 
-    //----------------------------------------------------------------
+    //----------------------------------------------------------------UseCase----------
     protected static void storeUseCaseController(Node node, IController controller)
     {
+        //Stores nodes in useCase HashMap
         instance.canvasUseCaseNodes.put(node, controller);
+        //Stores Actors in
+        if(controller instanceof UMLClassIController)
+        {
+            UMLClassIController classController = (UMLClassIController)controller;
+            instance.classDiagramPresenter.addClass(classController.getUMLClassName());
+        }
+
     }
 
     public static IController getClassController(Node node)
