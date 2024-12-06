@@ -53,6 +53,7 @@ public  class ActorController extends ViewIController implements IController {
     public void initialize() {
         setupActorBindings();
         setupDragHandlers();
+        attachFocusChangeListener(actorNameTextField);
     }
 
 

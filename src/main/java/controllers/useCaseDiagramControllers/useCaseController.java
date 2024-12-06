@@ -39,18 +39,13 @@ public  class useCaseController extends ViewIController implements IController {
 
         assert useCaseTextField != null : "fx:id=\"useCaseTextField\" was not injected: check your FXML file 'useCasePane.fxml'.";
 
-        // Add an action listener for the TextField
-        useCaseTextField.setOnAction(event -> {
-            String inputText = useCaseTextField.getText();
-            System.out.println("Entered UseCase Text: " + inputText);
-
-            // Optional: Clear the text field after pressing Enter
-           // useCaseTextField.clear();
-        });
+        //This is slightly different from Class focusListener
+        attachFocusChangeListener(useCaseTextField);
 
         //Use case textField is working properly (after typing any input just press enter then input will be accessed through above function)
     }
 
+    //attach this listener to textField.
     private void attachFocusChangeListener(TextField textField) {
         textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
