@@ -113,7 +113,7 @@ public class UMLClassIController extends ViewIController implements IController 
     @FXML
     void addNewFieldListener(ActionEvent event) {
         TextField newField = new TextField();
-        setupTextField(newField, "Enter Variable Name");
+        setupTextField(newField, "(+/-/#):variable name:returnType");
         classVBox.getChildren().add(classVBox.getChildren().indexOf(addFieldBtn), newField);
         System.out.println("New empty field added to the class");
     }
@@ -121,7 +121,7 @@ public class UMLClassIController extends ViewIController implements IController 
     @FXML
     void addNewMethodListener(ActionEvent event) {
         TextField newField = new TextField();
-        setupTextField(newField, "Enter Method Name");
+        setupTextField(newField, "(+/#/-):method name:returnType");
         classVBox.getChildren().add(classVBox.getChildren().indexOf(addMethodBtn), newField);
         System.out.println("New empty method added to the class");
     }
