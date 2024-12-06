@@ -9,9 +9,9 @@ public interface IController {
     public String getUMLClassName(); //unique to UMLClassIController
 
     //related to classes
-    void addOrUpdateClassName(String name);
-    void addMethodToClass(String className, String methodDetails);
-    void addFieldToClass(String className, String fieldName);
+    void addOrUpdateClassName(String oldName, String newName);
+    void addOrUpdateMethodToClass(String className, String oldMethodDetails, String newMethodDetails);
+    void addOrUpdateFieldToClass(String className, String oldFieldName, String newFieldName);
     void removeMethodFromClass(String className, String methodDetails);
     void removeFieldFromClass(String className, String fieldName);
 
