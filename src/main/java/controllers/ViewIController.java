@@ -119,28 +119,28 @@ public class ViewIController implements IController {
 
     //----------------------of Classes
     @Override
-    public void addOrUpdateClassName(String name) {
-        classDiagramPresenter.updateClassName(name);
+    public void addOrUpdateClassName(String oldName, String newName) {
+        classDiagramPresenter.updateClassName(oldName, newName);
     }
 
     @Override
-    public void addMethodToClass(String className, String methodDetails) {
-        classDiagramPresenter.addMethod(className, methodDetails);
+    public void addOrUpdateMethodToClass(String className, String oldMethodDetails, String newMethodDetails) {
+        classDiagramPresenter.addClassMethod(className, oldMethodDetails ,newMethodDetails);
     }
 
     @Override
-    public void addFieldToClass(String className, String fieldName) {
-        classDiagramPresenter.addField(className, fieldName);
+    public void addOrUpdateFieldToClass(String className, String oldFieldName, String newFieldName) {
+        classDiagramPresenter.addOrUpdateClassField(className, oldFieldName, newFieldName);
     }
 
     @Override
     public void removeMethodFromClass(String className, String methodDetails) {
-        classDiagramPresenter.removeMethod(className, methodDetails);
+        classDiagramPresenter.removeClassMethod(className, methodDetails);
     }
 
     @Override
     public void removeFieldFromClass(String className, String fieldName) {
-        classDiagramPresenter.removeField(className, fieldName);
+        classDiagramPresenter.removeClassField(className, fieldName);
     }
     //----------------------of Aggregation
     @Override
