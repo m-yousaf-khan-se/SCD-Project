@@ -7,6 +7,8 @@ public class Aggregation extends Relationship {
 
     public Aggregation(Component from, Component to, String label,int x,int y) {
         super(from, to, "Aggregation", label,x,y);
+        System.out.println("Aggregation constructor ");
+
     }
 
 //    @Override
