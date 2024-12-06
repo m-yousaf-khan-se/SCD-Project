@@ -52,8 +52,8 @@ public class ViewIController{
 
     private static ViewIController instance; //for using sigleton pattern
 
-    private ClassDiagramPresenter classDiagramPresenter;
-    private UseCaseDiagramPresenter useCaseDiagramPresenter;
+    private static ClassDiagramPresenter classDiagramPresenter;
+    private static UseCaseDiagramPresenter useCaseDiagramPresenter;
 
     // ------------------------Not useable
 
@@ -308,8 +308,17 @@ public class ViewIController{
     }
 
     public void setPresenter(ClassDiagramPresenter classPresenter, UseCaseDiagramPresenter useCasePresenter) {
-        this.classDiagramPresenter = classPresenter;
-        this.useCaseDiagramPresenter = useCasePresenter;
+        classDiagramPresenter = classPresenter;
+        useCaseDiagramPresenter = useCasePresenter;
+
+        if(useCaseDiagramPresenter == null || classDiagramPresenter == null)
+        {
+            System.err.println("Presenters are not set in the View!!");
+        }
+        else
+        {
+            System.out.println("Preseters are set successfully in the View!");
+        }
     }
 
 
