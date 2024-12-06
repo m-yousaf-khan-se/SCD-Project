@@ -31,12 +31,12 @@ public class ClassDiagramPresenter {
     private DiagramModel model; // Reference to the DiagramModel
 
 
-    ClassDiagramPresenter(IModel model1, IController view) {
+    public ClassDiagramPresenter(IModel model1, ViewIController view) {
 
 
         //initialize models
-        this.model1 = model1;
-        this.view = (ViewIController) view;
+        this.model = (DiagramModel)model1;
+        this.view = view;
     }
 
     //----------------------related to Classes------------------------------

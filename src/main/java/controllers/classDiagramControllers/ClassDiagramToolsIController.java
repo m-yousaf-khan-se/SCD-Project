@@ -12,7 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
-public abstract class ClassDiagramToolsIController implements IController {
+public class ClassDiagramToolsIController {
 
     @FXML
     private ResourceBundle resources;
