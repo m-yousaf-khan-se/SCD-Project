@@ -1,6 +1,5 @@
 package presenter.classDiagramPresenters;
 
-import controllers.IController;
 import controllers.ViewIController;
 import models.DiagramModel;
 import models.IModel;

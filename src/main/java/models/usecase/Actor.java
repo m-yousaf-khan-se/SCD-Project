@@ -9,11 +9,30 @@ public class Actor implements Component,Serializable {
     private int x; // X coordinate
     private int y; // Y coordinate
 
-    public Actor(String name, int x, int y) {
+
+    public Actor(String name) {
         this.name = name;
+        this.x = 0;  // Set the initial x-coordinate
+        this.y = 0;// Set the initial y-coordinate
+        System.out.println("Inside model Actor constructor");
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setX(int x) {
         this.x = x;
+    }
+
+    public void setY(int y) {
         this.y = y;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
 //    @Override
 //    public void display() {

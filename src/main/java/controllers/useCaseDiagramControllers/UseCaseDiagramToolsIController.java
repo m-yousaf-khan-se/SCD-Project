@@ -61,8 +61,11 @@ public abstract class UseCaseDiagramToolsIController implements IController {
 
     @FXML
     void createUseCaseLIstener(ActionEvent event) throws IOException {
+        System.out.println("Creating Use Case");
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlUseCaseViews/useCasePane.fxml"));
-        ViewIController.getPaneCanvas().getChildren().add(loader.load());
+        Parent container = loader.load();
+        ViewIController.getPaneCanvas().getChildren().add(container);
+        ViewIController.storeClassController(container, loader.getController());
 
     }
 
