@@ -15,7 +15,7 @@ import javafx.scene.shape.Polygon;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public abstract class GeneralizationIController implements IController {
+public class GeneralizationIController  extends ViewIController implements IController {
 
     @FXML
     private ResourceBundle resources;

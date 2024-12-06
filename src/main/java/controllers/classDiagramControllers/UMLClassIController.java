@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import controllers.IController;
+import controllers.ViewIController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -15,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public abstract class UMLClassIController implements IController {
+public class UMLClassIController extends ViewIController implements IController {
 
     @FXML
     public Group umlClassGroup;
@@ -47,7 +48,7 @@ public abstract class UMLClassIController implements IController {
     private String initialText = "";
     private String className = "";
 
-    @Override
+
     public String getUMLClassName()
     {
         return className;
@@ -148,6 +149,11 @@ public abstract class UMLClassIController implements IController {
         classCoordinates[0] = umlClassGroup.getLayoutX();
         classCoordinates[1] = umlClassGroup.getLayoutY();
         return classCoordinates;
+    }
+
+    @Override
+    public String[] getClassesName() {
+        throw new UnsupportedOperationException("Not implemented! as Class Diagram contains name of only one class. Call getUMLClassName() ");
     }
 
 }
