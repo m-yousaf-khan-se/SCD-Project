@@ -48,7 +48,6 @@ public class ApplicationMain extends Application {
         List<Class> classes = new ArrayList<>();
 
         //Use Case Diagram Presenter
-        ViewIController view;
         models.usecase.Actor actor=new Actor();
         models.usecase.UseCase useCase=new UseCase();
         models.usecase.Include include=new Include();
@@ -59,16 +58,11 @@ public class ApplicationMain extends Application {
         models.usecase.UseCaseDiagram useCaseDiagram;
 
 
-
-        /* @Saad is ki jaga dakh lena tum na kon kon sa model kis presenter ma use kerna hai
-                                                wo wo model define ker k relavent Presetner ma pass ker dena*/
-
         while(true)
         {
             if (parentView != null) {
                 ClassDiagramPresenter classDiagramPresenter = new ClassDiagramPresenter(model,clazz,aggregation,association,generalizations,inherritance,classes,parentView);
 
-                // or imran tum bhi mera is presnter ko set ker lena jasa mena oper wala ko kia hai taak saad is per bhi kaam ker saka.
                 UseCaseDiagramPresenter useCaseDiagramPresenter = new UseCaseDiagramPresenter(model,actor,useCase,include,extend,associations,actors,useCases,parentView);
 
                 if(classDiagramPresenter == null || useCaseDiagramPresenter == null)
@@ -95,7 +89,7 @@ public class ApplicationMain extends Application {
 
         stage.setTitle("UML Editor");
         stage.setScene(mainScene);
-        stage.show();// iam imran
+        stage.show();
     }
 
     public static Scene getScene()

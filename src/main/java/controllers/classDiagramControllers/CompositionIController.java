@@ -182,13 +182,19 @@ public class CompositionIController  extends ViewIController implements IControl
 
     private void updateAttachedClass(Circle corner, Node node) {
         UMLClassIController ctrl = (UMLClassIController) ViewIController.getClassController(node);
-
+        String newClassName;
         if (corner == corner1) {
-            className1 = ctrl.getUMLClassName();
+            newClassName = ctrl.getUMLClassName();
+            updateComposition(className1, newClassName, className2, className2);
+
+            className1 = newClassName;
             attachedNode1 = node;
             bindCornerToNode(corner1, attachedNode1);
         } else if (corner == corner2) {
-            className2 = ctrl.getUMLClassName();
+            newClassName = ctrl.getUMLClassName();
+            updateComposition(className1, className1, className2, newClassName);
+
+            className2 = newClassName;
             attachedNode2 = node;
             bindCornerToNode(corner2, attachedNode2);
         }

@@ -181,13 +181,19 @@ public class AssociationIController  extends ViewIController implements IControl
 
     private void updateAttachedClass(Circle corner, Node node) {
         UMLClassIController ctrl = (UMLClassIController) ViewIController.getClassController(node);
-
+        String newClassName;
         if (corner == corner1) {
-            className1 = ctrl.getUMLClassName();
+            newClassName = ctrl.getUMLClassName();
+            updateAssociation(className1, newClassName, className2, className2);
+
+            className1 = newClassName;
             attachedNode1 = node;
             bindCornerToNode(corner1, attachedNode1);
         } else if (corner == corner2) {
-            className2 = ctrl.getUMLClassName();
+            newClassName = ctrl.getUMLClassName();
+            updateAssociation(className1, className1, className2, newClassName);
+
+            className2 = newClassName;
             attachedNode2 = node;
             bindCornerToNode(corner2, attachedNode2);
         }
@@ -219,11 +225,13 @@ public class AssociationIController  extends ViewIController implements IControl
 
     private void onMultiplicity1Changed(ActionEvent event) {
         String choice = multiplicity1ChoiceBox.getValue();
+        updateAssociationMultiplicity(className1, choice, className2, multiplicity2ChoiceBox.getValue());
         System.out.println("Multiplicity 1: " + choice);
     }
 
     private void onMultiplicity2Changed(ActionEvent event) {
         String choice = multiplicity2ChoiceBox.getValue();
+        updateAssociationMultiplicity(className1, multiplicity1ChoiceBox.getValue(), className2, choice);
         System.out.println("Multiplicity 2: " + choice);
     }
 
@@ -238,5 +246,10 @@ public class AssociationIController  extends ViewIController implements IControl
     @Override
     public String[] getClassesName(){
         return new String[]{className1, className2};
+    }
+
+    public String[] getMultiplicities()
+    {
+        return new String[]{multiplicity1ChoiceBox.getValue(), multiplicity2ChoiceBox.getValue()};
     }
 }
