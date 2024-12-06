@@ -4,11 +4,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import controllers.ControllerClass;
+import controllers.IController;
+import controllers.ViewIController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
-public abstract class useCaseController extends ControllerClass {
+public abstract class useCaseController extends ViewIController implements IController {
 
     @FXML
     private ResourceBundle resources;
@@ -21,8 +23,10 @@ public abstract class useCaseController extends ControllerClass {
     @FXML
     private TextField useCaseTextField;
 
+    private String initialText = "";
+    private String useCaseName = "";
+
     @FXML
-    @Override
     public void initialize() {
         assert useCasePane != null : "fx:id=\"useCasePane\" was not injected: check your FXML file 'useCasePane.fxml'.";
 
@@ -38,6 +42,28 @@ public abstract class useCaseController extends ControllerClass {
         });
 
         //Use case textField is working properly (after typing any input just press enter then input will be accessed through above function)
+    }
+
+    private void attachFocusChangeListener(TextField textField) {
+        textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                // Field gained focus
+                initialText = textField.getText();
+            } else {
+                // Field lost focus
+                if (!initialText.equals(textField.getText())) {
+                    if(textField.getPromptText().contains("usecase name"))
+                    {
+                        useCaseName = textField.getText();
+                        addOrUpdateActorName(initialText, useCaseName);
+                    }
+
+                    System.out.println("Text changed in: " + textField.getPromptText() + " (of the useCase: " + useCaseName + ")");
+                    System.out.println("Old Value: " + initialText);
+                    System.out.println("New Value: " + textField.getText());
+                }
+            }
+        });
     }
 
 }

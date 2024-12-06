@@ -13,7 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
-public abstract class useCaseAssociationIController implements IController {
+public abstract class useCaseAssociationIController extends ViewIController implements IController {
 
     @FXML
     private ResourceBundle resources;

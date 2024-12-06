@@ -17,6 +17,6 @@
       <Line fx:id="arms" stroke="BLACK" /> <!-- Single line for both arms -->
       <Line fx:id="leftLeg" stroke="BLACK" />
       <Line fx:id="rightLeg" stroke="BLACK" />
-      <TextField fx:id="actorNameTextField" promptText="Enter Actor Name" />
+      <TextField fx:id="actorNameTextField" promptText="actor name" />
    </children>
 </Group>
