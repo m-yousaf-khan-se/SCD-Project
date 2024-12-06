@@ -13,7 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
-public abstract class useCaseAssociationIController extends ViewIController implements IController {
+public  class useCaseAssociationIController extends ViewIController implements IController {
 
     @FXML
     private ResourceBundle resources;
@@ -140,5 +140,17 @@ public abstract class useCaseAssociationIController extends ViewIController impl
         }
 
         System.out.println((node.getStyleClass().contains("usecase-actor") ? "Actor" : "Use Case") + " snapped to node: " + node.getId());
+    }
+    @Override
+    public Double[] getCoordinates() {
+        Double []useCaseCoordinates = new Double[2];
+        useCaseCoordinates[0] = useCaseAssociationGroup.getLayoutX();
+        useCaseCoordinates[1] = useCaseAssociationGroup.getLayoutY();
+        return useCaseCoordinates;
+    }
+
+    @Override
+    public String[] getClassesName() {
+        throw new UnsupportedOperationException("Not implemented! as it is only for Class Diagram. ");
     }
 }

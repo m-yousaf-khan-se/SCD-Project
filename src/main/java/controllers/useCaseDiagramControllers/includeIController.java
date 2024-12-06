@@ -14,7 +14,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
-public abstract class includeIController extends ViewIController implements IController {
+public class includeIController extends ViewIController implements IController {
 
     @FXML
     private ResourceBundle resources;
@@ -289,5 +289,18 @@ public abstract class includeIController extends ViewIController implements ICon
             attachedEndNode = nearestNode;
         }
         System.out.println((node.getStyleClass().contains("usecase-actor") ? "Actor" : "Use Case") + " snapped to node: " + node.getId());
+    }
+
+    @Override
+    public Double[] getCoordinates() {
+        Double []includeLinkCoordinates = new Double[2];
+        includeLinkCoordinates[0] = includeGroup.getLayoutX();
+        includeLinkCoordinates[1] = includeGroup.getLayoutY();
+        return includeLinkCoordinates;
+    }
+
+    @Override
+    public String[] getClassesName() {
+        throw new UnsupportedOperationException("Not implemented! as it is only for Class Diagram. ");
     }
 }
