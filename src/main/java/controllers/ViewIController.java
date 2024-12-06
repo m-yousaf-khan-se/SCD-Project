@@ -80,12 +80,11 @@ public class ViewIController implements IController {
         {
             UMLClassIController classController = (UMLClassIController)controller;
             instance.classDiagramPresenter.addClass(classController.getUMLClassName());
-
         }
     }
 
     //fetch only the components of class
-    public Double[] getComponentCoordinates(String styleClass, String className)
+    public Double[] getClassComponentCoordinates(String styleClass, String className)
     {
         for(Map.Entry<Node, IController> entry : canvasClassNodes.entrySet())
         {
@@ -98,7 +97,7 @@ public class ViewIController implements IController {
         return null;
     }
     //can fetch all the components of class Diagram through their styleClass and their connected classes
-    public Double[] getComponentCoordinates(String styleClass, String className1, String className2)
+    public Double[] getClassComponentCoordinates(String styleClass, String className1, String className2)
     {
         for(Map.Entry<Node, IController> entry : canvasClassNodes.entrySet())
         {
