@@ -9,6 +9,10 @@ import models.DiagramModel;
 import models.IModel;
 import models.classdiagram.*;
 import models.classdiagram.Class;
+import models.usecase.Actor;
+import models.usecase.Extend;
+import models.usecase.Include;
+import models.usecase.UseCase;
 import presenter.classDiagramPresenters.ClassDiagramPresenter;
 import presenter.useCaseDiagramPresenters.UseCaseDiagramPresenter;
 
@@ -34,6 +38,7 @@ public class ApplicationMain extends Application {
 
         //Setting up MVP
         //------------------------------------------------------------------
+        //For Class Diagram Prsenter
         DiagramModel model = new DiagramModel();
         Class clazz=new Class();
         Aggregation aggregation=new Aggregation();
@@ -41,6 +46,18 @@ public class ApplicationMain extends Application {
         generalization generalizations=new generalization();
         Inherritance inherritance=new Inherritance();
         List<Class> classes = new ArrayList<>();
+
+        //Use Case Diagram Presenter
+        ViewIController view;
+        models.usecase.Actor actor=new Actor();
+        models.usecase.UseCase useCase=new UseCase();
+        models.usecase.Include include=new Include();
+        models.usecase.Extend extend=new Extend();
+        models.usecase.Association associations=new models.usecase.Association();
+        List<Actor> actors = new ArrayList<>();
+        List<UseCase> useCases = new ArrayList<>();
+        models.usecase.UseCaseDiagram useCaseDiagram;
+
 
 
         /* @Saad is ki jaga dakh lena tum na kon kon sa model kis presenter ma use kerna hai
@@ -52,7 +69,7 @@ public class ApplicationMain extends Application {
                 ClassDiagramPresenter classDiagramPresenter = new ClassDiagramPresenter(model,clazz,aggregation,association,generalizations,inherritance,classes,parentView);
 
                 // or imran tum bhi mera is presnter ko set ker lena jasa mena oper wala ko kia hai taak saad is per bhi kaam ker saka.
-                UseCaseDiagramPresenter useCaseDiagramPresenter = new UseCaseDiagramPresenter();
+                UseCaseDiagramPresenter useCaseDiagramPresenter = new UseCaseDiagramPresenter(model,actor,useCase,include,extend,associations,actors,useCases,parentView);
 
                 if(classDiagramPresenter == null || useCaseDiagramPresenter == null)
                 {

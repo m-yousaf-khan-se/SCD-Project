@@ -11,6 +11,7 @@ public class UseCase implements Component,Serializable {
     private int x; // X coordinate
     private int y; // Y coordinate
 
+    public UseCase(){}
     public UseCase(String name) {
         this.name = name;
         this.x = 0;  // Set the initial x-coordinate

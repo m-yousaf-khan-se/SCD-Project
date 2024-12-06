@@ -9,6 +9,7 @@ public class Actor implements Component,Serializable {
     private int x; // X coordinate
     private int y; // Y coordinate
 
+    public Actor(){}
 
     public Actor(String name) {
         this.name = name;

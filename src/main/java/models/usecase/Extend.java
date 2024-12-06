@@ -5,6 +5,7 @@ import models.Relationship;
 
 public class Extend extends Relationship {
 
+    public Extend(){}
     public Extend(Component from, Component to, String label,int x,int y) {
         super(from, to, "Extend", label,x,y);
     }
