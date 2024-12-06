@@ -9,10 +9,13 @@ public class Association extends Relationship {
     private String multiplicity2;
 
     // Constructor
+    public Association(){}
     public Association(Component from, Component to, String label, int x, int y, String multiplicity1, String multiplicity2) {
         super(from, to, "Association", label, x, y);
         this.multiplicity1 = multiplicity1;
         this.multiplicity2 = multiplicity2;
+        System.out.println("Association constructor ");
+
     }
 
     // Getters and Setters

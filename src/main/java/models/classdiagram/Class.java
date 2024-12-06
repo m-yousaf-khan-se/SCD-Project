@@ -16,6 +16,8 @@ public class Class implements Component, Serializable {
     private int y;  // Y-coordinate for positioning the component
 
     // Constructor
+    public Class()
+    {}
     public Class(String name) {
         this.name = name;
         this.attributes = new ArrayList<>();
@@ -29,37 +31,60 @@ public class Class implements Component, Serializable {
     public void setName(String name)
     {
         this.name=name;
+        System.out.println("Setting the name of class ");
     }
     public String getName()
     {
+        System.out.println("Getting the name of class ");
         return name;
+
     }
     // Method to add an attribute
     public void addAttribute(String attribute) {
         attributes.add(attribute);
+        System.out.println("Attribute added in the class ");
+
     }
-    public void removeAttribute(String attribute){attributes.remove(attribute);}
+    public void removeAttribute(String attribute){
+        attributes.remove(attribute);
+        System.out.println("Attribute removed from the class ");
+
+    }
 
     // Method to add a method
     public void addMethod(String method) {
         methods.add(method);
+        System.out.println("Method added in the class ");
+
     }
 
-    public void removeMethod(String method){methods.remove(method);}
+    public void removeMethod(String method){
+        methods.remove(method);
+        System.out.println("Method Removed from the class ");
+
+    }
     // Getter and setter for coordinates
     public int getX() {
+        System.out.println("Getting x cordinate ");
+
         return x;
     }
 
     public void setX(int x) {
+        System.out.println("Setting x cordinate ");
+
         this.x = x;
     }
 
     public int getY() {
+        System.out.println("Getting y cordinate ");
+
         return y;
     }
 
     public void setY(int y) {
+        System.out.println("Setting x cordinate ");
+
         this.y = y;
     }
 

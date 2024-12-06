@@ -7,8 +7,11 @@ import models.Relationship;
 
 public class generalization extends Relationship {
 
+    public generalization(){}
     public generalization(Component from, Component to, String label,int x,int y) {
         super(from, to, "generalization", label,x,y);
+        System.out.println("Generalization constructor ");
+
     }
 
 //    @Override
