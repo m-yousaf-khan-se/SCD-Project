@@ -107,13 +107,57 @@ public class ClassDiagramPresenter {
     }
 
     public void addOrUpdateClassField(String className, String oldFieldName, String newFieldName) {
+        for (Class clazz : classes) {
+            if (clazz.getName().equals(className)) {
+                // If oldFieldName exists, update it
+                List<String> attributes = clazz.getAttributes();
+                if (attributes.contains(oldFieldName)) {
+                    int index = attributes.indexOf(oldFieldName);
+                    attributes.set(index, newFieldName); // Update the field
+                } else {
+                    // If oldFieldName does not exist, add newFieldName
+                    clazz.addAttribute(newFieldName);
+                }
+                break;
+            }
+        }
     }
+
 
     public void removeClassMethod(String className, String methodDetails) {
+        for (Class clazz : classes) {
+            if (clazz.getName().equals(className)) {
+                // Assuming the Class model has a removeMethod method
+                clazz.removeMethod(methodDetails);
+                break;
+            }
+        }
     }
 
+
     public void removeClassField(String className, String fieldName) {
+        for (Class clazz : classes) {
+            if (clazz.getName().equals(className)) {
+                // Assuming the Class model has a method to remove attributes
+                List<String> attributes = clazz.getAttributes();
+                attributes.remove(fieldName);
+                break;
+            }
+        }
     }
+    //function for setting the cordinates of the class ... call it when we are saving the diagram
+    public void setClassCoordinates(String className, int x, int y) {
+        for (Component component : model.getComponents()) {
+            if (component instanceof Class && component.getDetails().equals(className)) {
+                Class clazz = (Class) component;
+                clazz.setX(x);
+                clazz.setY(y);
+                break;
+            }
+        }
+    }
+
+
     //----------------------related to Aggregation------------------------------
     private Class getClassByName(String className) {
         for (Component component : model.getComponents()) {
@@ -318,6 +362,19 @@ public class ClassDiagramPresenter {
                 relationship instanceof Inherritance &&
                         ((Inherritance) relationship).getFrom().getDetails().equals(className1) &&
                         ((Inherritance) relationship).getTo().getDetails().equals(className2));
+    }
+
+    //Setting the cordinates of all the relationships such as agregation , association, inherritance and generalization
+    public void setRelationshipCoordinates(String fromClassName, String toClassName, int labelX, int labelY) {
+        for (Relationship relationship : model.getRelationships()) {
+            if (relationship.getFrom().getDetails().equals(fromClassName) &&
+                    relationship.getTo().getDetails().equals(toClassName)) {
+
+                relationship.setLabelX(labelX);
+                relationship.setLabelY(labelY);
+                break;
+            }
+        }
     }
 
 }

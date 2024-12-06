@@ -17,12 +17,15 @@ public class DiagramModel implements IModel, Serializable {
     @Override
     public void addComponent(Component component) {
         components.add(component);
+        System.out.println("Component Added");
     }
 
 
     @Override
     public void removeComponent(Component component) {
         components.remove(component);
+        System.out.println("Component Removed");
+
     }
 
     @Override
@@ -33,11 +36,15 @@ public class DiagramModel implements IModel, Serializable {
     @Override
     public void addRelationship(Relationship relationship) {
         relationships.add(relationship);
+        System.out.println("Relationship Added");
+
     }
 
     @Override
     public void removeRelationship(Relationship relationship) {
         relationships.remove(relationship);
+        System.out.println("Relationship Removed");
+
     }
 
     @Override

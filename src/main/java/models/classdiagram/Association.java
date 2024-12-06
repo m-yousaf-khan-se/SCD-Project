@@ -13,6 +13,8 @@ public class Association extends Relationship {
         super(from, to, "Association", label, x, y);
         this.multiplicity1 = multiplicity1;
         this.multiplicity2 = multiplicity2;
+        System.out.println("Association constructor ");
+
     }
 
     // Getters and Setters
