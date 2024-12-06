@@ -91,7 +91,7 @@ public class ApplicationMain extends Application {
 
         stage.setTitle("UML Editor");
         stage.setScene(mainScene);
-        stage.show();// iam imran
+        stage.show();
     }
 
     public static Scene getScene()
