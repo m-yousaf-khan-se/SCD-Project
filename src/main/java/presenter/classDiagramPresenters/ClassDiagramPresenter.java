@@ -11,7 +11,6 @@ import models.classdiagram.Class;
 import models.classdiagram.Association;
 import models.classdiagram.generalization;
 import models.classdiagram.Inherritance;
-import models.Component;
 
 
 import java.util.ArrayList;
@@ -79,15 +78,26 @@ public class ClassDiagramPresenter {
     }
 
     // Add a method to a class in the DiagramModel
-    public void addMethod(String className, String methodDetail) {
+    public void addClassMethod(String className, String oldMethodDetails, String newMethodDetails) {
         for (Class clazz : classes) {
             if (clazz.getName().equals(className)) {
-                clazz.addMethod(methodDetail);
+                if(oldMethodDetails.isEmpty())
+                {
+                    clazz.addMethod(newMethodDetails);
+                }
+                else
+                {
+                    for(String method : clazz.getMethods())
+                    {
+                        if(method.equals(oldMethodDetails))
+                            method = newMethodDetails;
+                    }
+                }
 
                 // Update the corresponding component in DiagramModel
                 for (Component component : model.getComponents()) {
                     if (component instanceof Class && ((Class) component).getName().equals(className)) {
-                        ((Class) component).addMethod(methodDetail);
+                        ((Class) component).addMethod(newMethodDetails);
                         break;
                     }
                 }
@@ -96,6 +106,14 @@ public class ClassDiagramPresenter {
         }
     }
 
+    public void addOrUpdateClassField(String className, String oldFieldName, String newFieldName) {
+    }
+
+    public void removeClassMethod(String className, String methodDetails) {
+    }
+
+    public void removeClassField(String className, String fieldName) {
+    }
     //----------------------related to Aggregation------------------------------
     private Class getClassByName(String className) {
         for (Component component : model.getComponents()) {

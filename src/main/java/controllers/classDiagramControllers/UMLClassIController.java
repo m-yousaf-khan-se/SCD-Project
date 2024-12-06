@@ -79,7 +79,15 @@ public abstract class UMLClassIController implements IController {
                     if(textField.getPromptText().contains("class name"))
                     {
                         className = textField.getText();
-                        addOrUpdateClassName(className);
+                        addOrUpdateClassName(initialText, className);
+                    }
+                    else if(textField.getPromptText().contains("method name"))
+                    {
+                        addOrUpdateMethodToClass(className, initialText, textField.getText());
+                    }
+                    else if(textField.getPromptText().contains("variable name"))
+                    {
+                        addOrUpdateFieldToClass(className, initialText, textField.getText());
                     }
                     System.out.println("Text changed in: " + textField.getPromptText() + " (of the class: " + className + ")");
                     System.out.println("Old Value: " + initialText);
