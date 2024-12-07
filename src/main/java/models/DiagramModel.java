@@ -1,11 +1,14 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DiagramModel implements IModel, Serializable {
+    @JsonProperty("components")
     private List<Component> components; // List of components (e.g., classes, actors)
     private List<Relationship> relationships; // List of relationships (e.g., association, include)
 
@@ -28,6 +31,7 @@ public class DiagramModel implements IModel, Serializable {
 
     }
 
+    @JsonProperty("components")
     @Override
     public List<Component> getComponents() {
         return components;

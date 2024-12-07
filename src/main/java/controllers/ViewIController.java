@@ -346,12 +346,17 @@ public class ViewIController{
         File file = fileChooser.showSaveDialog(OwnerWin);
 
         if (file != null) {
+
+            if (!file.getName().endsWith(".json")) {
+                file = new File(file.getAbsolutePath() + ".json");
+            }
+
             System.out.println("File path to save project is set successfully!");
 //            classDiagramPresenter.saveClassDiagramProject(file);
 
             if(!generateJavaCodeFromClassDiagramMenuItem.isDisable()) //if the option to generate Java code is available this means that the user was creating class Diagram
             {
-                System.out.println("Saving class Diagram from Current Working Project!");
+                System.out.println("Passing the follwing path to Presenter to save file: "+ file.getPath().toString());
                 instance.classDiagramPresenter.saveClassDiagramProject(file);
             }
             else
