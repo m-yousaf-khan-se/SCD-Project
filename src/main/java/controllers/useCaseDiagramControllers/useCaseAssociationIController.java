@@ -173,13 +173,13 @@ public  class useCaseAssociationIController extends ViewIController implements I
 
         if (ctrl instanceof ActorController) {
             newNodeName = ((ActorController) ctrl).getActorName();
-            updateAssociation(actorName, newNodeName, useCaseName, useCaseName);
+            updateUseCaseAssociation(actorName, newNodeName, useCaseName, useCaseName);
             actorName = newNodeName;
             attachedActorNode = node;
             bindCornerToNode(actorCircle, attachedActorNode);
         } else if (ctrl instanceof useCaseController) {
             newNodeName = ((useCaseController) ctrl).getUseCaseName();
-            updateAssociation(actorName, actorName, useCaseName, newNodeName);
+            updateUseCaseAssociation(actorName, actorName, useCaseName, newNodeName);
             useCaseName = newNodeName;
             attachedUseCaseNode = node;
             bindCornerToNode(useCaseCircle, attachedUseCaseNode);
