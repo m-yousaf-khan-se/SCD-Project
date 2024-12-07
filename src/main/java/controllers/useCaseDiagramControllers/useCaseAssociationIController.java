@@ -37,6 +37,9 @@ public  class useCaseAssociationIController extends ViewIController implements I
     private Node attachedActorNode;
     private Node attachedUseCaseNode;
 
+    String actorName="";
+    String useCaseName="";
+
     @FXML
     void initialize() {
         setupAssociationLineBindings();
@@ -132,17 +135,64 @@ public  class useCaseAssociationIController extends ViewIController implements I
         circle.setLayoutX(edgeX);
         circle.setLayoutY(edgeY);
     }
+    private void bindCornerToNode(Circle circle, Node node) {
+        if (node == null) return;
+
+        // Listen for changes in the node's layout and update the circle's position
+        node.layoutXProperty().addListener((observable, oldValue, newValue) -> {
+            if (circle == actorCircle && node == attachedActorNode) {
+                updateCirclePositionToEdge(circle, node);
+            } else if (circle == useCaseCircle && node == attachedUseCaseNode) {
+                updateCirclePositionToEdge(circle, node);
+            }
+        });
+
+        node.layoutYProperty().addListener((observable, oldValue, newValue) -> {
+            if (circle == actorCircle && node == attachedActorNode) {
+                updateCirclePositionToEdge(circle, node);
+            } else if (circle == useCaseCircle && node == attachedUseCaseNode) {
+                updateCirclePositionToEdge(circle, node);
+            }
+        });
+    }
+
 
     private void updateAttachedNode(Circle circle, Node node) {
-        if (node.getStyleClass().contains("usecase-actor")) {
-            attachedActorNode = node;
-
-        } else {
-            attachedUseCaseNode = node;
+        if (node == null) {
+            System.err.println("Node is null.");
+            return;
         }
 
-        System.out.println((node.getStyleClass().contains("usecase-actor") ? "Actor" : "Use Case") + " snapped to node: " + node.getId());
+        String newNodeName = null;
+        IController ctrl = ViewIController.getUseCaseController(node);
+
+        if (ctrl == null) {
+            System.err.println("No controller found for the given node.");
+            return;
+        }
+
+        if (ctrl instanceof ActorController) {
+            newNodeName = ((ActorController) ctrl).getActorName();
+            updateAssociation(actorName, newNodeName, useCaseName, useCaseName);
+            actorName = newNodeName;
+            attachedActorNode = node;
+            bindCornerToNode(actorCircle, attachedActorNode);
+        } else if (ctrl instanceof useCaseController) {
+            newNodeName = ((useCaseController) ctrl).getUseCaseName();
+            updateAssociation(actorName, actorName, useCaseName, newNodeName);
+            useCaseName = newNodeName;
+            attachedUseCaseNode = node;
+            bindCornerToNode(useCaseCircle, attachedUseCaseNode);
+        } else {
+            System.err.println("Unexpected controller type for node: " + node.getClass().getSimpleName());
+            return;
+        }
+
+        System.out.println("Snapped " + (circle == actorCircle ? "Actor Circle" : "Use Case Circle")
+                + " to " + (ctrl instanceof ActorController ? "Actor: " : "Use Case: ") + newNodeName);
     }
+
+
     @Override
     public Double[] getCoordinates() {
         Double []useCaseCoordinates = new Double[2];
@@ -156,11 +206,7 @@ public  class useCaseAssociationIController extends ViewIController implements I
         throw new UnsupportedOperationException("Not implemented! as it is only for Class Diagram. ");
     }
     public String[] getActorAndUseCaseNames(){
-       ActorController ctrl1 = (ActorController) ViewIController.getClassController(attachedActorNode);
-        useCaseController ctrl2 = (useCaseController) ViewIController.getClassController(attachedUseCaseNode);
-        String actorName=ctrl1.getActorName();
 
-      String useCaseName=ctrl2.getUseCaseName();
 
         return new String[]{actorName, useCaseName};
     }

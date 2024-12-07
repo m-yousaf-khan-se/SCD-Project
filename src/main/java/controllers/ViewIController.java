@@ -201,6 +201,11 @@ public class ViewIController{
             String[] useCases = extendController.getUseCaseNames();
             instance.useCaseDiagramPresenter.addExtend(useCases[0], useCases[1]);
         }
+        else if (controller instanceof useCaseAssociationIController) {
+            useCaseAssociationIController useCaseAssociationController = (useCaseAssociationIController) controller;
+            String[] actorAndUseCaseNames = useCaseAssociationController.getActorAndUseCaseNames();
+            instance.useCaseDiagramPresenter.addAssociation(actorAndUseCaseNames[0], actorAndUseCaseNames[1]);
+        }
 
 
 

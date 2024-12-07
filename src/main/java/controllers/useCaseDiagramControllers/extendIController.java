@@ -43,8 +43,10 @@ public  class extendIController extends ViewIController implements IController {
     @FXML
     private Text excludeText; // The text node for "<<include>>"
 
-    private Node attachedStartNode;
-    private Node attachedEndNode;
+    private Node attachedNode1;
+    private Node attachedNode2;
+    String useCaseName1="";
+    String useCaseName2="";
 
     @FXML
     void initialize() {
@@ -119,8 +121,8 @@ public  class extendIController extends ViewIController implements IController {
     }
 
     private void setupDragHandlers() {
-        startCircle.setOnMouseDragged(event -> onNodeDragged(startCircle, event, true));
-        endCircle.setOnMouseDragged(event -> onNodeDragged(endCircle, event, false));
+        startCircle.setOnMouseDragged(event -> onNodeDragged(startCircle, event));
+        endCircle.setOnMouseDragged(event -> onNodeDragged(endCircle, event));
         excludeLine.setOnMouseDragged(this::onLineDragged);
         arrowLineLeft.setOnMouseDragged(event -> onArrowDragged(event, true));
         arrowLineRight.setOnMouseDragged(event -> onArrowDragged(event, false));
@@ -177,7 +179,7 @@ public  class extendIController extends ViewIController implements IController {
         event.consume();
     }
 
-    private void onNodeDragged(Node node, MouseEvent event, boolean isStart) {
+    private void onNodeDragged(Node node, MouseEvent event) {
         double newX = excludeGroup.sceneToLocal(event.getSceneX(), event.getSceneY()).getX();
         double newY = excludeGroup.sceneToLocal(event.getSceneX(), event.getSceneY()).getY();
 
@@ -189,13 +191,13 @@ public  class extendIController extends ViewIController implements IController {
             node.setLayoutY(newY);
 
             // Snap the node to the edge of the nearest node
-            snapToNearestNodeEdge(node, isStart);
+            snapToNearestNodeEdge(node);
         }
 
         event.consume();
     }
 
-    private void snapToNearestNodeEdge(Node node, boolean isStart) {
+    private void snapToNearestNodeEdge(Node node) {
         Node nearestNode = findNearestUseCaseNode(node);
 
         if (nearestNode != null) {
@@ -203,8 +205,9 @@ public  class extendIController extends ViewIController implements IController {
             double distance = calculateDistanceToNode(node, nearestNode.getBoundsInParent());
 
             if (distance < threshold) {
-                updateNodePositionToEdge(node, nearestNode); // Attach to edge
-                updateAttachedNode(node, nearestNode, isStart); // Update attached node
+                Circle correspondingCircle = (node == startCircle) ? startCircle : endCircle;
+                updateNodePositionToEdge(correspondingCircle, nearestNode); // Attach to edge
+                updateAttachedNode(correspondingCircle, nearestNode); // Update attached node
             }
         }
     }
@@ -282,13 +285,51 @@ public  class extendIController extends ViewIController implements IController {
     }
 
 
-    private void updateAttachedNode(Node node, Node nearestNode, boolean isStart) {
-        if (isStart) {
-            attachedStartNode = nearestNode;
-        } else {
-            attachedEndNode = nearestNode;
+    private void bindCornerToNode(Circle circle, Node node) {
+        if (node == null) return;
+
+        // Listen for changes in the node's layout and update the circle's position
+        node.layoutXProperty().addListener((observable, oldValue, newValue) -> {
+            if (circle == startCircle && node == attachedNode1) {
+                updateNodePositionToEdge(circle, node);
+            } else if (circle == endCircle && node == attachedNode2) {
+                updateNodePositionToEdge(circle, node);
+            }
+        });
+
+        node.layoutYProperty().addListener((observable, oldValue, newValue) -> {
+            if (circle == startCircle && node == attachedNode1) {
+                updateNodePositionToEdge(circle, node);
+            } else if (circle == endCircle && node == attachedNode2) {
+                updateNodePositionToEdge(circle, node);
+            }
+        });
+    }
+
+
+
+
+    private void updateAttachedNode(Circle circle, Node node) {
+        useCaseController ctrl = (useCaseController) ViewIController.getUseCaseController(node);
+        String newUseCaseName;
+        if (circle == startCircle) {
+            newUseCaseName = ctrl.getUseCaseName();
+            updateAssociation(useCaseName1, newUseCaseName, useCaseName2, useCaseName2);
+
+            useCaseName1 = newUseCaseName;
+            attachedNode1 = node;
+            bindCornerToNode(startCircle, attachedNode1);
+        } else if (circle == endCircle) {
+            newUseCaseName = ctrl.getUseCaseName();
+            updateAssociation(useCaseName1, useCaseName1, useCaseName2, newUseCaseName);
+
+            useCaseName2 = newUseCaseName;
+            attachedNode2 = node;
+            bindCornerToNode(endCircle, attachedNode2);
         }
-        System.out.println((node.getStyleClass().contains("usecase-actor") ? "Actor" : "Use Case") + " snapped to node: " + node.getId());
+
+        System.out.println("Snapped " + (circle == startCircle ? "Corner 1" : "Corner 2")
+                + " to UseCase: " + ctrl.getUseCaseName());
     }
 
     @Override
@@ -304,11 +345,7 @@ public  class extendIController extends ViewIController implements IController {
         throw new UnsupportedOperationException("Not implemented! as it is only for Class Diagram. ");
     }
     public String[] getUseCaseNames(){
-        useCaseController ctrl1 = ( useCaseController) ViewIController.getClassController(attachedStartNode);
-        useCaseController ctrl2 = (useCaseController) ViewIController.getClassController(attachedEndNode);
-        String useCaseName1=ctrl1.getUseCaseName();
 
-        String useCaseName2=ctrl2.getUseCaseName();
 
         return new String[]{useCaseName1, useCaseName2};
     }
