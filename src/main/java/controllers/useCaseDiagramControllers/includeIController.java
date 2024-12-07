@@ -303,4 +303,13 @@ public class includeIController extends ViewIController implements IController {
     public String[] getClassesName() {
         throw new UnsupportedOperationException("Not implemented! as it is only for Class Diagram. ");
     }
+    public String[] getUseCaseNames(){
+        useCaseController ctrl1 = ( useCaseController) ViewIController.getClassController(attachedStartNode);
+        useCaseController ctrl2 = (useCaseController) ViewIController.getClassController(attachedEndNode);
+        String useCaseName1=ctrl1.getUseCaseName();
+
+        String useCaseName2=ctrl2.getUseCaseName();
+
+        return new String[]{useCaseName1, useCaseName2};
+    }
 }

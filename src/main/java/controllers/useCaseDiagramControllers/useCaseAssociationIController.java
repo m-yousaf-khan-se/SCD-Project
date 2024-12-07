@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import controllers.IController;
 import controllers.ViewIController;
+import controllers.classDiagramControllers.UMLClassIController;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
@@ -135,6 +136,7 @@ public  class useCaseAssociationIController extends ViewIController implements I
     private void updateAttachedNode(Circle circle, Node node) {
         if (node.getStyleClass().contains("usecase-actor")) {
             attachedActorNode = node;
+
         } else {
             attachedUseCaseNode = node;
         }
@@ -152,5 +154,14 @@ public  class useCaseAssociationIController extends ViewIController implements I
     @Override
     public String[] getClassesName() {
         throw new UnsupportedOperationException("Not implemented! as it is only for Class Diagram. ");
+    }
+    public String[] getActorAndUseCaseNames(){
+       ActorController ctrl1 = (ActorController) ViewIController.getClassController(attachedActorNode);
+        useCaseController ctrl2 = (useCaseController) ViewIController.getClassController(attachedUseCaseNode);
+        String actorName=ctrl1.getActorName();
+
+      String useCaseName=ctrl2.getUseCaseName();
+
+        return new String[]{actorName, useCaseName};
     }
 }

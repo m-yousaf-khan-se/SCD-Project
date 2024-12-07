@@ -9,8 +9,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import controllers.classDiagramControllers.*;
-import controllers.useCaseDiagramControllers.ActorController;
-import controllers.useCaseDiagramControllers.useCaseController;
+import controllers.useCaseDiagramControllers.*;
 import javafx.scene.image.WritableImage;
 import javafx.embed.swing.SwingFXUtils;
 
@@ -186,6 +185,17 @@ public class ViewIController{
             useCaseController useCase_Controller = (useCaseController)controller;
             instance.useCaseDiagramPresenter.addUseCase(useCase_Controller.getUseCaseName());
         }
+        else if (controller instanceof includeIController) {
+            includeIController includeController = (includeIController) controller;
+            String[] useCases = includeController.getUseCaseNames();
+            instance.useCaseDiagramPresenter.addInclude(useCases[0], useCases[1]);
+        }
+        else if (controller instanceof extendIController) {
+            extendIController extendController = (extendIController) controller;
+            String[] useCases = extendController.getUseCaseNames();
+            instance.useCaseDiagramPresenter.addExtend(useCases[0], useCases[1]);
+        }
+
 
 
     }
@@ -198,31 +208,20 @@ public class ViewIController{
         useCaseDiagramPresenter.updateUseCaseName(oldName, newName);
     }
     //----------------------------------------------------------------For UseCaseAssociation----------
-    protected void addUseCaseAssociation(String actorName, String useCaseName) {
-
-    }
 
     protected void updateUseCaseAssociation(String oldActorName, String newactorName, String olduseCaseName, String newuseCaseName) {
-
+       useCaseDiagramPresenter.updateAssociation(oldActorName, newactorName, olduseCaseName, newuseCaseName);
     }
     //----------------------------------------------------------------For Include Link----------
 
-    protected void addIncludeLink(String useCaseName1, String useCaseName2) {
-
-    }
-
     protected void updateIncludeLink(String oldUseCaseName1, String newUseCaseName1, String oldUseCaseName2, String newUseCaseName2) {
-
+      useCaseDiagramPresenter.updateInclude(oldUseCaseName1, newUseCaseName1, oldUseCaseName2, newUseCaseName2);
     }
 
-    //----------------------------------------------------------------For Extend Link----------
-
-    protected void addExtendLink(String useCaseName1, String useCaseName2) {
-
-    }
+    //----------------------------------------------------------------For Extend Link-----------
 
     protected void updateExtendLink(String oldUseCaseName1, String newUseCaseName1, String oldUseCaseName2, String newUseCaseName2) {
-
+     useCaseDiagramPresenter.updateExtend(oldUseCaseName1, newUseCaseName1, oldUseCaseName2, newUseCaseName2);
     }
 
     public static IController getClassController(Node node)
