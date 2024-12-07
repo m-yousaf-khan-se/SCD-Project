@@ -3,6 +3,7 @@ package presenter.useCaseDiagramPresenters;
 
 import controllers.ViewIController;
 
+
 import data.DiagramSerializer;
 import models.Component;
 import models.DiagramModel;
@@ -15,13 +16,14 @@ import models.usecase.Extend;
 import models.usecase.Include;
 import  models.usecase.UseCaseDiagram;
 
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UseCaseDiagramPresenter{
     ViewIController view;
-    DiagramModel model;
+    models.DiagramModel model;
     models.usecase.Actor actor;
     models.usecase.UseCase useCase;
     models.usecase.Include include;
@@ -30,11 +32,11 @@ public class UseCaseDiagramPresenter{
     models.usecase.UseCaseDiagram useCaseDiagram;
 
 
-    private List<Actor> actors = new ArrayList<>();
-    private List<UseCase> useCases = new ArrayList<>();
+    private List<models.usecase.Actor> actors = new ArrayList<>();
+    private List<models.usecase.UseCase> useCases = new ArrayList<>();
     //actor,useCase,include,extend,associations,actors,useCases,parentView
     //Constructor
-    public UseCaseDiagramPresenter(DiagramModel model,models.usecase.Actor actor,models.usecase.UseCase useCase,models.usecase.Include include,models.usecase.Extend extend,models.usecase.Association association,List<Actor> actors,List<UseCase> useCases,ViewIController view) {
+    public UseCaseDiagramPresenter(models.DiagramModel model,models.usecase.Actor actor,models.usecase.UseCase useCase,models.usecase.Include include,models.usecase.Extend extend,models.usecase.Association association,List<models.usecase.Actor> actors,List<models.usecase.UseCase> useCases,ViewIController view) {
         this.model=model;
         this.actor=actor;
         this.useCase=useCase;
@@ -61,15 +63,15 @@ public class UseCaseDiagramPresenter{
         System.out.println("Inside updateActorName");
 
         // Find and update in the local list
-        for (Actor actor : actors) {
+        for (models.usecase.Actor actor : actors) {
             if (actor.getName().equals(oldName)) {
                 actor.setName(newName);
 
                 // Ensure the DiagramModel is updated as well
-                List<Component> components = model.getComponents();
-                for (Component component : components) {
-                    if (component instanceof Actor && ((Actor) component).getName().equals(oldName)) {
-                        ((Actor) component).setName(newName);
+                List<models.Component> components = model.getComponents();
+                for (models.Component component : components) {
+                    if (component instanceof models.usecase.Actor && ((models.usecase.Actor) component).getName().equals(oldName)) {
+                        ((models.usecase.Actor) component).setName(newName);
                         break;
                     }
                 }
@@ -84,11 +86,11 @@ public class UseCaseDiagramPresenter{
         actors.removeIf(actor -> actor.getName().equals(name));
 
         // Remove the actor from the DiagramModel's components
-        model.getComponents().removeIf(component -> component instanceof Actor && ((Actor) component).getName().equals(name));
+        model.getComponents().removeIf(component -> component instanceof models.usecase.Actor && ((models.usecase.Actor) component).getName().equals(name));
     }
 
     public void setActorCoordinates(String ActorName, int x, int y) {
-        for (Component component : model.getComponents()) {
+        for (models.Component component : model.getComponents()) {
             if (component instanceof models.usecase.Actor && component.getDetails().equals(ActorName)) {
                 models.usecase.Actor actor1 = (models.usecase.Actor) component;
                 actor1.setX(x);
@@ -101,7 +103,7 @@ public class UseCaseDiagramPresenter{
     //----------------------related to Use Cases------------------------------
 
     public void addUseCase(String name) {
-        UseCase useCase = new UseCase(name);
+        models.usecase.UseCase useCase = new models.usecase.UseCase(name);
 
         // Add the class to the local list
         useCases.add(useCase);
@@ -111,15 +113,15 @@ public class UseCaseDiagramPresenter{
     }
     // Update the Use Case name in the DiagramModel
     public void updateUseCaseName(String oldName, String newName) {
-        for (UseCase useCase : useCases) {
+        for (models.usecase.UseCase useCase : useCases) {
             if (useCase.getName().equals(oldName)) {
                 useCase.setName(newName);
 
                 // Ensure the DiagramModel is updated
-                List<Component> components = model.getComponents();
-                for (Component component : components) {
-                    if (component instanceof UseCase && ((UseCase) component).getName().equals(oldName)) {
-                        ((UseCase) component).setName(newName);
+                List<models.Component> components = model.getComponents();
+                for (models.Component component : components) {
+                    if (component instanceof models.usecase.UseCase && ((models.usecase.UseCase) component).getName().equals(oldName)) {
+                        ((models.usecase.UseCase) component).setName(newName);
                         break;
                     }
                 }
@@ -135,12 +137,12 @@ public class UseCaseDiagramPresenter{
         useCases.removeIf(useCase -> useCase.getName().equals(name));
 
         // Remove the use case from the DiagramModel's components
-        model.getComponents().removeIf(component -> component instanceof UseCase && ((UseCase) component).getName().equals(name));
+        model.getComponents().removeIf(component -> component instanceof models.usecase.UseCase && ((models.usecase.UseCase) component).getName().equals(name));
     }
 
 
     public void setUseCaseCoordinates(String usecaseName, int x, int y) {
-        for (Component component : model.getComponents()) {
+        for (models.Component component : model.getComponents()) {
             if (component instanceof models.usecase.UseCase && component.getDetails().equals(usecaseName)) {
                 models.usecase.UseCase useCase1 = (models.usecase.UseCase) component;
                 useCase1.setX(x);
@@ -153,42 +155,42 @@ public class UseCaseDiagramPresenter{
 
     //----------------------related to Association------------------------------
 
-    private UseCase getUseCaseByName(String useCaseName) {
-        for (Component component : model.getComponents()) {
-            if (component instanceof UseCase && ((UseCase) component).getName().equals(useCaseName)) {
-                return (UseCase) component;
+    private models.usecase.UseCase getUseCaseByName(String useCaseName) {
+        for (models.Component component : model.getComponents()) {
+            if (component instanceof models.usecase.UseCase && ((models.usecase.UseCase) component).getName().equals(useCaseName)) {
+                return (models.usecase.UseCase) component;
             }
         }
         return null;
     }
-    private Actor getActorByName(String actorName) {
-        for (Component component : model.getComponents()) {
-            if (component instanceof Actor && ((Actor) component).getName().equals(actorName)) {
-                return (Actor) component;
+    private models.usecase.Actor getActorByName(String actorName) {
+        for (models.Component component : model.getComponents()) {
+            if (component instanceof models.usecase.Actor && ((models.usecase.Actor) component).getName().equals(actorName)) {
+                return (models.usecase.Actor) component;
             }
         }
         return null;
     }
     public void addAssociation(String actorName, String useCaseName) {
         // Get the Actor and UseCase components using their names provided
-        Actor actorObj = getActorByName(actorName);
-        UseCase useCaseObj = getUseCaseByName(useCaseName);
+        models.usecase.Actor actorObj = getActorByName(actorName);
+        models.usecase.UseCase useCaseObj = getUseCaseByName(useCaseName);
 
         if (actorObj != null && useCaseObj != null) {
             // Create the Association link relationship between actor and useCase
-            Association association = new Association(actorObj, useCaseObj, "Association", 0, 0);  // Position can be adjusted
+            models.usecase.Association association = new models.usecase.Association(actorObj, useCaseObj, "Association", 0, 0);  // Position can be adjusted
             model.addRelationship(association);  // Add to diagram model
         }
     }
     public void updateAssociation(String oldActorName, String newActorName, String oldUseCaseName, String newUseCaseName) {
         // Find and update the relationship if exists
-        for (Relationship relationship : model.getRelationships()) {
-            if (relationship instanceof Association) {
-                Association association = (Association) relationship;
+        for (models.Relationship relationship : model.getRelationships()) {
+            if (relationship instanceof models.usecase.Association) {
+                models.usecase.Association association = (models.usecase.Association) relationship;
                 if (association.getFrom().getDetails().equals(oldActorName) && association.getTo().getDetails().equals(oldActorName)) {
                     // Update the components if the relationship is found
-                    Actor actorObj = getActorByName(newActorName);
-                    UseCase useCaseObj = getUseCaseByName(newUseCaseName);
+                    models.usecase.Actor actorObj = getActorByName(newActorName);
+                    models.usecase.UseCase useCaseObj = getUseCaseByName(newUseCaseName);
                     if (newActorName != null && newUseCaseName != null) {
                         association.setFrom(actorObj);
                         association.setTo(useCaseObj);
@@ -201,9 +203,9 @@ public class UseCaseDiagramPresenter{
     public void removeAssociation(String actorName, String useCaseName) {
         // Remove the aggregation relationship based on class names
         model.getRelationships().removeIf(relationship ->
-                relationship instanceof Association &&
-                        ((Association) relationship).getFrom().getDetails().equals(actorName) &&
-                        ((Association) relationship).getTo().getDetails().equals(actorName));
+                relationship instanceof models.usecase.Association &&
+                        ((models.usecase.Association) relationship).getFrom().getDetails().equals(actorName) &&
+                        ((models.usecase.Association) relationship).getTo().getDetails().equals(actorName));
     }
 
     // Extend
@@ -212,25 +214,28 @@ public class UseCaseDiagramPresenter{
 
     public void addExtend(String useCaseName1, String useCaseName2) {
         // Get the Actor and UseCase components using their names provided
-        UseCase useCaseObj1 = getUseCaseByName(useCaseName1);
-        UseCase useCaseObj2 = getUseCaseByName(useCaseName2);
+        models.usecase.UseCase useCaseObj1 = getUseCaseByName(useCaseName1);
+        models.usecase.UseCase useCaseObj2 = getUseCaseByName(useCaseName2);
 
 
         if (useCaseObj1 != null && useCaseObj2 != null) {
             // Create the Association link relationship between actor and useCase
-            Extend extend = new Extend(useCaseObj1, useCaseObj2, "Extend", 0, 0);  // Position can be adjusted
+            models.usecase.Extend extend = new models.usecase.Extend(useCaseObj1, useCaseObj2, "Extend", 0, 0);  // Position can be adjusted
             model.addRelationship(extend);  // Add to diagram model
+        }
+        else {
+            models.usecase.Extend extend=new models.usecase.Extend();
         }
     }
     public void updateExtend(String oldUseCaseName1, String newUseCaseName1, String oldUseCaseName2, String newUseCaseName2) {
         // Find and update the relationship if exists
-        for (Relationship relationship : model.getRelationships()) {
-            if (relationship instanceof Extend) {
-                Extend extend = (Extend) relationship;
+        for (models.Relationship relationship : model.getRelationships()) {
+            if (relationship instanceof models.usecase.Extend) {
+                models.usecase.Extend extend = (models.usecase.Extend) relationship;
                 if (extend.getFrom().getDetails().equals(oldUseCaseName1) && extend.getTo().getDetails().equals(oldUseCaseName1)) {
                     // Update the components if the relationship is found
-                    UseCase useCaseObj1 = getUseCaseByName(newUseCaseName1);
-                    UseCase useCaseObj2 = getUseCaseByName(newUseCaseName2);
+                    models.usecase.UseCase useCaseObj1 = getUseCaseByName(newUseCaseName1);
+                    models.usecase.UseCase useCaseObj2 = getUseCaseByName(newUseCaseName2);
                     if (newUseCaseName1 != null && newUseCaseName2 != null) {
                         extend.setFrom(useCaseObj1);
                         extend.setTo(useCaseObj2);
@@ -243,9 +248,9 @@ public class UseCaseDiagramPresenter{
     public void removeExtend(String useCaseName1, String useCaseName2) {
         // Remove the aggregation relationship based on class names
         model.getRelationships().removeIf(relationship ->
-                relationship instanceof Extend &&
-                        ((Extend) relationship).getFrom().getDetails().equals(useCaseName1) &&
-                        ((Extend) relationship).getTo().getDetails().equals(useCaseName2));
+                relationship instanceof models.usecase.Extend &&
+                        ((models.usecase.Extend) relationship).getFrom().getDetails().equals(useCaseName1) &&
+                        ((models.usecase.Extend) relationship).getTo().getDetails().equals(useCaseName2));
     }
 
 
@@ -255,25 +260,28 @@ public class UseCaseDiagramPresenter{
 
     public void addInclude(String useCaseName1, String useCaseName2) {
         // Get the Actor and UseCase components using their names provided
-        UseCase useCaseObj1 = getUseCaseByName(useCaseName1);
-        UseCase useCaseObj2 = getUseCaseByName(useCaseName2);
+        models.usecase.UseCase useCaseObj1 = getUseCaseByName(useCaseName1);
+        models.usecase.UseCase useCaseObj2 = getUseCaseByName(useCaseName2);
 
 
         if (useCaseObj1 != null && useCaseObj2 != null) {
             // Create the Association link relationship between actor and useCase
-            Include include = new Include(useCaseObj1, useCaseObj2, "Include", 0, 0);  // Position can be adjusted
+            models.usecase.Include include = new models.usecase.Include(useCaseObj1, useCaseObj2, "Include", 0, 0);  // Position can be adjusted
             model.addRelationship(include);  // Add to diagram model
+        }
+        else {
+            models.usecase.Include include=new models.usecase.Include();
         }
     }
     public void updateInclude(String oldUseCaseName1, String newUseCaseName1, String oldUseCaseName2, String newUseCaseName2) {
         // Find and update the relationship if exists
-        for (Relationship relationship : model.getRelationships()) {
-            if (relationship instanceof Include) {
-                Include include = (Include) relationship;
+        for (models.Relationship relationship : model.getRelationships()) {
+            if (relationship instanceof models.usecase.Include) {
+                models.usecase.Include include = (models.usecase.Include) relationship;
                 if (include.getFrom().getDetails().equals(oldUseCaseName1) && include.getTo().getDetails().equals(oldUseCaseName1)) {
                     // Update the components if the relationship is found
-                    UseCase useCaseObj1 = getUseCaseByName(newUseCaseName1);
-                    UseCase useCaseObj2 = getUseCaseByName(newUseCaseName2);
+                    models.usecase.UseCase useCaseObj1 = getUseCaseByName(newUseCaseName1);
+                    models.usecase.UseCase useCaseObj2 = getUseCaseByName(newUseCaseName2);
                     if (newUseCaseName1 != null && newUseCaseName2 != null) {
                         include.setFrom(useCaseObj1);
                         include.setTo(useCaseObj2);
@@ -286,14 +294,14 @@ public class UseCaseDiagramPresenter{
     public void removeInclude(String useCaseName1, String useCaseName2) {
         // Remove the aggregation relationship based on class names
         model.getRelationships().removeIf(relationship ->
-                relationship instanceof Include &&
-                        ((Include) relationship).getFrom().getDetails().equals(useCaseName1) &&
-                        ((Include) relationship).getTo().getDetails().equals(useCaseName2));
+                relationship instanceof models.usecase.Include &&
+                        ((models.usecase.Include) relationship).getFrom().getDetails().equals(useCaseName1) &&
+                        ((models.usecase.Include) relationship).getTo().getDetails().equals(useCaseName2));
     }
 
 
     public void setRelationshipCoordinates(String fromClassName, String toClassName, int labelX, int labelY) {
-        for (Relationship relationship : model.getRelationships()) {
+        for (models.Relationship relationship : model.getRelationships()) {
             if (relationship.getFrom().getDetails().equals(fromClassName) &&
                     relationship.getTo().getDetails().equals(toClassName)) {
 

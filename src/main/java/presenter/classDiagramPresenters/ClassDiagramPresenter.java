@@ -22,17 +22,19 @@ public class ClassDiagramPresenter {
 
     ViewIController view;
     IModel model1;
-    Class clazz;
-    Aggregation aggregation;
-    Association association;
-    generalization generalizations;
-    Inherritance inherritance;
+    models.classdiagram.Class clazz;
+    models.classdiagram.Aggregation aggregation;
+    models.classdiagram.Association association;
+    models.classdiagram.generalization generalizations;
+    models.classdiagram.Inherritance inherritance;
+    models.CodeGenerator code;
 
-    List<Class> classes = new ArrayList<>();
-    private DiagramModel model; // Reference to the DiagramModel
+    List<models.classdiagram.Class> classes = new ArrayList<>();
+    private models.DiagramModel model; // Reference to the DiagramModel
 //clazz,aggregation,association,generalizations,inherritance,classes
 
-    public ClassDiagramPresenter(DiagramModel model,Class clazz,Aggregation aggregation,Association association,generalization generalizations,Inherritance inherritance,List<Class> classes , ViewIController view) {
+
+    public ClassDiagramPresenter(models.DiagramModel model,models.classdiagram.Class clazz,models.classdiagram.Aggregation aggregation,models.classdiagram.Association association,models.classdiagram.generalization generalizations,models.classdiagram.Inherritance inherritance,List<models.classdiagram.Class> classes , ViewIController view) {
 
 
         //initialize models
@@ -49,27 +51,29 @@ public class ClassDiagramPresenter {
 
     //----------------------related to Classes------------------------------
     public void addClass(String name) {
-        Class clazz = new Class(name);
+
+        models.classdiagram.Class clazz = new models.classdiagram.Class(name);
 
         // Add the class to the local list
         classes.add(clazz);
 
         // Add the class as a component to the DiagramModel
         model.addComponent(clazz);
+
     }
 
     // Update the class name in the DiagramModel
     public void updateClassName(String oldName, String newName) {
         System.out.println("Inside UpdateClassName");
-        for (Class clazz : classes) {
+        for (models.classdiagram.Class clazz : classes) {
             if (clazz.getName().equals(oldName)) {
                 clazz.setName(newName);
 
                 // Ensure the DiagramModel is updated
-                List<Component> components = model.getComponents();
-                for (Component component : components) {
-                    if (component instanceof Class && ((Class) component).getName().equals(oldName)) {
-                        ((Class) component).setName(newName);
+                List<models.Component> components = model.getComponents();
+                for (models.Component component : components) {
+                    if (component instanceof models.classdiagram.Class && ((models.classdiagram.Class) component).getName().equals(oldName)) {
+                        ((models.classdiagram.Class) component).setName(newName);
                         break;
                     }
                 }
@@ -83,12 +87,12 @@ public class ClassDiagramPresenter {
         classes.removeIf(clazz -> clazz.getName().equals(name));
 
         // Remove the class from the DiagramModel's components
-        model.getComponents().removeIf(component -> component instanceof Class && ((Class) component).getName().equals(name));
+        model.getComponents().removeIf(component -> component instanceof models.classdiagram.Class && ((models.classdiagram.Class) component).getName().equals(name));
     }
 
     // Add a method to a class in the DiagramModel
     public void addClassMethod(String className, String oldMethodDetails, String newMethodDetails) {
-        for (Class clazz : classes) {
+        for (models.classdiagram.Class clazz : classes) {
             if (clazz.getName().equals(className)) {
                 if(oldMethodDetails.isEmpty())
                 {
@@ -104,8 +108,8 @@ public class ClassDiagramPresenter {
                 }
 
                 // Update the corresponding component in DiagramModel
-                for (Component component : model.getComponents()) {
-                    if (component instanceof Class && ((Class) component).getName().equals(className)) {
+                for (models.Component component : model.getComponents()) {
+                    if (component instanceof models.classdiagram.Class && ((models.classdiagram.Class) component).getName().equals(className)) {
                         ((Class) component).addMethod(newMethodDetails);
                         break;
                     }
@@ -181,6 +185,7 @@ public class ClassDiagramPresenter {
         Class class1 = getClassByName(className1);
         Class class2 = getClassByName(className2);
 
+        System.out.println("Inside Presnter add Aggregation");
         if (class1 != null && class2 != null) {
             // Create the Aggregation relationship between class1 and class2
             Aggregation aggregation = new Aggregation(class1, class2, "Aggregation", 0, 0);  // Position can be adjusted
@@ -230,14 +235,19 @@ public class ClassDiagramPresenter {
         Component class1 = findComponentByName(className1);
         Component class2 = findComponentByName(className2);
 
-        if (class1 == null || class2 == null) {
-            System.out.println("Error: One or both classes not found");
-            return;
-        }
+//        Association association = new Association(class1, class2, "Association", 0, 0, multiplicity1, multiplicity2);
+//        model.addRelationship(association);
 
+        System.out.println("Inside Association PResenter");
+        if (class1 != null && class2 != null) {
+            Association association = new Association(class1, class2, "Association", 0, 0, multiplicity1, multiplicity2);
+            model.addRelationship(association);
+        }
+        else{
+            Association association=new Association();
+        }
         // Create the association and add it to the diagram model
-        Association association = new Association(class1, class2, "Association", 0, 0, multiplicity1, multiplicity2);
-        model.addRelationship(association);
+
     }
 
     public void updateAssociationMultiplicity(String className1, String newMultiplicity1, String className2, String newMultiplicity2) {
@@ -259,6 +269,7 @@ public class ClassDiagramPresenter {
     }
 
     public void updateAssociation(String oldClassName1, String newClassName1, String oldClassName2, String newClassName2) {
+        System.out.println("Presenter Update Association");
         for (Relationship relationship : model.getRelationships()) {
             if (relationship instanceof Association) {
                 Association association = (Association) relationship;
@@ -304,6 +315,9 @@ public class ClassDiagramPresenter {
             generalization composition = new generalization(class1, class2, "Composition", 0, 0);  // Position can be adjusted
             model.addRelationship(composition);  // Add to diagram model
         }
+        else {
+            generalization composition=new generalization();
+        }
     }
 
     public void updateComposition(String className1, String newClassName1, String className2, String newClassName2) {
@@ -343,6 +357,9 @@ public class ClassDiagramPresenter {
             // Create the Composition relationship between class1 and class2
             Inherritance inherritance = new Inherritance(class1, class2, "Inherritane", 0, 0);  // Position can be adjusted
             model.addRelationship(inherritance);  // Add to diagram model
+        }
+        else {
+            Inherritance inherritance1=new Inherritance();
         }
     }
 
