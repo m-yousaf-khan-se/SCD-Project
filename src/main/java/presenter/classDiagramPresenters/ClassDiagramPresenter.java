@@ -316,7 +316,7 @@ public class ClassDiagramPresenter {
             model.addRelationship(composition);  // Add to diagram model
         }
         else {
-            generalization composition=new generalization();
+            generalization composition = new generalization();
         }
     }
 
