@@ -189,7 +189,6 @@ public class ViewIController{
         else if(controller instanceof useCaseController)
         {
             useCaseController useCase_Controller = (useCaseController)controller;
-            System.out.println("Hello I am "+ useCase_Controller.getUseCaseName());
             instance.useCaseDiagramPresenter.addUseCase(useCase_Controller.getUseCaseName());
         }
         else if (controller instanceof includeIController) {
