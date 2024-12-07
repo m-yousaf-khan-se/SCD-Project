@@ -315,14 +315,14 @@ public class includeIController extends ViewIController implements IController {
         String newUseCaseName;
         if (circle == startCircle) {
             newUseCaseName = ctrl.getUseCaseName();
-            updateAssociation(useCaseName1, newUseCaseName, useCaseName2, useCaseName2);
+            updateIncludeLink(useCaseName1, newUseCaseName, useCaseName2, useCaseName2);
 
             useCaseName1 = newUseCaseName;
             attachedNode1 = node;
             bindCornerToNode(startCircle, attachedNode1);
         } else if (circle == endCircle) {
             newUseCaseName = ctrl.getUseCaseName();
-            updateAssociation(useCaseName1, useCaseName1, useCaseName2, newUseCaseName);
+            updateIncludeLink(useCaseName1, useCaseName1, useCaseName2, newUseCaseName);
 
             useCaseName2 = newUseCaseName;
             attachedNode2 = node;
