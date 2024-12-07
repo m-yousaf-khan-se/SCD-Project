@@ -201,6 +201,11 @@ public class ViewIController{
             String[] useCases = extendController.getUseCaseNames();
             instance.useCaseDiagramPresenter.addExtend(useCases[0], useCases[1]);
         }
+        else if (controller instanceof useCaseAssociationIController) {
+            useCaseAssociationIController useCaseAssociationController = (useCaseAssociationIController) controller;
+            String[] actorAndUseCaseNames = useCaseAssociationController.getActorAndUseCaseNames();
+            instance.useCaseDiagramPresenter.addAssociation(actorAndUseCaseNames[0], actorAndUseCaseNames[1]);
+        }
 
 
 
@@ -359,7 +364,8 @@ public class ViewIController{
             }
             else
             {
-                //imran use case ki similar logic implement ker lena
+                System.out.println("Passing the follwing path to Presenter to save file: "+ file.getPath().toString());
+                instance.useCaseDiagramPresenter.saveClassDiagramProject(file);
             }
         }
         else
