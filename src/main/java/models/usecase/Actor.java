@@ -18,6 +18,7 @@ public class Actor implements Component,Serializable {
         System.out.println("Inside model Actor constructor");
     }
 
+    @Override
     public String getName() {
         return name;
     }
