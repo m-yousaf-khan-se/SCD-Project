@@ -8,6 +8,9 @@ module main.scdprojectupdated {
 
 
     requires com.fasterxml.jackson.databind;
+    opens models to com.fasterxml.jackson.databind; // Open the entire `models` package for Jackson
+    opens models.classdiagram to com.fasterxml.jackson.databind; // Open the `models.classdiagram` package
+    opens models.usecase to com.fasterxml.jackson.databind; // Open the models.usecase package
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.annotation;
 

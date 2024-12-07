@@ -24,7 +24,7 @@ import java.util.List;
 public class ApplicationMain extends Application {
 
     private static Scene mainScene;
-    private ViewIController parentView;
+    private static ViewIController parentView;
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ApplicationMain.class.getResource("Views/view.fxml"));
@@ -84,10 +84,8 @@ public class ApplicationMain extends Application {
             }
         }
 
-
+        ViewIController.setOwnerWindow(stage);
         //-------------------------------------------------------------------
-
-
 
         stage.setTitle("UML Editor");
         stage.setScene(mainScene);

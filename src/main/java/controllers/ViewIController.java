@@ -10,9 +10,9 @@ import java.util.ResourceBundle;
 
 import controllers.classDiagramControllers.*;
 import controllers.useCaseDiagramControllers.*;
+import javafx.scene.control.Alert;
 import javafx.scene.image.WritableImage;
 import javafx.embed.swing.SwingFXUtils;
-
 
 
 import MainClass.scdprojectupdated.ApplicationMain;
@@ -29,6 +29,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import presenter.classDiagramPresenters.ClassDiagramPresenter;
 import presenter.useCaseDiagramPresenters.UseCaseDiagramPresenter;
 
@@ -48,6 +49,9 @@ public class ViewIController{
     @FXML
     private Pane paneCanvas;
 
+    @FXML
+    private MenuItem generateJavaCodeFromClassDiagramMenuItem; //using this fx:id just to enable and disable this option
+
     HashMap<Node, IController> canvasClassNodes = new HashMap<Node, IController>();
     HashMap<Node, IController> canvasUseCaseNodes = new HashMap<Node, IController>();
 
@@ -55,6 +59,8 @@ public class ViewIController{
 
     private static ClassDiagramPresenter classDiagramPresenter;
     private static UseCaseDiagramPresenter useCaseDiagramPresenter;
+
+    private static Stage OwnerWin;
 
     // ------------------------Not useable
 
@@ -241,9 +247,6 @@ public class ViewIController{
             instance.canvasUseCaseNodes.remove(node);
     }
 
-    @FXML
-    private MenuItem generateJavaCodeFromClassDiagramMenuItem; //using this fx:id just to enable and disable this option
-
     public static ObservableList<Node> getCanvasChildren() {
         return instance.paneCanvas.getChildren();
     }
@@ -323,6 +326,51 @@ public class ViewIController{
     @FXML
     private void saveProjectListener(ActionEvent event) {
 
+        if(paneCanvas.getChildren().isEmpty())
+        {
+            showAlert(Alert.AlertType.INFORMATION, "Information", "Please add something on Canvas to Save!");
+            return;
+        }
+
+        // Create a FileChooser
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save current Project");
+
+        // Set extension filter to .json
+        FileChooser.ExtensionFilter jsonFilter = new FileChooser.ExtensionFilter("JSON Files (*.json)", "*.json");
+        fileChooser.getExtensionFilters().add(jsonFilter);
+
+        // Open the save dialog
+        File file = fileChooser.showSaveDialog(OwnerWin);
+
+        if (file != null) {
+
+            if (!file.getName().endsWith(".json")) {
+                file = new File(file.getAbsolutePath() + ".json");
+            }
+
+            System.out.println("File path to save project is set successfully!");
+//            classDiagramPresenter.saveClassDiagramProject(file);
+
+            if(!generateJavaCodeFromClassDiagramMenuItem.isDisable()) //if the option to generate Java code is available this means that the user was creating class Diagram
+            {
+                System.out.println("Passing the follwing path to Presenter to save file: "+ file.getPath().toString());
+                instance.classDiagramPresenter.saveClassDiagramProject(file);
+            }
+            else
+            {
+                //imran use case ki similar logic implement ker lena
+            }
+        }
+        else
+        {
+            System.err.println("File is not set!");
+        }
+    }
+
+    public static void setOwnerWindow(Stage stage)
+    {
+        OwnerWin = stage;
     }
 
     @FXML
@@ -359,6 +407,14 @@ public class ViewIController{
             throw new IllegalStateException("ViewController has not been initialized yet.");
         }
         return instance.paneCanvas;
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null); // Optional: No header
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public void setPresenter(ClassDiagramPresenter classPresenter, UseCaseDiagramPresenter useCasePresenter) {
