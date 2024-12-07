@@ -1,5 +1,6 @@
 package presenter.classDiagramPresenters;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import controllers.ViewIController;
 import data.DiagramSerializer;
 import models.DiagramModel;
@@ -22,18 +23,19 @@ public class ClassDiagramPresenter {
 
     ViewIController view;
     IModel model1;
-    models.classdiagram.Class clazz;
-    models.classdiagram.Aggregation aggregation;
-    models.classdiagram.Association association;
-    models.classdiagram.generalization generalizations;
-    models.classdiagram.Inherritance inherritance;
-    models.CodeGenerator code;
+    models.classdiagram.Class clazz=new models.classdiagram.Class();
+    models.classdiagram.Aggregation aggregation=new Aggregation();
+    models.classdiagram.Association association=new Association();
+    models.classdiagram.generalization generalizations=new generalization();
+    models.classdiagram.Inherritance inherritance=new Inherritance();
+    models.CodeGenerator code=new models.CodeGenerator();
 
     List<models.classdiagram.Class> classes = new ArrayList<>();
     private models.DiagramModel model; // Reference to the DiagramModel
 //clazz,aggregation,association,generalizations,inherritance,classes
 
 
+    int count=0;
     public ClassDiagramPresenter(models.DiagramModel model,models.classdiagram.Class clazz,models.classdiagram.Aggregation aggregation,models.classdiagram.Association association,models.classdiagram.generalization generalizations,models.classdiagram.Inherritance inherritance,List<models.classdiagram.Class> classes , ViewIController view) {
 
 
@@ -52,6 +54,7 @@ public class ClassDiagramPresenter {
     //----------------------related to Classes------------------------------
     public void addClass(String name) {
 
+        count++;
         models.classdiagram.Class clazz = new models.classdiagram.Class(name);
 
         // Add the class to the local list
@@ -59,6 +62,7 @@ public class ClassDiagramPresenter {
 
         // Add the class as a component to the DiagramModel
         model.addComponent(clazz);
+
 
     }
 
@@ -191,25 +195,79 @@ public class ClassDiagramPresenter {
             Aggregation aggregation = new Aggregation(class1, class2, "Aggregation", 0, 0);  // Position can be adjusted
             model.addRelationship(aggregation);  // Add to diagram model
         }
+        else {
+            Aggregation aggregation=new Aggregation("Aggregation");
+            model.addRelationship(aggregation);
+        }
     }
-    public void updateAggregation(String className1, String newClassName1, String className2, String newClassName2) {
-        // Find and update the relationship if exists
-        for (Relationship relationship : model.getRelationships()) {
-            if (relationship instanceof Aggregation) {
-                Aggregation aggregation = (Aggregation) relationship;
-                if (aggregation.getFrom().getDetails().equals(className1) && aggregation.getTo().getDetails().equals(className1)) {
-                    // Update the components if the relationship is found
-                    Class newClass1 = getClassByName(newClassName1);
-                    Class newClass2 = getClassByName(newClassName2);
-                    if (newClass1 != null && newClass2 != null) {
-                        aggregation.setFrom(newClass1);
-                        aggregation.setTo(newClass2);
-                        break;
-                    }
+//    public void updateAggregation(String className1, String newClassName1, String className2, String newClassName2) {
+//        // Find and update the relationship if exists
+//        for (Relationship relationship : model.getRelationships()) {
+//            if (relationship instanceof Aggregation) {
+//                Aggregation aggregation = (Aggregation) relationship;
+//                if (aggregation.getFrom().getDetails().equals(className1) && aggregation.getTo().getDetails().equals(className1)) {
+//                    // Update the components if the relationship is found
+//                    Class newClass1 = getClassByName(newClassName1);
+//                    Class newClass2 = getClassByName(newClassName2);
+//                    if (newClass1 != null && newClass2 != null) {
+//                        aggregation.setFrom(newClass1);
+//                        aggregation.setTo(newClass2);
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//    }
+public void updateAggregation(String oldClassName1, String newClassName1, String oldClassName2, String newClassName2) {
+    System.out.println("Presenter Update Inherritance");
+    System.out.println("Old class names: " + oldClassName1 + ", " + oldClassName2);
+    System.out.println("New class names: " + newClassName1 + ", " + newClassName2);
+
+    // Iterate through all relationships in the model
+    for (Relationship relationship : model.getRelationships()) {
+        System.out.println("Inside for loop");
+
+        // Check if the relationship is an instance of Inherritance
+        if (relationship instanceof Aggregation) {
+            System.out.println("Inside if condition");
+            Aggregation association = (Aggregation) relationship;
+
+            // Check if the relationship involves the old class names
+            boolean isMatchingFrom = (oldClassName1 == null || association.getFrom().getDetails().equals(oldClassName1));
+            boolean isMatchingTo = (oldClassName2 == null || association.getTo().getDetails().equals(oldClassName2));
+
+            System.out.println("Checking relationship: " + association);
+            System.out.println("Matching from: " + isMatchingFrom + ", Matching to: " + isMatchingTo);
+
+            // If both the from and to classes match, update them
+            if (isMatchingFrom || isMatchingTo) {
+                // Find the new components based on the new class names
+                Component newClass1 = findComponentByName(newClassName1);
+                Component newClass2 = findComponentByName(newClassName2);
+
+                // Update the "from" component if the new class is found
+                if (newClass1 != null) {
+                    System.out.println("Setting 'from' to: " + newClassName1);
+                    association.setFrom(newClass1); // Update "from" with the new class
+                } else {
+                    System.err.println("Warning: Could not find class: " + newClassName1);
                 }
+
+                // Update the "to" component if the new class is found
+                if (newClass2 != null) {
+                    System.out.println("Setting 'to' to: " + newClassName2);
+                    association.setTo(newClass2); // Update "to" with the new class
+                } else {
+                    System.err.println("Warning: Could not find class: " + newClassName2);
+                }
+
+                // Exit after updating the relationship
+                break;
             }
         }
     }
+}
+
     public void removeAggregation(String className1, String className2) {
         // Remove the aggregation relationship based on class names
         model.getRelationships().removeIf(relationship ->
@@ -244,7 +302,8 @@ public class ClassDiagramPresenter {
             model.addRelationship(association);
         }
         else{
-            Association association=new Association();
+            Association association=new Association("Association");
+            model.addRelationship(association);
         }
         // Create the association and add it to the diagram model
 
@@ -268,30 +327,79 @@ public class ClassDiagramPresenter {
         }
     }
 
+//    public void updateAssociation(String oldClassName1, String newClassName1, String oldClassName2, String newClassName2) {
+//        System.out.println("Presenter Update Association");
+//        for (Relationship relationship : model.getRelationships()) {
+//            if (relationship instanceof Association) {
+//                Association association = (Association) relationship;
+//
+//                // Check if the association is between the old class names
+//                if (association.getFrom().getDetails().equals(oldClassName1) &&
+//                        association.getTo().getDetails().equals(oldClassName2)) {
+//
+//                    // Update the components (assuming findClassByName works for the new names)
+//                    Component newClass1 = findComponentByName(newClassName1);
+//                    Component newClass2 = findComponentByName(newClassName2);
+//
+//                    if (newClass1 != null && newClass2 != null) {
+//                        association.setFrom(newClass1);
+//                        association.setTo(newClass2);
+//                    }
+//                    break;
+//                }
+//            }
+//        }
+//    }
+
     public void updateAssociation(String oldClassName1, String newClassName1, String oldClassName2, String newClassName2) {
-        System.out.println("Presenter Update Association");
+        System.out.println("Presenter Update Inherritance");
+        System.out.println("Old class names: " + oldClassName1 + ", " + oldClassName2);
+        System.out.println("New class names: " + newClassName1 + ", " + newClassName2);
+
+        // Iterate through all relationships in the model
         for (Relationship relationship : model.getRelationships()) {
+            System.out.println("Inside for loop");
+
+            // Check if the relationship is an instance of Inherritance
             if (relationship instanceof Association) {
+                System.out.println("Inside if condition");
                 Association association = (Association) relationship;
 
-                // Check if the association is between the old class names
-                if (association.getFrom().getDetails().equals(oldClassName1) &&
-                        association.getTo().getDetails().equals(oldClassName2)) {
+                // Check if the relationship involves the old class names
+                boolean isMatchingFrom = (oldClassName1 == null || association.getFrom().getDetails().equals(oldClassName1));
+                boolean isMatchingTo = (oldClassName2 == null || association.getTo().getDetails().equals(oldClassName2));
 
-                    // Update the components (assuming findClassByName works for the new names)
+                System.out.println("Checking relationship: " + association);
+                System.out.println("Matching from: " + isMatchingFrom + ", Matching to: " + isMatchingTo);
+
+                // If both the from and to classes match, update them
+                if (isMatchingFrom || isMatchingTo) {
+                    // Find the new components based on the new class names
                     Component newClass1 = findComponentByName(newClassName1);
                     Component newClass2 = findComponentByName(newClassName2);
 
-                    if (newClass1 != null && newClass2 != null) {
-                        association.setFrom(newClass1);
-                        association.setTo(newClass2);
+                    // Update the "from" component if the new class is found
+                    if (newClass1 != null) {
+                        System.out.println("Setting 'from' to: " + newClassName1);
+                        association.setFrom(newClass1); // Update "from" with the new class
+                    } else {
+                        System.err.println("Warning: Could not find class: " + newClassName1);
                     }
+
+                    // Update the "to" component if the new class is found
+                    if (newClass2 != null) {
+                        System.out.println("Setting 'to' to: " + newClassName2);
+                        association.setTo(newClass2); // Update "to" with the new class
+                    } else {
+                        System.err.println("Warning: Could not find class: " + newClassName2);
+                    }
+
+                    // Exit after updating the relationship
                     break;
                 }
             }
         }
     }
-
     public void removeAssociation(String className1, String className2) {
         model.getRelationships().removeIf(relationship -> {
             if (relationship instanceof Association) {
@@ -312,32 +420,83 @@ public class ClassDiagramPresenter {
 
         if (class1 != null && class2 != null) {
             // Create the Composition relationship between class1 and class2
-            generalization composition = new generalization(class1, class2, "Composition", 0, 0);  // Position can be adjusted
+            generalization composition = new generalization(class1, class2, "generalization", 0, 0);  // Position can be adjusted
             model.addRelationship(composition);  // Add to diagram model
         }
         else {
-            generalization composition=new generalization();
+            generalization composition=new generalization("generalization");
+            model.addRelationship(composition);
         }
     }
 
-    public void updateComposition(String className1, String newClassName1, String className2, String newClassName2) {
-        // Find and update the relationship if exists
-        for (Relationship relationship : model.getRelationships()) {
-            if (relationship instanceof generalization) {
-                generalization composition = (generalization) relationship;
-                if (composition.getFrom().getDetails().equals(className1) && composition.getTo().getDetails().equals(className2)) {
-                    // Update the components if the relationship is found
-                    Class newClass1 = getClassByName(newClassName1);
-                    Class newClass2 = getClassByName(newClassName2);
-                    if (newClass1 != null && newClass2 != null) {
-                        composition.setFrom(newClass1);
-                        composition.setTo(newClass2);
-                        break;
-                    }
+//    public void updateComposition(String className1, String newClassName1, String className2, String newClassName2) {
+//        // Find and update the relationship if exists
+//        for (Relationship relationship : model.getRelationships()) {
+//            if (relationship instanceof generalization) {
+//                generalization composition = (generalization) relationship;
+//                if (composition.getFrom().getDetails().equals(className1) && composition.getTo().getDetails().equals(className2)) {
+//                    // Update the components if the relationship is found
+//                    Class newClass1 = getClassByName(newClassName1);
+//                    Class newClass2 = getClassByName(newClassName2);
+//                    if (newClass1 != null && newClass2 != null) {
+//                        composition.setFrom(newClass1);
+//                        composition.setTo(newClass2);
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//    }
+public void updateComposition(String oldClassName1, String newClassName1, String oldClassName2, String newClassName2) {
+    System.out.println("Presenter Update Inherritance");
+    System.out.println("Old class names: " + oldClassName1 + ", " + oldClassName2);
+    System.out.println("New class names: " + newClassName1 + ", " + newClassName2);
+
+    // Iterate through all relationships in the model
+    for (Relationship relationship : model.getRelationships()) {
+        System.out.println("Inside for loop");
+
+        // Check if the relationship is an instance of Inherritance
+        if (relationship instanceof generalization) {
+            System.out.println("Inside if condition");
+            generalization association = (generalization) relationship;
+
+            // Check if the relationship involves the old class names
+            boolean isMatchingFrom = (oldClassName1 == null || association.getFrom().getDetails().equals(oldClassName1));
+            boolean isMatchingTo = (oldClassName2 == null || association.getTo().getDetails().equals(oldClassName2));
+
+            System.out.println("Checking relationship: " + association);
+            System.out.println("Matching from: " + isMatchingFrom + ", Matching to: " + isMatchingTo);
+
+            // If both the from and to classes match, update them
+            if (isMatchingFrom || isMatchingTo) {
+                // Find the new components based on the new class names
+                Component newClass1 = findComponentByName(newClassName1);
+                Component newClass2 = findComponentByName(newClassName2);
+
+                // Update the "from" component if the new class is found
+                if (newClass1 != null) {
+                    System.out.println("Setting 'from' to: " + newClassName1);
+                    association.setFrom(newClass1); // Update "from" with the new class
+                } else {
+                    System.err.println("Warning: Could not find class: " + newClassName1);
                 }
+
+                // Update the "to" component if the new class is found
+                if (newClass2 != null) {
+                    System.out.println("Setting 'to' to: " + newClassName2);
+                    association.setTo(newClass2); // Update "to" with the new class
+                } else {
+                    System.err.println("Warning: Could not find class: " + newClassName2);
+                }
+
+                // Exit after updating the relationship
+                break;
             }
         }
     }
+}
+
 
     public void removeComposition(String className1, String className2) {
         // Remove the composition relationship based on class names
@@ -355,32 +514,84 @@ public class ClassDiagramPresenter {
 
         if (class1 != null && class2 != null) {
             // Create the Composition relationship between class1 and class2
-            Inherritance inherritance = new Inherritance(class1, class2, "Inherritane", 0, 0);  // Position can be adjusted
+            Inherritance inherritance = new Inherritance(class1, class2, "Inherritance", 0, 0);  // Position can be adjusted
             model.addRelationship(inherritance);  // Add to diagram model
         }
         else {
-            Inherritance inherritance1=new Inherritance();
+            Inherritance inherritance1=new Inherritance("Inherritance");
+            model.addRelationship(inherritance1);
         }
     }
 
-    public void updateinherritance(String className1, String newClassName1, String className2, String newClassName2) {
-        // Find and update the relationship if exists
+//    public void updateinherritance(String className1, String newClassName1, String className2, String newClassName2) {
+//        // Find and update the relationship if exists
+//        for (Relationship relationship : model.getRelationships()) {
+//            if (relationship instanceof Inherritance) {
+//                Inherritance inherritance = (Inherritance) relationship;
+//                if (inherritance.getFrom().getDetails().equals(className1) && inherritance.getTo().getDetails().equals(className2)) {
+//                    // Update the components if the relationship is found
+//                    Class newClass1 = getClassByName(newClassName1);
+//                    Class newClass2 = getClassByName(newClassName2);
+//                    if (newClass1 != null && newClass2 != null) {
+//                        inherritance.setFrom(newClass1);
+//                        inherritance.setTo(newClass2);
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//    }
+
+    public void updateinherritance(String oldClassName1, String newClassName1, String oldClassName2, String newClassName2) {
+        System.out.println("Presenter Update Inherritance");
+        System.out.println("Old class names: " + oldClassName1 + ", " + oldClassName2);
+        System.out.println("New class names: " + newClassName1 + ", " + newClassName2);
+
+        // Iterate through all relationships in the model
         for (Relationship relationship : model.getRelationships()) {
+            System.out.println("Inside for loop");
+
+            // Check if the relationship is an instance of Inherritance
             if (relationship instanceof Inherritance) {
-                Inherritance inherritance = (Inherritance) relationship;
-                if (inherritance.getFrom().getDetails().equals(className1) && inherritance.getTo().getDetails().equals(className2)) {
-                    // Update the components if the relationship is found
-                    Class newClass1 = getClassByName(newClassName1);
-                    Class newClass2 = getClassByName(newClassName2);
-                    if (newClass1 != null && newClass2 != null) {
-                        inherritance.setFrom(newClass1);
-                        inherritance.setTo(newClass2);
-                        break;
+                System.out.println("Inside if condition");
+                Inherritance association = (Inherritance) relationship;
+
+                // Check if the relationship involves the old class names
+                boolean isMatchingFrom = (oldClassName1 == null || association.getFrom().getDetails().equals(oldClassName1));
+                boolean isMatchingTo = (oldClassName2 == null || association.getTo().getDetails().equals(oldClassName2));
+
+                System.out.println("Checking relationship: " + association);
+                System.out.println("Matching from: " + isMatchingFrom + ", Matching to: " + isMatchingTo);
+
+                // If both the from and to classes match, update them
+                if (isMatchingFrom || isMatchingTo) {
+                    // Find the new components based on the new class names
+                    Component newClass1 = findComponentByName(newClassName1);
+                    Component newClass2 = findComponentByName(newClassName2);
+
+                    // Update the "from" component if the new class is found
+                    if (newClass1 != null) {
+                        System.out.println("Setting 'from' to: " + newClassName1);
+                        association.setFrom(newClass1); // Update "from" with the new class
+                    } else {
+                        System.err.println("Warning: Could not find class: " + newClassName1);
                     }
+
+                    // Update the "to" component if the new class is found
+                    if (newClass2 != null) {
+                        System.out.println("Setting 'to' to: " + newClassName2);
+                        association.setTo(newClass2); // Update "to" with the new class
+                    } else {
+                        System.err.println("Warning: Could not find class: " + newClassName2);
+                    }
+
+                    // Exit after updating the relationship
+                    break;
                 }
             }
         }
     }
+
 
     public void removeInherritance(String className1, String className2) {
         // Remove the composition relationship based on class names
