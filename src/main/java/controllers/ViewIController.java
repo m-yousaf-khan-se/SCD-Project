@@ -359,7 +359,8 @@ public class ViewIController{
             }
             else
             {
-                //imran use case ki similar logic implement ker lena
+                System.out.println("Passing the follwing path to Presenter to save file: "+ file.getPath().toString());
+                instance.useCaseDiagramPresenter.saveClassDiagramProject(file);
             }
         }
         else
