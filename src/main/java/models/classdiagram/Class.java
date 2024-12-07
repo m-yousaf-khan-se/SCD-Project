@@ -32,6 +32,7 @@ public class Class implements Component, Serializable {
         this.name=name;
         System.out.println("Setting the name of class ");
     }
+    @Override
     public String getName()
     {
         System.out.println("Getting the name of class ");

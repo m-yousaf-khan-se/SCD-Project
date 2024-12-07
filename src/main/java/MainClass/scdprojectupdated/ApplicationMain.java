@@ -40,11 +40,11 @@ public class ApplicationMain extends Application {
         //------------------------------------------------------------------
         //For Class Diagram Prsenter
         DiagramModel model = new DiagramModel();
-        Class clazz=new Class();
-        Aggregation aggregation=new Aggregation();
-        Association association=new Association();
-        generalization generalizations=new generalization();
-        Inherritance inherritance=new Inherritance();
+        models.classdiagram.Class clazz=new models.classdiagram.Class();
+        models.classdiagram.Aggregation aggregation=new models.classdiagram.Aggregation();
+        models.classdiagram.Association association=new models.classdiagram.Association();
+        models.classdiagram.generalization generalizations=new models.classdiagram.generalization();
+        models.classdiagram.Inherritance inherritance=new models.classdiagram.Inherritance();
         List<Class> classes = new ArrayList<>();
 
         //Use Case Diagram Presenter
