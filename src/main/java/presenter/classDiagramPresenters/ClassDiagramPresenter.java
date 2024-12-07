@@ -1,6 +1,7 @@
 package presenter.classDiagramPresenters;
 
 import controllers.ViewIController;
+import data.DiagramSerializer;
 import models.DiagramModel;
 import models.IModel;
 import models.Component;
@@ -12,6 +13,7 @@ import models.classdiagram.generalization;
 import models.classdiagram.Inherritance;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -384,5 +386,15 @@ public class ClassDiagramPresenter {
         }
     }
 
+    //------------------------Save Projects to JSON ------------------------
+    public void saveClassDiagramProject(File file)
+    {
+        System.out.println("Presenter is passing data to models...");
+        if (!file.getName().endsWith(".json")) {
+            file = new File(file.getAbsolutePath() + ".json");
+            System.out.println("Fetching file Path to save the project: " + file.getPath().toString());
+            DiagramSerializer.saveToFile(model , file);
+        }
+    }
 }
 
