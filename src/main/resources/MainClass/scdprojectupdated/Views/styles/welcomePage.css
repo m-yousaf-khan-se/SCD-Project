@@ -1,0 +1,17 @@
+/* General styles for the root background */
+.root {
+    -fx-background-color: lightblue; /* Light blue background */
+    -fx-min-width: 800px;
+    -fx-min-height: 600px;
+}
+
+#firstText {
+    -fx-font-size: 30px;  /* Larger font size for the first text */
+    -fx-fill: white;      /* White text color */
+    -fx-font-weight: bold;
+}
+
+#secondText {
+    -fx-font-size: 18px;  /* Slightly smaller font size for the second text */
+}
+
