@@ -233,7 +233,7 @@ public class ClassDiagramPresenter {
         }
     }
     //function for setting the cordinates of the class ... call it when we are saving the diagram
-    public void setClassCoordinates(String className, int x, int y) {
+    public void setClassCoordinates(String className, Double x, Double y) {
         for (Component component : model.getComponents()) {
             if (component instanceof Class && component.getDetails().equals(className)) {
                 Class clazz = (Class) component;

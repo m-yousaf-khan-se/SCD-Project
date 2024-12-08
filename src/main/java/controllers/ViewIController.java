@@ -403,11 +403,24 @@ public class ViewIController{
 
             if(!generateJavaCodeFromClassDiagramMenuItem.isDisable()) //if the option to generate Java code is available this means that the user was creating class Diagram
             {
+                //setting up co-ordinates before passing file to store data.
+                System.out.println("Passing Co-ordinates of the Class Diagram components to the presenter!");
+                for(Map.Entry<Node, IController> entry : canvasClassNodes.entrySet())
+                {
+                    if(entry.getKey().getStyleClass().contains("uml-class"))
+                    {
+                        UMLClassIController ctrler = (UMLClassIController)entry.getValue();
+                        Double []coordinates = ctrler.getCoordinates();
+                        String className = ctrler.getUMLClassName();
+                        instance.classDiagramPresenter.setClassCoordinates(className, coordinates[0], coordinates[1]);
+                    }
+                }
                 System.out.println("Passing the follwing path to Presenter to save file: "+ file.getPath().toString());
                 instance.classDiagramPresenter.saveClassDiagramProject(file);
             }
-            else
+            else // when user was making a Use Case Diagram
             {
+                //imran aap na yaha per logic lagani hai coordinates ki
                 System.out.println("Passing the follwing path to Presenter to save file: "+ file.getPath().toString());
                 instance.useCaseDiagramPresenter.saveClassDiagramProject(file);
             }
