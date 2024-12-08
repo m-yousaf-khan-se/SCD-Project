@@ -5,6 +5,7 @@ import controllers.ViewIController;
 
 
 import data.DiagramSerializer;
+import models.DiagramModel;
 
 
 import java.io.File;
@@ -319,6 +320,59 @@ public class UseCaseDiagramPresenter{
 
 
     public boolean loadUseCaseDiagram(File file) {
+        System.out.println("Presenter received the follwing file:"+file.getName()+" with path to be loaded : " + file.getPath());
+        List<models.usecase.Actor> newActors = new ArrayList<>();
+        List<models.usecase.UseCase> newUseCases = new ArrayList<>();
+        List<models.usecase.Include> newInclude = new ArrayList<>();
+        List<models.usecase.Extend> newExtend = new ArrayList<>();
+        List<models.usecase.Association> newAssociation = new ArrayList<>();
+
+        if (file.getName().endsWith(".json")) {
+            System.out.println("Fetching file Path to load the project: " + file.getPath().toString() + " from that file.");
+            DiagramModel loadedModel = DiagramSerializer.loadFromFile(file);
+            if(loadedModel == null)
+            {
+                return false;
+            }
+
+            for(models.Component components : loadedModel.getComponents())
+            {
+                if(components instanceof models.usecase.Actor)
+                {
+                    newActors.add((models.usecase.Actor)components);
+                }
+            }
+            for(models.Component components : loadedModel.getComponents())
+            {
+                if(components instanceof models.usecase.UseCase)
+                {
+                    newUseCases.add((models.usecase.UseCase)components);
+                }
+            }
+
+            for(models.Relationship relationships : loadedModel.getRelationships())
+            {
+                if(relationships instanceof models.usecase.Association)
+                {
+                    newAssociation.add((models.usecase.Association)relationships);
+                }
+                else if(relationships instanceof models.usecase.Include)
+                {
+                    newInclude.add((models.usecase.Include)relationships);
+                }
+                else if(relationships instanceof models.usecase.Extend)
+                {
+                    newExtend.add((models.usecase.Extend)relationships);
+                }
+
+            }
+
+        }
+        else
+        {
+            System.err.println("Unable to load Project: File path doesn't ends with .json extension!");
+        }
+
         return false;
     }
 }
