@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.text.Text;
 
 public  class extendIController extends ViewIController implements IController {
@@ -50,6 +51,10 @@ public  class extendIController extends ViewIController implements IController {
 
     @FXML
     void initialize() {
+        // Set the stroke dash array for the includeLine
+        excludeLine.getStrokeDashArray().addAll(5.0, 5.0); // Equivalent to dashes of 5px with 5px gaps
+        excludeLine.setStrokeWidth(2.0); // Set the stroke width
+        excludeLine.setStrokeLineCap(StrokeLineCap.ROUND); // Set the cap style for dashes
         setupAssociationLineBindings();
         setupDragHandlers();
     }

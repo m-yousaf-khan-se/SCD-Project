@@ -47,6 +47,8 @@ public class ViewIController{
     private ScrollPane MainViewRightBorderArea;
 
     @FXML
+    private ScrollPane paneCanvasScrollPane;
+    @FXML
     private Pane paneCanvas;
 
     @FXML
@@ -61,6 +63,12 @@ public class ViewIController{
     private static UseCaseDiagramPresenter useCaseDiagramPresenter;
 
     private static Stage OwnerWin;
+
+    private void bindCanvasToScrollPane() {
+        // Bind the width and height of the canvas to the viewport of the ScrollPane
+        paneCanvas.prefWidthProperty().bind(paneCanvasScrollPane.viewportBoundsProperty().map(bounds -> bounds.getWidth()));
+        paneCanvas.prefHeightProperty().bind(paneCanvasScrollPane.viewportBoundsProperty().map(bounds -> bounds.getHeight()));
+    }
 
     // ------------------------Not useable
 
@@ -417,6 +425,8 @@ public class ViewIController{
 
     @FXML
     void initialize() {
+        //Following function will bind our paneCanvas according to the size of screen means jitna scrollPane ka size hoga utna paneCanvas ka size hoga.
+        bindCanvasToScrollPane();
         //Actually this code is loaded from the scene builder sample Controller. And I don't why I get these two line below.
         assert MainViewRightBorderArea != null : "fx:id=\"MainViewRightBorderArea\" was not injected: check your FXML file 'view.fxml'.";
         assert paneCanvas != null : "fx:id=\"paneCanvas\" was not injected: check your FXML file 'view.fxml'.";
