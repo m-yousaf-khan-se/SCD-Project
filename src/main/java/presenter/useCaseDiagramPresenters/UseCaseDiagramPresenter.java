@@ -89,7 +89,7 @@ public class UseCaseDiagramPresenter{
         model.getComponents().removeIf(component -> component instanceof models.usecase.Actor && ((models.usecase.Actor) component).getName().equals(name));
     }
 
-    public void setActorCoordinates(String ActorName, int x, int y) {
+    public void setActorCoordinates(String ActorName, double x, double y) {
         for (models.Component component : model.getComponents()) {
             if (component instanceof models.usecase.Actor && component.getDetails().equals(ActorName)) {
                 models.usecase.Actor actor1 = (models.usecase.Actor) component;
@@ -141,7 +141,7 @@ public class UseCaseDiagramPresenter{
     }
 
 
-    public void setUseCaseCoordinates(String usecaseName, int x, int y) {
+    public void setUseCaseCoordinates(String usecaseName, double x, double y) {
         for (models.Component component : model.getComponents()) {
             if (component instanceof models.usecase.UseCase && component.getDetails().equals(usecaseName)) {
                 models.usecase.UseCase useCase1 = (models.usecase.UseCase) component;
@@ -300,7 +300,7 @@ public class UseCaseDiagramPresenter{
     }
 
 
-    public void setRelationshipCoordinates(String fromClassName, String toClassName, int labelX, int labelY) {
+    public void setRelationshipCoordinates(String fromClassName, String toClassName, double labelX, double labelY) {
         for (models.Relationship relationship : model.getRelationships()) {
             if (relationship.getFrom().getDetails().equals(fromClassName) &&
                     relationship.getTo().getDetails().equals(toClassName)) {

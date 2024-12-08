@@ -11,7 +11,7 @@ public class Inherritance extends Relationship {
     {
         super(type);
     }
-    public Inherritance(Component from, Component to, String label,int x,int y) {
+    public Inherritance(Component from, Component to, String label,double x,double y) {
         super(from, to, "Inherritance", label,x,y);
         System.out.println("Inherritance constructor ");
 

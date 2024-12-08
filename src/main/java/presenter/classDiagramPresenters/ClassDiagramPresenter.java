@@ -95,26 +95,73 @@ public class ClassDiagramPresenter {
     }
 
     // Add a method to a class in the DiagramModel
+//    public void addClassMethod(String className, String oldMethodDetails, String newMethodDetails) {
+//        for (models.classdiagram.Class clazz : classes) {
+//            if (clazz.getName().equals(className)) {
+//                if(oldMethodDetails.isEmpty())
+//                {
+//                    clazz.addMethod(newMethodDetails);
+//                }
+//                else
+//                {
+//                    for(String method : clazz.getMethods())
+//                    {
+//                        if(method.equals(oldMethodDetails))
+//                            method = newMethodDetails;
+//                    }
+//                }
+//
+//                // Update the corresponding component in DiagramModel
+//                for (models.Component component : model.getComponents()) {
+//                    if (component instanceof models.classdiagram.Class && ((models.classdiagram.Class) component).getName().equals(className)) {
+//                        ((Class) component).addMethod(newMethodDetails);
+//                        break;
+//                    }
+//                }
+//                break;
+//            }
+//        }
+//    }
+
     public void addClassMethod(String className, String oldMethodDetails, String newMethodDetails) {
         for (models.classdiagram.Class clazz : classes) {
             if (clazz.getName().equals(className)) {
-                if(oldMethodDetails.isEmpty())
-                {
-                    clazz.addMethod(newMethodDetails);
-                }
-                else
-                {
-                    for(String method : clazz.getMethods())
-                    {
-                        if(method.equals(oldMethodDetails))
-                            method = newMethodDetails;
+                // If no old method is specified, check and add the new method if it doesn't already exist
+                if (oldMethodDetails.isEmpty()) {
+                    if (!clazz.getMethods().contains(newMethodDetails)) {
+                        clazz.addMethod(newMethodDetails);
+                    } else {
+                        System.out.println("Method already exists: " + newMethodDetails);
+                    }
+                } else {
+                    // Update the method details if oldMethodDetails is found
+                    boolean methodUpdated = false;
+                    for (int i = 0; i < clazz.getMethods().size(); i++) {
+                        if (clazz.getMethods().get(i).equals(oldMethodDetails)) {
+                            clazz.getMethods().set(i, newMethodDetails);
+                            methodUpdated = true;
+                            break;
+                        }
+                    }
+
+                    // If the old method was not found, optionally add the new method
+                    if (!methodUpdated) {
+                        System.out.println("Old method not found: " + oldMethodDetails);
                     }
                 }
 
                 // Update the corresponding component in DiagramModel
                 for (models.Component component : model.getComponents()) {
-                    if (component instanceof models.classdiagram.Class && ((models.classdiagram.Class) component).getName().equals(className)) {
-                        ((Class) component).addMethod(newMethodDetails);
+                    if (component instanceof models.classdiagram.Class &&
+                            ((models.classdiagram.Class) component).getName().equals(className)) {
+                        Class diagramClass = (Class) component;
+
+                        // Ensure the new method is added only if it doesn't exist
+                        if (!diagramClass.getMethods().contains(newMethodDetails)) {
+                            diagramClass.addMethod(newMethodDetails);
+                        } else {
+                            System.out.println("Method already exists in DiagramModel: " + newMethodDetails);
+                        }
                         break;
                     }
                 }
@@ -123,17 +170,40 @@ public class ClassDiagramPresenter {
         }
     }
 
+//    public void addOrUpdateClassField(String className, String oldFieldName, String newFieldName) {
+//        for (Class clazz : classes) {
+//            if (clazz.getName().equals(className)) {
+//                // If oldFieldName exists, update it
+//                List<String> attributes = clazz.getAttributes();
+//                if (attributes.contains(oldFieldName)) {
+//                    int index = attributes.indexOf(oldFieldName);
+//                    attributes.set(index, newFieldName); // Update the field
+//                } else {
+//                    // If oldFieldName does not exist, add newFieldName
+//                    clazz.addAttribute(newFieldName);
+//                }
+//                break;
+//            }
+//        }
+//    }
+
     public void addOrUpdateClassField(String className, String oldFieldName, String newFieldName) {
         for (Class clazz : classes) {
             if (clazz.getName().equals(className)) {
-                // If oldFieldName exists, update it
+                // Get the list of attributes
                 List<String> attributes = clazz.getAttributes();
+
+                // If oldFieldName exists, update it
                 if (attributes.contains(oldFieldName)) {
                     int index = attributes.indexOf(oldFieldName);
                     attributes.set(index, newFieldName); // Update the field
                 } else {
-                    // If oldFieldName does not exist, add newFieldName
-                    clazz.addAttribute(newFieldName);
+                    // If oldFieldName does not exist, check if newFieldName already exists
+                    if (!attributes.contains(newFieldName)) {
+                        clazz.addAttribute(newFieldName); // Add the new field
+                    } else {
+                        System.out.println("Field already exists: " + newFieldName);
+                    }
                 }
                 break;
             }

@@ -12,7 +12,7 @@ public class Association extends Relationship {
     {
         super(type);
     }
-    public Association(Component from, Component to, String label, int x, int y) {
+    public Association(Component from, Component to, String label, double x, double y) {
         super(from, to, "Association", label, x, y);
         System.out.println("Association constructor ");
 

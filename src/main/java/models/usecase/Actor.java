@@ -6,8 +6,8 @@ import java.io.Serializable;
 
 public class Actor implements Component,Serializable {
     private String name;
-    private int x; // X coordinate
-    private int y; // Y coordinate
+    private double x; // X coordinate
+    private double y; // Y coordinate
 
     public Actor(){}
 
@@ -23,11 +23,11 @@ public class Actor implements Component,Serializable {
         return name;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 
@@ -48,17 +48,17 @@ public class Actor implements Component,Serializable {
 
     // Implement setCoordinates method from Component interface
     @Override
-    public void setCoordinates(int x, int y) {
+    public void setCoordinates(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
     // Optionally, get the coordinates
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 }

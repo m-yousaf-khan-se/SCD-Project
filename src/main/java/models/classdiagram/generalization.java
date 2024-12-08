@@ -12,7 +12,7 @@ public class generalization extends Relationship {
     {
         super(type);
     }
-    public generalization(Component from, Component to, String label,int x,int y) {
+    public generalization(Component from, Component to, String label,double x,double y) {
         super(from, to, "generalization", label,x,y);
         System.out.println("Generalization constructor ");
 

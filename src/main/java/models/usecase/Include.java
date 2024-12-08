@@ -10,7 +10,7 @@ public class Include extends Relationship {
     {
         super(type);
     }
-    public Include(Component from, Component to, String label,int x,int y) {
+    public Include(Component from, Component to, String label,double x,double y) {
         super(from, to, "Include", label,x,y);
     }
 
