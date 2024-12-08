@@ -404,6 +404,7 @@ public class ViewIController{
                         Double []coordinates = ctrler.getCoordinates();
                         String className = ctrler.getUMLClassName();
                         instance.classDiagramPresenter.setClassCoordinates(className, coordinates[0], coordinates[1]);
+                        //TODO : currently in progress
                     }
                 }
                 System.out.println("Passing the follwing path to Presenter to save file: "+ file.getPath().toString());
