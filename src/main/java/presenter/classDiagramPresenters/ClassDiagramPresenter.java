@@ -3,10 +3,7 @@ package presenter.classDiagramPresenters;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import controllers.ViewIController;
 import data.DiagramSerializer;
-import models.DiagramModel;
-import models.IModel;
-import models.Component;
-import models.Relationship;
+import models.*;
 import models.classdiagram.Aggregation;
 import models.classdiagram.Class;
 import models.classdiagram.Association;
@@ -234,9 +231,11 @@ public class ClassDiagramPresenter {
     }
     //function for setting the cordinates of the class ... call it when we are saving the diagram
     public void setClassCoordinates(String className, Double x, Double y) {
+        System.out.println("Co-ordinates: x="+x+" y="+y+" of the class: " + className + " passed to the class presenter.");
         for (Component component : model.getComponents()) {
-            if (component instanceof Class && component.getDetails().equals(className)) {
+            if (component instanceof Class && component.getName().equals(className)) {
                 Class clazz = (Class) component;
+                System.out.println("Setting up Co-ordinates of the class: " + clazz.getName());
                 clazz.setX(x);
                 clazz.setY(y);
                 break;
@@ -697,6 +696,11 @@ public void updateComposition(String oldClassName1, String newClassName1, String
         {
             System.err.println("File path doesn't ends with .json extension!");
         }
+    }
+
+    public String generateJavaCodeFromClassDiagram() {
+        String javaCode = CodeGenerator.generateCode(model);
+        return javaCode;
     }
 }
 
