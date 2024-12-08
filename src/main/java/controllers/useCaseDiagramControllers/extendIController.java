@@ -49,6 +49,22 @@ public  class extendIController extends ViewIController implements IController {
     String useCaseName1="";
     String useCaseName2="";
 
+    public void setAttachedNode1(Node attachedNode1) {
+        this.attachedNode1 = attachedNode1;
+    }
+
+    public void setAttachedNode2(Node attachedNode2) {
+        this.attachedNode2 = attachedNode2;
+    }
+
+    public void setUseCaseName1(String useCaseName1) {
+        this.useCaseName1 = useCaseName1;
+    }
+
+    public void setUseCaseName2(String useCaseName2) {
+        this.useCaseName2 = useCaseName2;
+    }
+
     @FXML
     void initialize() {
         // Set the stroke dash array for the includeLine

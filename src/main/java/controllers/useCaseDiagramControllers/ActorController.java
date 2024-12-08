@@ -45,8 +45,13 @@ public  class ActorController extends ViewIController implements IController {
     private String initialText = "";
     private String actorName = "";
 
+
     public String getActorName() {
         return actorName;
+    }
+
+    public void setActorName(String actorName) {
+        this.actorName = actorName;
     }
 
     @FXML
@@ -141,5 +146,10 @@ public  class ActorController extends ViewIController implements IController {
     @Override
     public String[] getClassesName() {
         throw new UnsupportedOperationException("Not implemented! as it has one actor only right now");
+    }
+
+    public void setCoordinates(Double x, Double y){
+        ActorGroup.setLayoutX(x);
+        ActorGroup.setLayoutY(y);
     }
 }

@@ -5,9 +5,11 @@ import controllers.ViewIController;
 
 
 import data.DiagramSerializer;
+import models.DiagramModel;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -318,7 +320,82 @@ public class UseCaseDiagramPresenter{
     }
 
 
-    public boolean loadUseCaseDiagram(File file) {
+    public boolean loadUseCaseDiagram(File file) throws IOException {
+        System.out.println("Presenter received the follwing file:"+file.getName()+" with path to be loaded : " + file.getPath());
+        List<models.usecase.Actor> newActors = new ArrayList<>();
+        List<models.usecase.UseCase> newUseCases = new ArrayList<>();
+        List<models.usecase.Include> newInclude = new ArrayList<>();
+        List<models.usecase.Extend> newExtend = new ArrayList<>();
+        List<models.usecase.Association> newAssociation = new ArrayList<>();
+
+        if (file.getName().endsWith(".json")) {
+            System.out.println("Fetching file Path to load the project: " + file.getPath().toString() + " from that file.");
+            DiagramModel loadedModel = DiagramSerializer.loadFromFile(file);
+            if(loadedModel == null)
+            {
+                return false;
+            }
+
+            for(models.Component components : loadedModel.getComponents())
+            {
+                if(components instanceof models.usecase.Actor)
+                {
+                    newActors.add((models.usecase.Actor)components);
+                }
+            }
+            for(models.Component components : loadedModel.getComponents())
+            {
+                if(components instanceof models.usecase.UseCase)
+                {
+                    newUseCases.add((models.usecase.UseCase)components);
+                }
+            }
+
+            for(models.Relationship relationships : loadedModel.getRelationships())
+            {
+                if(relationships instanceof models.usecase.Association)
+                {
+                    newAssociation.add((models.usecase.Association)relationships);
+                }
+                else if(relationships instanceof models.usecase.Include)
+                {
+                    newInclude.add((models.usecase.Include)relationships);
+                }
+                else if(relationships instanceof models.usecase.Extend)
+                {
+                    newExtend.add((models.usecase.Extend)relationships);
+                }
+
+
+            }
+
+            for(models.usecase.Actor newActor : newActors){
+                view.loadActor(newActor.getName(),newActor.getX(),newActor.getY());
+            }
+            for(models.usecase.UseCase newUseCase : newUseCases){
+                view.loadUseCase(newUseCase.getName(),newUseCase.getX(),newUseCase.getY());
+            }
+            for(models.usecase.Include newIncludee : newInclude){
+                view.loadInclude(newIncludee.getFrom().getName(),newIncludee.getTo().getName());
+            }
+            for(models.usecase.Association newAssociationn : newAssociation){
+                view.loadUseCaseAssociation(newAssociationn.getFrom().getName(),newAssociationn.getTo().getName());
+            }
+            for(models.usecase.Extend newExtendd : newExtend){
+                view.loadUseCaseAssociation(newExtendd.getFrom().getName(),newExtendd.getTo().getName());
+            }
+
+
+
+
+
+
+        }
+        else
+        {
+            System.err.println("Unable to load Project: File path doesn't ends with .json extension!");
+        }
+
         return false;
     }
 }
