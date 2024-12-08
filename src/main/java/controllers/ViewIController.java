@@ -405,7 +405,7 @@ public class ViewIController{
             {
                 //setting up co-ordinates before passing file to store data.
                 System.out.println("Passing Co-ordinates of the Class Diagram components to the presenter!");
-                for(Map.Entry<Node, IController> entry : canvasClassNodes.entrySet())
+                for(Map.Entry<Node, IController> entry : canvasUseCaseNodes.entrySet())
                 {
                     if(entry.getKey().getStyleClass().contains("uml-class"))
                     {
@@ -420,7 +420,32 @@ public class ViewIController{
             }
             else // when user was making a Use Case Diagram
             {
-                //imran aap na yaha per logic lagani hai coordinates ki
+                //setting up co-ordinates before passing file to store data.
+                System.out.println("Passing Co-ordinates of the UseCase Diagram components to the presenter!");
+                //For UseCases
+                for(Map.Entry<Node, IController> entry : canvasUseCaseNodes.entrySet())
+                {
+                    if(entry.getKey().getStyleClass().contains("uml-useCase"))
+                    {
+                        useCaseController ctrler = (useCaseController)entry.getValue();
+                        Double []coordinates = ctrler.getCoordinates();
+                        String useCaseName = ctrler.getUseCaseName();
+                        instance.useCaseDiagramPresenter.setUseCaseCoordinates(useCaseName, coordinates[0], coordinates[1]);
+                    }
+                }
+                //For Actors
+                for(Map.Entry<Node, IController> entry : canvasUseCaseNodes.entrySet())
+                {
+                    if(entry.getKey().getStyleClass().contains("usecase-actor"))
+                    {
+                        ActorController ctrler = (ActorController)entry.getValue();
+                        Double []coordinates = ctrler.getCoordinates();
+                        String actorName = ctrler.getActorName();
+                        instance.useCaseDiagramPresenter.setActorCoordinates(actorName, coordinates[0], coordinates[1]);
+                    }
+                }
+
+
                 System.out.println("Passing the follwing path to Presenter to save file: "+ file.getPath().toString());
                 instance.useCaseDiagramPresenter.saveClassDiagramProject(file);
             }
