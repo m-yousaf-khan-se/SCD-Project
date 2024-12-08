@@ -15,7 +15,7 @@ import javafx.scene.shape.Polygon;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GeneralizationIController  extends ViewIController implements IController {
+public class GeneralizationIController  extends ViewIController implements IController, IClassComponentController {
 
     @FXML
     private ResourceBundle resources;
@@ -254,6 +254,26 @@ public class GeneralizationIController  extends ViewIController implements ICont
 //        generalizationArrow.setTranslateY(pivot.getLayoutY() / (generalizationArrow.getBoundsInParent().getHeight()+2));
 //    }
 
+    @Override
+    public void setClassName1(String className1) {
+        this.className1 = className1;
+    }
 
+    @Override
+    public void setClassName2(String className2) {
+        this.className2 = className2;
+    }
+
+    @Override
+    public void setAttachedNode1(Node attachedNode1) {
+        this.attachedNode1 = attachedNode1;
+        updateCornerPosition(corner1, attachedNode1);
+    }
+
+    @Override
+    public void setAttachedNode2(Node attachedNode2) {
+        this.attachedNode2 = attachedNode2;
+        updateCornerPosition(corner2, attachedNode2);
+    }
 
 }

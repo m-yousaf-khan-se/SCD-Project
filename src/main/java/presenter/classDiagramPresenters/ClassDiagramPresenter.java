@@ -12,6 +12,7 @@ import models.classdiagram.Inherritance;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -704,7 +705,7 @@ public void updateComposition(String oldClassName1, String newClassName1, String
         return javaCode;
     }
 
-    public boolean loadClassDiagram(File file) {
+    public boolean loadClassDiagram(File file) throws IOException {
         System.out.println("Presenter received the follwing file:"+file.getName()+" with path to be loaded : " + file.getPath());
         List<models.classdiagram.Class> newClasses = new ArrayList<>();
         List<models.classdiagram.Aggregation> newAggreations = new ArrayList<>();
@@ -747,6 +748,32 @@ public void updateComposition(String oldClassName1, String newClassName1, String
                 {
                     newInheritance.add((models.classdiagram.Inherritance)relationships);
                 }
+            }
+
+
+            for(models.classdiagram.Class cls : newClasses)
+            {
+                view.loadClass(cls.getName(), (String[]) cls.getAttributes().toArray(), (String[]) cls.getMethods().toArray(), cls.getX(), cls.getY());
+            }
+
+            for(models.classdiagram.Aggregation agr : newAggreations)
+            {
+                view.loadAggregation(agr.getFrom().getName(), agr.getTo().getName());
+            }
+
+            for(models.classdiagram.Association agr : newAssociations)
+            {
+                view.loadAssociation(agr.getFrom().getName(), agr.getTo().getName(), agr.getMultiplicity1(), agr.getMultiplicity2());
+            }
+
+            for(models.classdiagram.generalization agr : newCopositions)
+            {
+                view.loadComposition(agr.getFrom().getName(), agr.getTo().getName());
+            }
+
+            for(models.classdiagram.Inherritance agr : newInheritance)
+            {
+                view.loadGeneralization(agr.getFrom().getName(), agr.getTo().getName());
             }
 
         }

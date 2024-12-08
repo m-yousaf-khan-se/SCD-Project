@@ -351,7 +351,7 @@ public class ViewIController{
 
 
     @FXML
-    private void loadExistingProject(ActionEvent event) {
+    private void loadExistingProject(ActionEvent event) throws IOException {
 
         if(!paneCanvas.getChildren().isEmpty() && !CurrentDiagramSaved)
         {
@@ -376,16 +376,17 @@ public class ViewIController{
             }
         }
 
-        //Create a file Chooser
+        // Create a FileChooser
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Loading Project");
+        fileChooser.setTitle("Load Project");
 
-        // Set extension filter to .json
+// Set extension filter to .json
         FileChooser.ExtensionFilter jsonFilter = new FileChooser.ExtensionFilter("JSON Files (*.json)", "*.json");
         fileChooser.getExtensionFilters().add(jsonFilter);
 
-        // Open the save dialog
-        File file = fileChooser.showSaveDialog(OwnerWin);
+// Open the open dialog
+        File file = fileChooser.showOpenDialog(OwnerWin);
+
 
         if (file != null) {
 
@@ -610,7 +611,142 @@ public class ViewIController{
 
 
     //------------------------------------Data Loading from class models --------------------------------
-    public static void loadClass(){
+    public static void loadClass(String name, String[] fieldDetails, String[] methodDetails, Double x, Double y) throws IOException {
+        //code of creating class
+        System.out.println("Creating empty class");
+        FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/UMLclass.fxml"));
+        Node container = loader.load();
+        UMLClassIController controller = loader.getController();
 
+        controller.setClassName1(name);
+        for(String field : fieldDetails)
+        {
+            controller.addNewField(field);
+        }
+        for(String method : methodDetails)
+        {
+            controller.addNewMethod(method);
+        }
+        controller.setCoordinates(x,y);
+
+        ViewIController.getPaneCanvas().getChildren().add(container);
+        ViewIController.storeClassController(container, controller);
     }
+
+    public static void loadAggregation(String className1, String className2) throws IOException {
+        System.out.println("Creating Aggregation");
+        FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/aggregation.fxml"));
+        Parent container = loader.load();
+        AggregationIController controller = loader.getController();
+
+        controller.setClassName1(className1);
+        controller.setClassName2(className2);
+        for(Map.Entry<Node, IController> entry : canvasClassNodes.entrySet())
+        {
+            if(!(entry.getValue() instanceof AggregationIController))
+                continue;
+
+            AggregationIController actrl = (AggregationIController) entry.getValue();
+
+            String []classNames = actrl.getClassesName();
+
+            if(classNames[0].equals(className1))
+                controller.setAttachedNode1(entry.getKey());
+
+            if(classNames[1].equals(className1))
+                controller.setAttachedNode2(entry.getKey());
+        }
+
+        ViewIController.getPaneCanvas().getChildren().add(container);
+        ViewIController.storeClassController(container, controller);
+    }
+
+    public static void loadAssociation(String className1, String className2, String multiplicity1, String multipliciy2) throws IOException {
+        System.out.println("Creating Association");
+        FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/association.fxml"));
+        Parent container = loader.load();
+        AssociationIController controller = loader.getController();
+
+        controller.setClassName1(className1);
+        controller.setClassName2(className2);
+        for(Map.Entry<Node, IController> entry : canvasClassNodes.entrySet())
+        {
+            if(!(entry.getValue() instanceof AssociationIController))
+                continue;
+
+            AssociationIController actrl = (AssociationIController) entry.getValue();
+
+            String []classNames = actrl.getClassesName();
+
+            if(classNames[0].equals(className1))
+                controller.setAttachedNode1(entry.getKey());
+
+            if(classNames[1].equals(className1))
+                controller.setAttachedNode2(entry.getKey());
+        }
+
+        controller.setMultiplicity1(multiplicity1);
+        controller.setMultiplicity2(multipliciy2);
+
+        ViewIController.getPaneCanvas().getChildren().add(container);
+        ViewIController.storeClassController(container, controller);
+    }
+
+    public static void loadComposition(String className1, String className2) throws IOException {
+        System.out.println("Creating Composition");
+        FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/composition.fxml"));
+        Parent container = loader.load();
+        CompositionIController controller = loader.getController();
+
+        controller.setClassName1(className1);
+        controller.setClassName2(className2);
+        for(Map.Entry<Node, IController> entry : canvasClassNodes.entrySet())
+        {
+            if(!(entry.getValue() instanceof CompositionIController))
+                continue;
+
+            CompositionIController actrl = (CompositionIController) entry.getValue();
+
+            String []classNames = actrl.getClassesName();
+
+            if(classNames[0].equals(className1))
+                controller.setAttachedNode1(entry.getKey());
+
+            if(classNames[1].equals(className1))
+                controller.setAttachedNode2(entry.getKey());
+        }
+
+        ViewIController.getPaneCanvas().getChildren().add(container);
+        ViewIController.storeClassController(container, controller);
+    }
+
+    public static void loadGeneralization(String className1, String className2) throws IOException {
+        System.out.println("Creating Generalization");
+        FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/generalization.fxml"));
+        Parent container = loader.load();
+        GeneralizationIController controller = loader.getController();
+
+        controller.setClassName1(className1);
+        controller.setClassName2(className2);
+        for(Map.Entry<Node, IController> entry : canvasClassNodes.entrySet())
+        {
+            if(!(entry.getValue() instanceof GeneralizationIController))
+                continue;
+
+            GeneralizationIController actrl = (GeneralizationIController) entry.getValue();
+
+            String []classNames = actrl.getClassesName();
+
+            if(classNames[0].equals(className1))
+                controller.setAttachedNode1(entry.getKey());
+
+            if(classNames[1].equals(className1))
+                controller.setAttachedNode2(entry.getKey());
+        }
+
+        ViewIController.getPaneCanvas().getChildren().add(container);
+        ViewIController.storeClassController(container, controller);
+    }
+
+
 }
