@@ -33,6 +33,10 @@ public  class useCaseController extends ViewIController implements IController {
         return useCaseName;
     }
 
+    public void setUseCaseName(String useCaseName) {
+        this.useCaseName = useCaseName;
+    }
+
     @FXML
     public void initialize() {
         assert useCasePane != null : "fx:id=\"useCasePane\" was not injected: check your FXML file 'useCasePane.fxml'.";
@@ -79,6 +83,10 @@ public  class useCaseController extends ViewIController implements IController {
     @Override
     public String[] getClassesName() {
         throw new UnsupportedOperationException("Not implemented! as it has one actor only right now");
+    }
+    public void setCoordinates(Double x, Double y){
+        useCaseGroup.setLayoutX(x);
+        useCaseGroup.setLayoutY(y);
     }
 
 }

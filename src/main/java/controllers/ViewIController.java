@@ -30,6 +30,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import models.usecase.Association;
 import presenter.classDiagramPresenters.ClassDiagramPresenter;
 import presenter.useCaseDiagramPresenters.UseCaseDiagramPresenter;
 
@@ -351,7 +352,7 @@ public class ViewIController{
 
 
     @FXML
-    private void loadExistingProject(ActionEvent event) {
+    private void loadExistingProject(ActionEvent event) throws IOException {
 
         if(!paneCanvas.getChildren().isEmpty() && !CurrentDiagramSaved)
         {
@@ -606,6 +607,106 @@ public class ViewIController{
         {
             System.out.println("Preseters are set successfully in the View!");
         }
+    }
+//----------------Deserializaton For UseCases--------
+    public static void loadUseCase(String name, Double x, Double y) throws IOException {
+        System.out.println("Creating Use Case");
+        FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlUseCaseViews/useCasePane.fxml"));
+        Parent container = loader.load();
+        useCaseController controller=loader.getController();
+
+        controller.setUseCaseName(name);
+        controller.setCoordinates(x,y);
+        ViewIController.getPaneCanvas().getChildren().add(container);
+        ViewIController.storeUseCaseController(container, controller);
+    }
+    public static void loadActor(String name, Double x, Double y) throws IOException {
+        System.out.println("Creating Actor");
+        FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlUseCaseViews/actor.fxml"));
+        Parent container = loader.load();
+        ActorController controller=loader.getController();
+
+        controller.setCoordinates(x,y);
+        controller.setActorName(name);
+        ViewIController.getPaneCanvas().getChildren().add(container);
+        ViewIController.storeUseCaseController(container, controller);
+    }
+    public static void loadUseCaseAssociation(String actorName, String useCaseName) throws IOException {
+        System.out.println("Creating Association Link");
+        FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlUseCaseViews/association.fxml"));
+        Parent container = loader.load();
+        useCaseAssociationIController controller=loader.getController();
+
+        controller.setUseCaseName(useCaseName);
+        controller.setActorName(actorName);
+
+        for(Map.Entry<Node,IController>entry:canvasUseCaseNodes.entrySet()){
+            if(!(entry.getValue() instanceof useCaseAssociationIController)){
+                continue;
+            }
+            useCaseAssociationIController ctrl=(useCaseAssociationIController)entry.getValue();
+            String[]useCaseAndActorNames= ctrl.getActorAndUseCaseNames();
+
+            if(useCaseAndActorNames[0].equals(actorName)){
+                controller.setAttachedActorNode(entry.getKey());
+            }
+            if(useCaseAndActorNames[1].equals(useCaseName)){
+                controller.setAttachedUseCaseNode(entry.getKey());
+            }
+        }
+        ViewIController.getPaneCanvas().getChildren().add(container);
+        ViewIController.storeUseCaseController(container, controller);
+    }
+    public static void loadInclude(String useCaseName1, String useCaseName2) throws IOException {
+        System.out.println("Creating Include Link");
+        FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlUseCaseViews/include.fxml"));
+        Parent container = loader.load();
+        includeIController controller=loader.getController();
+
+        controller.setUseCaseName1(useCaseName1);
+        controller.setUseCaseName2(useCaseName2);
+
+        for(Map.Entry<Node,IController>entry:canvasUseCaseNodes.entrySet()){
+            if(!(entry.getValue() instanceof includeIController)){
+                continue;
+            }
+            includeIController ctrl=(includeIController)entry.getValue();
+            String[]useCaseNames= ctrl.getUseCaseNames();
+
+            if(useCaseNames[0].equals(useCaseName1)){
+                controller.setAttachedNode1(entry.getKey());
+            }
+            if(useCaseNames[1].equals(useCaseName2)){
+                controller.setAttachedNode2(entry.getKey());
+            }
+        }
+        ViewIController.getPaneCanvas().getChildren().add(container);
+        ViewIController.storeUseCaseController(container, controller);
+    }
+    public static void loadExtend(String useCaseName1, String useCaseName2) throws IOException {
+        System.out.println("Creating Extend Link");
+        FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlUseCaseViews/extend.fxml"));
+        Parent container = loader.load();
+        extendIController controller=loader.getController();
+
+        controller.setUseCaseName1(useCaseName1);
+        controller.setUseCaseName2(useCaseName2);
+        for(Map.Entry<Node,IController>entry:canvasUseCaseNodes.entrySet()){
+            if(!(entry.getValue() instanceof extendIController)){
+                continue;
+            }
+            extendIController ctrl=(extendIController)entry.getValue();
+            String[]useCaseNames= ctrl.getUseCaseNames();
+
+            if(useCaseNames[0].equals(useCaseName1)){
+                controller.setAttachedNode1(entry.getKey());
+            }
+            if(useCaseNames[1].equals(useCaseName2)){
+                controller.setAttachedNode2(entry.getKey());
+            }
+        }
+        ViewIController.getPaneCanvas().getChildren().add(container);
+        ViewIController.storeUseCaseController(container, controller);
     }
 
 

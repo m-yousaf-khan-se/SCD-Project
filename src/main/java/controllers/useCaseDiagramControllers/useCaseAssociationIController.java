@@ -40,6 +40,24 @@ public  class useCaseAssociationIController extends ViewIController implements I
     String actorName="";
     String useCaseName="";
 
+    public void setAttachedActorNode(Node attachedActorNode) {
+        this.attachedActorNode = attachedActorNode;
+        updateCirclePositionToEdge(actorCircle,attachedActorNode);
+    }
+
+    public void setAttachedUseCaseNode(Node attachedUseCaseNode) {
+        this.attachedUseCaseNode = attachedUseCaseNode;
+        updateCirclePositionToEdge(useCaseCircle,attachedUseCaseNode);
+    }
+
+    public void setActorName(String actorName) {
+        this.actorName = actorName;
+    }
+
+    public void setUseCaseName(String useCaseName) {
+        this.useCaseName = useCaseName;
+    }
+
     @FXML
     void initialize() {
         setupAssociationLineBindings();

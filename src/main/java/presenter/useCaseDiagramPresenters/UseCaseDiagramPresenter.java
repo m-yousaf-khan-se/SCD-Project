@@ -9,6 +9,7 @@ import models.DiagramModel;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -319,7 +320,7 @@ public class UseCaseDiagramPresenter{
     }
 
 
-    public boolean loadUseCaseDiagram(File file) {
+    public boolean loadUseCaseDiagram(File file) throws IOException {
         System.out.println("Presenter received the follwing file:"+file.getName()+" with path to be loaded : " + file.getPath());
         List<models.usecase.Actor> newActors = new ArrayList<>();
         List<models.usecase.UseCase> newUseCases = new ArrayList<>();
@@ -365,7 +366,29 @@ public class UseCaseDiagramPresenter{
                     newExtend.add((models.usecase.Extend)relationships);
                 }
 
+
             }
+
+            for(models.usecase.Actor newActor : newActors){
+                view.loadActor(newActor.getName(),newActor.getX(),newActor.getY());
+            }
+            for(models.usecase.UseCase newUseCase : newUseCases){
+                view.loadUseCase(newUseCase.getName(),newUseCase.getX(),newUseCase.getY());
+            }
+            for(models.usecase.Include newIncludee : newInclude){
+                view.loadInclude(newIncludee.getFrom().getName(),newIncludee.getTo().getName());
+            }
+            for(models.usecase.Association newAssociationn : newAssociation){
+                view.loadUseCaseAssociation(newAssociationn.getFrom().getName(),newAssociationn.getTo().getName());
+            }
+            for(models.usecase.Extend newExtendd : newExtend){
+                view.loadUseCaseAssociation(newExtendd.getFrom().getName(),newExtendd.getTo().getName());
+            }
+
+
+
+
+
 
         }
         else
