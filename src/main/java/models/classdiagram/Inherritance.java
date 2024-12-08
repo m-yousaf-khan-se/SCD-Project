@@ -7,6 +7,10 @@ import models.Relationship;
 public class Inherritance extends Relationship {
 
     public Inherritance(){}
+    public Inherritance(String type)
+    {
+        super(type);
+    }
     public Inherritance(Component from, Component to, String label,int x,int y) {
         super(from, to, "Inherritance", label,x,y);
         System.out.println("Inherritance constructor ");

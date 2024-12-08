@@ -10,6 +10,10 @@ public class Association extends Relationship {
 
     // Constructor
     public Association(){}
+    public Association(String type)
+    {
+        super(type);
+    }
     public Association(Component from, Component to, String label, int x, int y, String multiplicity1, String multiplicity2) {
         super(from, to, "Association", label, x, y);
         this.multiplicity1 = multiplicity1;

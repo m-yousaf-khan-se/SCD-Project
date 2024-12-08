@@ -12,6 +12,16 @@ public abstract class Relationship implements Serializable {
 
     // Constructor
     public Relationship(){}
+    public Relationship(String type)
+    {
+        this.from=null;
+        this.to=null;
+        this.type=type;
+        this.label=null;
+        this.labelX=0;
+        this.labelY=0;
+
+    }
     public Relationship(Component from, Component to, String type, String label,int labelX,int labelY) {
         if (from == null || to == null) {
             throw new IllegalArgumentException("From and To components cannot be null");

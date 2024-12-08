@@ -2,18 +2,22 @@
 package presenter.useCaseDiagramPresenters;
 
 import controllers.ViewIController;
-//
-//import models.Component;
-//import models.DiagramModel;
-//import models.Relationship;
-//import models.classdiagram.Class;
-//import models.usecase.Actor;
-//import models.usecase.Association;
-//import models.usecase.UseCase;
-//import models.usecase.Extend;
-//import models.usecase.Include;
-//import  models.usecase.UseCaseDiagram;
 
+
+import data.DiagramSerializer;
+import models.Component;
+import models.DiagramModel;
+import models.Relationship;
+import models.classdiagram.Class;
+import models.usecase.Actor;
+import models.usecase.Association;
+import models.usecase.UseCase;
+import models.usecase.Extend;
+import models.usecase.Include;
+import  models.usecase.UseCaseDiagram;
+
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -305,6 +309,20 @@ public class UseCaseDiagramPresenter{
                 relationship.setLabelY(labelY);
                 break;
             }
+        }
+    }
+    //------------------------Save Projects to JSON ------------------------
+    public void saveClassDiagramProject(File file)
+    {
+        System.out.println("Presenter is passing the follwing file:"+file.getName()+" with path to be saved: " + file.getPath());
+
+        if (file.getName().endsWith(".json")) {
+            System.out.println("Fetching file Path to save the project: " + file.getPath().toString());
+            DiagramSerializer.saveToFile(model , file);
+        }
+        else
+        {
+            System.err.println("File path doesn't ends with .json extension!");
         }
     }
 
