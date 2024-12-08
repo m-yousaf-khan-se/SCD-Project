@@ -52,8 +52,8 @@ public class ViewIController{
     @FXML
     private MenuItem generateJavaCodeFromClassDiagramMenuItem; //using this fx:id just to enable and disable this option
 
-    HashMap<Node, IController> canvasClassNodes = new HashMap<Node, IController>();
-    HashMap<Node, IController> canvasUseCaseNodes = new HashMap<Node, IController>();
+    protected static HashMap<Node, IController> canvasClassNodes = new HashMap<Node, IController>();
+    protected static HashMap<Node, IController> canvasUseCaseNodes = new HashMap<Node, IController>();
 
     private static ViewIController instance; //for using sigleton pattern
 
@@ -150,9 +150,20 @@ public class ViewIController{
     protected void removeFieldFromClass(String className, String fieldName) {
         classDiagramPresenter.removeClassField(className, fieldName);
     }
+
+    protected static void removeClass(String className)
+    {
+        classDiagramPresenter.removeClass(className);
+    }
+
     //----------------------of Aggregation
     protected void updateAggregation(String className1, String newClassName1, String className2, String newClassName2) {
         classDiagramPresenter.updateAggregation(className1, newClassName1, className2, newClassName2);
+    }
+
+    protected static void removeAggregation(String className1, String className2)
+    {
+        classDiagramPresenter.removeAggregation(className1, className2);
     }
 
     //----------------------of Association
@@ -164,16 +175,28 @@ public class ViewIController{
         classDiagramPresenter.updateAssociationMultiplicity(className1, multiplicity1, className2, multiplicity2);
     }
 
+    protected static void removeAssociation(String className1, String className2)
+    {
+        classDiagramPresenter.removeAssociation(className1, className2);
+    }
     //----------------------of Composition
     protected void updateComposition(String className1, String newClassName1, String className2, String newClassName2) {
         classDiagramPresenter.updateComposition(className1, newClassName1, className2, newClassName2);
     }
-
+    protected static void removeComposition(String className1, String className2)
+    {
+        classDiagramPresenter.removeComposition(className1, className2);
+    }
     //----------------------of Generalization
 
     protected void updateGeneratlization(String className1, String newClassName1, String className2, String newClassName2) {
         classDiagramPresenter.updateinherritance(className1, newClassName1, className2, newClassName2);
     }
+    protected static void removeGeneralization(String className1, String className2)
+    {
+        classDiagramPresenter.removeInherritance(className1, className2);
+    }
+
 
     //----------------------------------------------------------------UseCase----------
     public static void storeUseCaseController(Node node, IController controller)
@@ -207,32 +230,45 @@ public class ViewIController{
             instance.useCaseDiagramPresenter.addAssociation(actorAndUseCaseNames[0], actorAndUseCaseNames[1]);
         }
 
-
-
     }
     //----------------------------------------------------------------For Actor----------
     protected void addOrUpdateActorName(String oldName, String newName) {
         useCaseDiagramPresenter.updateActorName(oldName, newName);
     }
+    protected static void removeActor(String name){
+        useCaseDiagramPresenter.removeActor(name);
+    }
     //----------------------------------------------------------------For UseCase----------
     protected void addOrUpdateUseCaseName(String oldName, String newName) {
         useCaseDiagramPresenter.updateUseCaseName(oldName, newName);
+    }
+    protected static void removeUseCase(String name){
+        useCaseDiagramPresenter.removeUseCase(name);
     }
     //----------------------------------------------------------------For UseCaseAssociation----------
 
     protected void updateUseCaseAssociation(String oldActorName, String newactorName, String olduseCaseName, String newuseCaseName) {
        useCaseDiagramPresenter.updateAssociation(oldActorName, newactorName, olduseCaseName, newuseCaseName);
     }
+    protected static void removeUseCaseAssociation(String actorName, String useCaseName) {
+        useCaseDiagramPresenter.removeAssociation(actorName, useCaseName);
+    }
     //----------------------------------------------------------------For Include Link----------
 
     protected void updateIncludeLink(String oldUseCaseName1, String newUseCaseName1, String oldUseCaseName2, String newUseCaseName2) {
       useCaseDiagramPresenter.updateInclude(oldUseCaseName1, newUseCaseName1, oldUseCaseName2, newUseCaseName2);
+    }
+    protected static void removeIncludeLink(String useCaseName1, String useCaseName2){
+        useCaseDiagramPresenter.removeInclude(useCaseName1, useCaseName2);
     }
 
     //----------------------------------------------------------------For Extend Link-----------
 
     protected void updateExtendLink(String oldUseCaseName1, String newUseCaseName1, String oldUseCaseName2, String newUseCaseName2) {
      useCaseDiagramPresenter.updateExtend(oldUseCaseName1, newUseCaseName1, oldUseCaseName2, newUseCaseName2);
+    }
+    protected static void removeExtendLink(String useCaseName1, String useCaseName2){
+        useCaseDiagramPresenter.removeExtend(useCaseName1, useCaseName2);
     }
 
     public static IController getClassController(Node node)
@@ -389,8 +425,8 @@ public class ViewIController{
 
         // Adding a listener to the children list of the paneCanvas
 
-//For Delete functionality of nodes.
-        paneCanvas.getChildren().addListener((ListChangeListener<Node>) change -> {
+        //For Delete functionality of nodes.
+        instance.paneCanvas.getChildren().addListener((ListChangeListener<Node>) change -> {
             while (change.next()) {
                 if (change.wasAdded()) {
                     for (Node newChild : change.getAddedSubList()) {
@@ -399,6 +435,7 @@ public class ViewIController{
                         System.out.println("A new child was added: " + newChild.getClass().getName());
                     }
                 }
+
                 if (change.wasRemoved()) {
                     for (Node removedChild : change.getRemoved()) {
                         System.out.println("A child was removed: " + removedChild.getClass().getName());
