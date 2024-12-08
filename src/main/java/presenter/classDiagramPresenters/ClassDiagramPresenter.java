@@ -234,9 +234,11 @@ public class ClassDiagramPresenter {
     }
     //function for setting the cordinates of the class ... call it when we are saving the diagram
     public void setClassCoordinates(String className, Double x, Double y) {
+        System.out.println("Co-ordinates: x="+x+" y="+y+" of the class: " + className + " passed to the class presenter.");
         for (Component component : model.getComponents()) {
-            if (component instanceof Class && component.getDetails().equals(className)) {
+            if (component instanceof Class && component.getName().equals(className)) {
                 Class clazz = (Class) component;
+                System.out.println("Setting up Co-ordinates of the class: " + clazz.getName());
                 clazz.setX(x);
                 clazz.setY(y);
                 break;
