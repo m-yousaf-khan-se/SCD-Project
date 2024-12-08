@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class DiagramSerializer {
 
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    static final ObjectMapper objectMapper = new ObjectMapper();
     private static DefaultPrettyPrinter prettyPrinter = new DefaultPrettyPrinter();
 
     public static void saveToFile(DiagramModel diagram, File file) {

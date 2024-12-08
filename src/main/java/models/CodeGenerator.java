@@ -10,20 +10,28 @@ import java.util.Set;
 
 public class CodeGenerator {
 
+
+
     public static String generateCode(DiagramModel diagramModel) {
         clearConsole(); // Clear the console before printing
-        String classCode = "Unable to generate code";
-        for (Component component : diagramModel.getComponents()) {
-            if (component instanceof models.classdiagram.Class) {
-                classCode = generateClassCode((models.classdiagram.Class) component, diagramModel);
-                System.out.println("Generated Code for " + ((models.classdiagram.Class) component).getName() + ":\n");
-                System.out.println(classCode);
-                System.out.println("--------------------------------------------------");
-            }
-        }
+        StringBuilder allClassCode = new StringBuilder();
 
-        return classCode;
+        for (Component component : diagramModel.getComponents()) {
+           if (component instanceof models.classdiagram.Class) {
+               String classCode = generateClassCode((models.classdiagram.Class) component, diagramModel);
+               allClassCode
+                      .append("//")
+                      .append(((models.classdiagram.Class) component).getName())
+                      .append(":\n")
+                      .append(classCode)
+                       .append("\n//--------------------------------------------------\n");
+        }
     }
+
+    System.out.println(allClassCode.toString()); // Print all the generated code
+    return allClassCode.toString(); // Return the concatenated code
+}
+
 
     private static String generateClassCode(models.classdiagram.Class clazz, DiagramModel diagramModel) {
         StringBuilder code = new StringBuilder();
@@ -42,11 +50,13 @@ public class CodeGenerator {
         // Add attributes
         addAttributes(clazz, code);
 
+        addRelationships(clazz, diagramModel, code);
+
         // Add methods
         addMethods(clazz, code);
 
         // Handle relationships (Association, Aggregation, Composition)
-        addRelationships(clazz, diagramModel, code);
+        //addRelationships(clazz, diagramModel, code);
 
         // Close class
         code.append("}\n");
@@ -57,15 +67,15 @@ public class CodeGenerator {
     private static String getParentClass(models.classdiagram.Class clazz, DiagramModel diagramModel) {
         // Iterate through relationships to check for inheritance
         for (Relationship relationship : diagramModel.getRelationships()) {
-            System.out.println("Inside the generate code getparent class function");
-            System.out.println("Relationship Type: " + relationship.getType());
+            //System.out.println("Inside the generate code getparent class function");
+            //System.out.println("Relationship Type: " + relationship.getType());
 
             if ("Inherritance".equalsIgnoreCase(relationship.getType())) {
-                System.out.println("Inside the generate code getparent class if check1");
+                //System.out.println("Inside the generate code getparent class if check1");
 
                 // Check if relationship.getFrom() is valid and is not the same as clazz (to prevent self-inheritance)
                 if (relationship.getFrom() != null && relationship.getFrom().getName().equals(clazz.getName())) {
-                    System.out.println("Inside the generate code getparent class if check2");
+                    //System.out.println("Inside the generate code getparent class if check2");
 
                     Component parentComponent = relationship.getTo();
                     if (parentComponent instanceof models.classdiagram.Class) {
@@ -138,7 +148,7 @@ public class CodeGenerator {
 
     private static void addRelationships(models.classdiagram.Class clazz, DiagramModel diagramModel, StringBuilder code) {
         // Handle Association, Aggregation, and Composition
-        System.out.println("Inside addRelationship");
+        //System.out.println("Inside addRelationship");
         for (Relationship relationship : diagramModel.getRelationships()) {
             if (relationship.getFrom() == clazz) { // Check if this relationship starts from the current class
                 String relationshipType = relationship.getType();

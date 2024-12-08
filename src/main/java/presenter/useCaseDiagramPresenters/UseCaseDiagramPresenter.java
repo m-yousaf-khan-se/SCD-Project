@@ -8,6 +8,7 @@ import data.DiagramSerializer;
 import models.Component;
 import models.DiagramModel;
 import models.Relationship;
+import models.classdiagram.Aggregation;
 import models.classdiagram.Class;
 import models.usecase.Actor;
 import models.usecase.Association;
@@ -182,20 +183,70 @@ public class UseCaseDiagramPresenter{
             model.addRelationship(association);  // Add to diagram model
         }
     }
+//    public void updateAssociation(String oldActorName, String newActorName, String oldUseCaseName, String newUseCaseName) {
+//        // Find and update the relationship if exists
+//        for (models.Relationship relationship : model.getRelationships()) {
+//            if (relationship instanceof models.usecase.Association) {
+//                models.usecase.Association association = (models.usecase.Association) relationship;
+//                if (association.getFrom().getDetails().equals(oldActorName) && association.getTo().getDetails().equals(oldActorName)) {
+//                    // Update the components if the relationship is found
+//                    models.usecase.Actor actorObj = getActorByName(newActorName);
+//                    models.usecase.UseCase useCaseObj = getUseCaseByName(newUseCaseName);
+//                    if (newActorName != null && newUseCaseName != null) {
+//                        association.setFrom(actorObj);
+//                        association.setTo(useCaseObj);
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//    }
+
     public void updateAssociation(String oldActorName, String newActorName, String oldUseCaseName, String newUseCaseName) {
-        // Find and update the relationship if exists
-        for (models.Relationship relationship : model.getRelationships()) {
-            if (relationship instanceof models.usecase.Association) {
-                models.usecase.Association association = (models.usecase.Association) relationship;
-                if (association.getFrom().getDetails().equals(oldActorName) && association.getTo().getDetails().equals(oldActorName)) {
-                    // Update the components if the relationship is found
-                    models.usecase.Actor actorObj = getActorByName(newActorName);
-                    models.usecase.UseCase useCaseObj = getUseCaseByName(newUseCaseName);
-                    if (newActorName != null && newUseCaseName != null) {
-                        association.setFrom(actorObj);
-                        association.setTo(useCaseObj);
-                        break;
+        System.out.println("Presenter Update Inherritance");
+        // System.out.println("Old class names: " + oldClassName1 + ", " + oldClassName2);
+        // System.out.println("New class names: " + newClassName1 + ", " + newClassName2);
+
+        // Iterate through all relationships in the model
+        for (Relationship relationship : model.getRelationships()) {
+            System.out.println("Inside for loop");
+
+            // Check if the relationship is an instance of Inherritance
+            if (relationship instanceof Include) {
+                System.out.println("Inside if condition");
+                Include association = (Include) relationship;
+
+                // Check if the relationship involves the old class names
+                boolean isMatchingFrom = (oldActorName == null || association.getFrom().getDetails().equals(oldActorName));
+                boolean isMatchingTo = (oldUseCaseName == null || association.getTo().getDetails().equals(oldUseCaseName));
+
+                System.out.println("Checking relationship: " + association);
+                System.out.println("Matching from: " + isMatchingFrom + ", Matching to: " + isMatchingTo);
+
+                // If both the from and to classes match, update them
+                if (isMatchingFrom || isMatchingTo) {
+                    // Find the new components based on the new class names
+                    Component newClass1 = getActorByName(newActorName);
+                    Component newClass2 = getUseCaseByName(newUseCaseName);
+
+                    // Update the "from" component if the new class is found
+                    if (newClass1 != null) {
+                        System.out.println("Setting 'from' to: " + newActorName);
+                        association.setFrom(newClass1); // Update "from" with the new class
+                    } else {
+                        System.err.println("Warning: Could not find class: " + newActorName);
                     }
+
+                    // Update the "to" component if the new class is found
+                    if (newClass2 != null) {
+                        System.out.println("Setting 'to' to: " + newUseCaseName);
+                        association.setTo(newClass2); // Update "to" with the new class
+                    } else {
+                        System.err.println("Warning: Could not find class: " + newUseCaseName);
+                    }
+
+                    // Exit after updating the relationship
+                    break;
                 }
             }
         }
@@ -227,24 +278,74 @@ public class UseCaseDiagramPresenter{
             models.usecase.Extend extend=new models.usecase.Extend();
         }
     }
+
     public void updateExtend(String oldUseCaseName1, String newUseCaseName1, String oldUseCaseName2, String newUseCaseName2) {
-        // Find and update the relationship if exists
-        for (models.Relationship relationship : model.getRelationships()) {
-            if (relationship instanceof models.usecase.Extend) {
-                models.usecase.Extend extend = (models.usecase.Extend) relationship;
-                if (extend.getFrom().getDetails().equals(oldUseCaseName1) && extend.getTo().getDetails().equals(oldUseCaseName1)) {
-                    // Update the components if the relationship is found
-                    models.usecase.UseCase useCaseObj1 = getUseCaseByName(newUseCaseName1);
-                    models.usecase.UseCase useCaseObj2 = getUseCaseByName(newUseCaseName2);
-                    if (newUseCaseName1 != null && newUseCaseName2 != null) {
-                        extend.setFrom(useCaseObj1);
-                        extend.setTo(useCaseObj2);
-                        break;
+        System.out.println("Presenter Update Inherritance");
+        // System.out.println("Old class names: " + oldClassName1 + ", " + oldClassName2);
+        // System.out.println("New class names: " + newClassName1 + ", " + newClassName2);
+
+        // Iterate through all relationships in the model
+        for (Relationship relationship : model.getRelationships()) {
+            System.out.println("Inside for loop");
+
+            // Check if the relationship is an instance of Inherritance
+            if (relationship instanceof Extend) {
+                System.out.println("Inside if condition");
+                Extend association = (Extend) relationship;
+
+                // Check if the relationship involves the old class names
+                boolean isMatchingFrom = (oldUseCaseName1 == null || association.getFrom().getDetails().equals(oldUseCaseName1));
+                boolean isMatchingTo = (oldUseCaseName2 == null || association.getTo().getDetails().equals(oldUseCaseName2));
+
+                System.out.println("Checking relationship: " + association);
+                System.out.println("Matching from: " + isMatchingFrom + ", Matching to: " + isMatchingTo);
+
+                // If both the from and to classes match, update them
+                if (isMatchingFrom || isMatchingTo) {
+                    // Find the new components based on the new class names
+                    Component newClass1 = getUseCaseByName(newUseCaseName1);
+                    Component newClass2 = getUseCaseByName(newUseCaseName2);
+
+                    // Update the "from" component if the new class is found
+                    if (newClass1 != null) {
+                        System.out.println("Setting 'from' to: " + newUseCaseName1);
+                        association.setFrom(newClass1); // Update "from" with the new class
+                    } else {
+                        System.err.println("Warning: Could not find class: " + newUseCaseName1);
                     }
+
+                    // Update the "to" component if the new class is found
+                    if (newClass2 != null) {
+                        System.out.println("Setting 'to' to: " + newUseCaseName2);
+                        association.setTo(newClass2); // Update "to" with the new class
+                    } else {
+                        System.err.println("Warning: Could not find class: " + newUseCaseName2);
+                    }
+
+                    // Exit after updating the relationship
+                    break;
                 }
             }
         }
     }
+//    public void updateExtend(String oldUseCaseName1, String newUseCaseName1, String oldUseCaseName2, String newUseCaseName2) {
+//        // Find and update the relationship if exists
+//        for (models.Relationship relationship : model.getRelationships()) {
+//            if (relationship instanceof models.usecase.Extend) {
+//                models.usecase.Extend extend = (models.usecase.Extend) relationship;
+//                if (extend.getFrom().getDetails().equals(oldUseCaseName1) && extend.getTo().getDetails().equals(oldUseCaseName1)) {
+//                    // Update the components if the relationship is found
+//                    models.usecase.UseCase useCaseObj1 = getUseCaseByName(newUseCaseName1);
+//                    models.usecase.UseCase useCaseObj2 = getUseCaseByName(newUseCaseName2);
+//                    if (newUseCaseName1 != null && newUseCaseName2 != null) {
+//                        extend.setFrom(useCaseObj1);
+//                        extend.setTo(useCaseObj2);
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//    }
     public void removeExtend(String useCaseName1, String useCaseName2) {
         // Remove the aggregation relationship based on class names
         model.getRelationships().removeIf(relationship ->
@@ -273,24 +374,75 @@ public class UseCaseDiagramPresenter{
             models.usecase.Include include=new models.usecase.Include();
         }
     }
+//    public void updateInclude(String oldUseCaseName1, String newUseCaseName1, String oldUseCaseName2, String newUseCaseName2) {
+//        // Find and update the relationship if exists
+//        for (models.Relationship relationship : model.getRelationships()) {
+//            if (relationship instanceof models.usecase.Include) {
+//                models.usecase.Include include = (models.usecase.Include) relationship;
+//                if (include.getFrom().getDetails().equals(oldUseCaseName1) && include.getTo().getDetails().equals(oldUseCaseName1)) {
+//                    // Update the components if the relationship is found
+//                    models.usecase.UseCase useCaseObj1 = getUseCaseByName(newUseCaseName1);
+//                    models.usecase.UseCase useCaseObj2 = getUseCaseByName(newUseCaseName2);
+//                    if (newUseCaseName1 != null && newUseCaseName2 != null) {
+//                        include.setFrom(useCaseObj1);
+//                        include.setTo(useCaseObj2);
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//    }
+
     public void updateInclude(String oldUseCaseName1, String newUseCaseName1, String oldUseCaseName2, String newUseCaseName2) {
-        // Find and update the relationship if exists
-        for (models.Relationship relationship : model.getRelationships()) {
-            if (relationship instanceof models.usecase.Include) {
-                models.usecase.Include include = (models.usecase.Include) relationship;
-                if (include.getFrom().getDetails().equals(oldUseCaseName1) && include.getTo().getDetails().equals(oldUseCaseName1)) {
-                    // Update the components if the relationship is found
-                    models.usecase.UseCase useCaseObj1 = getUseCaseByName(newUseCaseName1);
-                    models.usecase.UseCase useCaseObj2 = getUseCaseByName(newUseCaseName2);
-                    if (newUseCaseName1 != null && newUseCaseName2 != null) {
-                        include.setFrom(useCaseObj1);
-                        include.setTo(useCaseObj2);
-                        break;
+        System.out.println("Presenter Update Inherritance");
+       // System.out.println("Old class names: " + oldClassName1 + ", " + oldClassName2);
+       // System.out.println("New class names: " + newClassName1 + ", " + newClassName2);
+
+        // Iterate through all relationships in the model
+        for (Relationship relationship : model.getRelationships()) {
+            System.out.println("Inside for loop");
+
+            // Check if the relationship is an instance of Inherritance
+            if (relationship instanceof Include) {
+                System.out.println("Inside if condition");
+                Include association = (Include) relationship;
+
+                // Check if the relationship involves the old class names
+                boolean isMatchingFrom = (oldUseCaseName1 == null || association.getFrom().getDetails().equals(oldUseCaseName1));
+                boolean isMatchingTo = (oldUseCaseName2 == null || association.getTo().getDetails().equals(oldUseCaseName2));
+
+                System.out.println("Checking relationship: " + association);
+                System.out.println("Matching from: " + isMatchingFrom + ", Matching to: " + isMatchingTo);
+
+                // If both the from and to classes match, update them
+                if (isMatchingFrom || isMatchingTo) {
+                    // Find the new components based on the new class names
+                    Component newClass1 = getUseCaseByName(newUseCaseName1);
+                    Component newClass2 = getUseCaseByName(newUseCaseName2);
+
+                    // Update the "from" component if the new class is found
+                    if (newClass1 != null) {
+                        System.out.println("Setting 'from' to: " + newUseCaseName1);
+                        association.setFrom(newClass1); // Update "from" with the new class
+                    } else {
+                        System.err.println("Warning: Could not find class: " + newUseCaseName1);
                     }
+
+                    // Update the "to" component if the new class is found
+                    if (newClass2 != null) {
+                        System.out.println("Setting 'to' to: " + newUseCaseName2);
+                        association.setTo(newClass2); // Update "to" with the new class
+                    } else {
+                        System.err.println("Warning: Could not find class: " + newUseCaseName2);
+                    }
+
+                    // Exit after updating the relationship
+                    break;
                 }
             }
         }
     }
+
     public void removeInclude(String useCaseName1, String useCaseName2) {
         // Remove the aggregation relationship based on class names
         model.getRelationships().removeIf(relationship ->
