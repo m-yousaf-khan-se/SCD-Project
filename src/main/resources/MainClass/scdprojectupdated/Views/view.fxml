@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="903.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ViewIController">
+<BorderPane stylesheets="@styles/paneCanvas.css"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="903.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ViewIController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -50,8 +50,8 @@
       <ScrollPane fx:id="MainViewRightBorderArea" prefHeight="200.0" prefWidth="113.0" BorderPane.alignment="CENTER" />
    </right>
    <center>
-      <ScrollPane prefHeight="333.0" prefWidth="490.0" BorderPane.alignment="CENTER">
-         <content>
+      <ScrollPane fx:id="paneCanvasScrollPane"  prefHeight="333.0" prefWidth="490.0" BorderPane.alignment="CENTER">
+         <content >
             <Pane fx:id="paneCanvas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="406.0" prefWidth="488.0" />
          </content>
       </ScrollPane>
