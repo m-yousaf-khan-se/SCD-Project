@@ -51,6 +51,7 @@ public class ApplicationMain extends Application {
 
                 // Setting up MVP
                 initializeMVP();
+                parentView.setOwnerWindow(stage);
 
                 // Set the actual view
                 stage.setScene(mainScene);

@@ -12,6 +12,7 @@ import models.classdiagram.Inherritance;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,17 +21,16 @@ public class ClassDiagramPresenter {
 
     ViewIController view;
     IModel model1;
-    models.classdiagram.Class clazz=new models.classdiagram.Class();
-    models.classdiagram.Aggregation aggregation=new Aggregation();
-    models.classdiagram.Association association=new Association();
-    models.classdiagram.generalization generalizations=new generalization();
-    models.classdiagram.Inherritance inherritance=new Inherritance();
-    models.CodeGenerator code=new models.CodeGenerator();
+    models.classdiagram.Class clazz = new models.classdiagram.Class();
+    models.classdiagram.Aggregation aggregation = new Aggregation();
+    models.classdiagram.Association association = new Association();
+    models.classdiagram.generalization generalizations = new generalization();
+    models.classdiagram.Inherritance inherritance = new Inherritance();
+    models.CodeGenerator code = new models.CodeGenerator();
 
     List<models.classdiagram.Class> classes = new ArrayList<>();
     private models.DiagramModel model; // Reference to the DiagramModel
 //clazz,aggregation,association,generalizations,inherritance,classes
-
 
     int count=0;
     public ClassDiagramPresenter(models.DiagramModel model,models.classdiagram.Class clazz,models.classdiagram.Aggregation aggregation,models.classdiagram.Association association,models.classdiagram.generalization generalizations,models.classdiagram.Inherritance inherritance,List<models.classdiagram.Class> classes , ViewIController view) {
@@ -684,23 +684,105 @@ public void updateComposition(String oldClassName1, String newClassName1, String
     }
 
     //------------------------Save Projects to JSON ------------------------
-    public void saveClassDiagramProject(File file)
+    public boolean saveClassDiagramProject(File file)
     {
         System.out.println("Presenter is passing the follwing file:"+file.getName()+" with path to be saved: " + file.getPath());
 
         if (file.getName().endsWith(".json")) {
             System.out.println("Fetching file Path to save the project: " + file.getPath().toString());
-            DiagramSerializer.saveToFile(model , file);
+            return DiagramSerializer.saveToFile(model , file);
         }
         else
         {
             System.err.println("File path doesn't ends with .json extension!");
         }
+
+        return false;
     }
 
     public String generateJavaCodeFromClassDiagram() {
         String javaCode = CodeGenerator.generateCode(model);
         return javaCode;
+    }
+
+    public boolean loadClassDiagram(File file) throws IOException {
+        System.out.println("Presenter received the follwing file:"+file.getName()+" with path to be loaded : " + file.getPath());
+        List<models.classdiagram.Class> newClasses = new ArrayList<>();
+        List<models.classdiagram.Aggregation> newAggreations = new ArrayList<>();
+        List<models.classdiagram.Association> newAssociations = new ArrayList<>();
+        List<models.classdiagram.generalization> newCopositions = new ArrayList<>();
+        List<models.classdiagram.Inherritance> newInheritance = new ArrayList<>();
+
+
+        if (file.getName().endsWith(".json")) {
+            System.out.println("Fetching file Path to load the project: " + file.getPath().toString() + " from that file.");
+            DiagramModel loadedModel = DiagramSerializer.loadFromFile(file);
+            if(loadedModel == null)
+            {
+                return false;
+            }
+
+            for(models.Component components : loadedModel.getComponents())
+            {
+                if(components instanceof models.classdiagram.Class)
+                {
+                    newClasses.add((models.classdiagram.Class)components);
+                }
+            }
+
+            for(models.Relationship relationships : loadedModel.getRelationships())
+            {
+                if(relationships instanceof models.classdiagram.Aggregation)
+                {
+                    newAggreations.add((models.classdiagram.Aggregation)relationships);
+                }
+                else if(relationships instanceof models.classdiagram.Association)
+                {
+                    newAssociations.add((models.classdiagram.Association)relationships);
+                }
+                else if(relationships instanceof models.classdiagram.generalization)
+                {
+                    newCopositions.add((models.classdiagram.generalization)relationships);
+                }
+                else if(relationships instanceof models.classdiagram.Inherritance)
+                {
+                    newInheritance.add((models.classdiagram.Inherritance)relationships);
+                }
+            }
+
+
+            for(models.classdiagram.Class cls : newClasses)
+            {
+                view.loadClass(cls.getName(), (String[]) cls.getAttributes().toArray(), (String[]) cls.getMethods().toArray(), cls.getX(), cls.getY());
+            }
+
+            for(models.classdiagram.Aggregation agr : newAggreations)
+            {
+                view.loadAggregation(agr.getFrom().getName(), agr.getTo().getName());
+            }
+
+            for(models.classdiagram.Association agr : newAssociations)
+            {
+                view.loadAssociation(agr.getFrom().getName(), agr.getTo().getName(), agr.getMultiplicity1(), agr.getMultiplicity2());
+            }
+
+            for(models.classdiagram.generalization agr : newCopositions)
+            {
+                view.loadComposition(agr.getFrom().getName(), agr.getTo().getName());
+            }
+
+            for(models.classdiagram.Inherritance agr : newInheritance)
+            {
+                view.loadGeneralization(agr.getFrom().getName(), agr.getTo().getName());
+            }
+
+        }
+        else
+        {
+            System.err.println("Unable to load Project: File path doesn't ends with .json extension!");
+        }
+
+        return false;
     }
 }
 

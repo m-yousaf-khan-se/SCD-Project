@@ -16,8 +16,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
-public class AssociationIController  extends ViewIController implements IController {
-    private static final String[] MULTIPLICITY_CHOICES = {"0..1", "1..1", "0..*", "1..*"};
+public class AssociationIController  extends ViewIController implements IController, IClassComponentController {
+    public static final String[] MULTIPLICITY_CHOICES = {"0..1", "1..1", "0..*", "1..*"};
 
     @FXML
     private ResourceBundle resources;
@@ -252,4 +252,35 @@ public class AssociationIController  extends ViewIController implements IControl
     {
         return new String[]{multiplicity1ChoiceBox.getValue(), multiplicity2ChoiceBox.getValue()};
     }
+
+    @Override
+    public void setClassName1(String className1) {
+        this.className1 = className1;
+    }
+
+    @Override
+    public void setClassName2(String className2) {
+        this.className2 = className2;
+    }
+
+    @Override
+    public void setAttachedNode1(Node attachedNode1) {
+        this.attachedNode1 = attachedNode1;
+        updateCornerPosition(corner1, attachedNode1);
+    }
+
+    @Override
+    public void setAttachedNode2(Node attachedNode2) {
+        this.attachedNode2 = attachedNode2;
+        updateCornerPosition(corner2, attachedNode2);
+    }
+
+    public void setMultiplicity1(String multiplicity1) {
+        multiplicity1ChoiceBox.setValue(multiplicity1);
+    }
+
+    public void setMultiplicity2(String multiplicity2) {
+        multiplicity2ChoiceBox.setValue(multiplicity2);
+    }
+
 }

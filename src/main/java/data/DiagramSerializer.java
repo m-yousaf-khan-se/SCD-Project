@@ -18,14 +18,16 @@ public class DiagramSerializer {
     private static final ObjectMapper objectMapper = new ObjectMapper();
     private static DefaultPrettyPrinter prettyPrinter = new DefaultPrettyPrinter();
 
-    public static void saveToFile(DiagramModel diagram, File file) {
+    public static boolean saveToFile(DiagramModel diagram, File file) {
         System.out.println("Saving File " + file.getPath().toString());
         try {
             objectMapper.writer(prettyPrinter).writeValue(file, diagram);
             System.out.println("Diagram saved to " + file.getName());
+            return true;
         } catch (IOException e) {
             System.err.println("Error saving diagram: " + e.getMessage());
         }
+        return false;
     }
 
     public static DiagramModel loadFromFile(File file) {

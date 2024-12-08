@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -16,7 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public class UMLClassIController extends ViewIController implements IController {
+public class UMLClassIController extends ViewIController implements IController, IClassComponentController {
 
     @FXML
     public Group umlClassGroup;
@@ -158,6 +159,71 @@ public class UMLClassIController extends ViewIController implements IController 
     @Override
     public String[] getClassesName() {
         throw new UnsupportedOperationException("Not implemented! as Class Diagram contains name of only one class. Call getUMLClassName() ");
+    }
+
+    @Override
+    public void setClassName1(String className1) {
+        this.className = className1;
+    }
+
+    @Override
+    public void setClassName2(String className2) {
+        this.className = className2;
+    }
+
+    @Override
+    public void setAttachedNode1(Node attachedNode1) {
+        throw new UnsupportedOperationException("These methods are only valid for relationships");
+    }
+
+    @Override
+    public void setAttachedNode2(Node attachedNode2) {
+        throw new UnsupportedOperationException("These methods are only valid for relationships");
+    }
+
+    public void addNewMethod(String methodDetail) {
+
+        if(methodNameField.getText().isEmpty())
+        {
+            methodNameField.setText(methodDetail);
+            return;
+        }
+
+        // Create a new TextField for the method
+        TextField newMethod = new TextField(methodDetail);
+
+        // Setup the TextField with a prompt and other properties
+        setupTextField(newMethod, "(+/#/-):method name:returnType");
+
+        // Add the TextField to the VBox before the "Add Method" button
+        classVBox.getChildren().add(classVBox.getChildren().indexOf(addMethodBtn), newMethod);
+
+        System.out.println("New method added: " + methodDetail);
+    }
+
+    public void addNewField(String fieldDetail) {
+        if(classNameField.getText().isEmpty())
+        {
+            classNameField.setText(fieldDetail);
+            return;
+        }
+
+        // Create a new TextField for the field
+        TextField newField = new TextField(fieldDetail);
+
+        // Setup the TextField with a prompt and other properties
+        setupTextField(newField, "(+/-/#):variable name:returnType");
+
+        // Add the TextField to the VBox before the "Add Field" button
+        classVBox.getChildren().add(classVBox.getChildren().indexOf(addFieldBtn), newField);
+
+        System.out.println("New field added: " + fieldDetail);
+    }
+
+    public void setCoordinates(Double x, Double y)
+    {
+        umlClassGroup.setLayoutX(x);
+        umlClassGroup.setLayoutY(y);
     }
 
 }
