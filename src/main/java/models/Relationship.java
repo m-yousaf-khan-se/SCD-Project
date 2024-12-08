@@ -7,8 +7,8 @@ public abstract class Relationship implements Serializable {
     private Component to;   // Target component
     private String type;    // Relationship type (e.g., Association, Include)
     private String label;   // Label for the relationship (e.g., "extends", "includes")
-    private int labelX;     // X-coordinate for the label
-    private int labelY;     // Y-coordinate for the label
+    private double labelX;     // X-coordinate for the label
+    private double labelY;     // Y-coordinate for the label
 
     // Constructor
     public Relationship(){}
@@ -22,7 +22,7 @@ public abstract class Relationship implements Serializable {
         this.labelY=0;
 
     }
-    public Relationship(Component from, Component to, String type, String label,int labelX,int labelY) {
+    public Relationship(Component from, Component to, String type, String label,double labelX,double labelY) {
         if (from == null || to == null) {
             throw new IllegalArgumentException("From and To components cannot be null");
         }
@@ -67,19 +67,19 @@ public abstract class Relationship implements Serializable {
         this.label = label;
     }
 
-    public int getLabelX() {
+    public double getLabelX() {
         return labelX;
     }
 
-    public void setLabelX(int labelX) {
+    public void setLabelX(double labelX) {
         this.labelX = labelX;
     }
 
-    public int getLabelY() {
+    public double getLabelY() {
         return labelY;
     }
 
-    public void setLabelY(int labelY) {
+    public void setLabelY(double labelY) {
         this.labelY = labelY;
     }
 

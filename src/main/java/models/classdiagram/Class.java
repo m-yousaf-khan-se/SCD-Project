@@ -12,8 +12,8 @@ public class Class implements Component, Serializable {
     private String name;
     private List<String> attributes;
     private List<String> methods;
-    private int x;  // X-coordinate for positioning the component
-    private int y;  // Y-coordinate for positioning the component
+    private double x;  // X-coordinate for positioning the component
+    private double y;  // Y-coordinate for positioning the component
 
     // Constructor
     public Class()
@@ -22,8 +22,8 @@ public class Class implements Component, Serializable {
         this.name = name;
         this.attributes = new ArrayList<>();
         this.methods = new ArrayList<>();
-        this.x = 0;  // Set the initial x-coordinate
-        this.y = 0;// Set the initial y-coordinate
+        this.x = 0.0;  // Set the initial x-coordinate
+        this.y = 0.0;// Set the initial y-coordinate
         System.out.println("Inside model class constructor");
     }
 
@@ -65,25 +65,28 @@ public class Class implements Component, Serializable {
 
     }
     // Getter and setter for coordinates
-    public int getX() {
+    @Override
+    public double getX() {
         System.out.println("Getting x cordinate ");
 
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         System.out.println("Setting x cordinate ");
 
         this.x = x;
     }
 
-    public int getY() {
+    @Override
+    public double getY()
+    {
         System.out.println("Getting y cordinate ");
 
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         System.out.println("Setting x cordinate ");
 
         this.y = y;
@@ -113,7 +116,7 @@ public class Class implements Component, Serializable {
 
     // Implementing setCoordinates from the Component interface
     @Override
-    public void setCoordinates(int x, int y) {
+    public void setCoordinates(double x, double y) {
         this.x = x;
         this.y = y;
     }
