@@ -10,7 +10,9 @@ import java.util.ResourceBundle;
 
 import controllers.classDiagramControllers.*;
 import controllers.useCaseDiagramControllers.*;
-import javafx.scene.control.Alert;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.WritableImage;
 import javafx.embed.swing.SwingFXUtils;
 
@@ -23,9 +25,6 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -354,8 +353,28 @@ public class ViewIController{
     }
 
     @FXML
-    private void generateJavaCodeFromClassDiagramListener(ActionEvent event) {
+    private void generateJavaCodeFromClassDiagramListener(ActionEvent event) throws IOException {
+        // Create a new stage for the window
+        Stage stage = new Stage();
+
+        // Fetch the generated Java code from the presenter
+        String javaCode = classDiagramPresenter.generateJavaCodeFromClassDiagram();
+        System.out.println("Java code is fetched from the presenter");
+
+        // Load the FXML and initialize the controller
+        FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/TextAreaForGeneratedJavaCode.fxml"));
+        Parent root = loader.load(); // This initializes the controller
+
+        // Get the controller and set the text in the TextArea
+        generateCodeWindowController controller = loader.getController();
+        controller.setTextArea(javaCode);
+
+        // Set the scene and show the stage
+        stage.setScene(new Scene(root));
+        stage.setTitle("Generated Java Code");
+        stage.show();
     }
+
 
     @FXML
     private void setStatusForGenerateJavaCodeFromClassDiagramStatusListener(Event event) {

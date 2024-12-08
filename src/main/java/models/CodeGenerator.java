@@ -10,22 +10,22 @@ import java.util.Set;
 
 public class CodeGenerator {
 
-    public CodeGenerator() {}
-
-    public void generateCode(DiagramModel diagramModel) {
+    public static String generateCode(DiagramModel diagramModel) {
         clearConsole(); // Clear the console before printing
-
+        String classCode = "Unable to generate code";
         for (Component component : diagramModel.getComponents()) {
             if (component instanceof models.classdiagram.Class) {
-                String classCode = generateClassCode((models.classdiagram.Class) component, diagramModel);
+                classCode = generateClassCode((models.classdiagram.Class) component, diagramModel);
                 System.out.println("Generated Code for " + ((models.classdiagram.Class) component).getName() + ":\n");
                 System.out.println(classCode);
                 System.out.println("--------------------------------------------------");
             }
         }
+
+        return classCode;
     }
 
-    private String generateClassCode(models.classdiagram.Class clazz, DiagramModel diagramModel) {
+    private static String generateClassCode(models.classdiagram.Class clazz, DiagramModel diagramModel) {
         StringBuilder code = new StringBuilder();
 
         // Add class declaration
@@ -54,7 +54,7 @@ public class CodeGenerator {
         return code.toString();
     }
 
-    private String getParentClass(models.classdiagram.Class clazz, DiagramModel diagramModel) {
+    private static String getParentClass(models.classdiagram.Class clazz, DiagramModel diagramModel) {
         // Iterate through relationships to check for inheritance
         for (Relationship relationship : diagramModel.getRelationships()) {
             System.out.println("Inside the generate code getparent class function");
@@ -78,7 +78,7 @@ public class CodeGenerator {
     }
 
 
-    private void addAttributes(models.classdiagram.Class clazz, StringBuilder code) {
+    private static void addAttributes(models.classdiagram.Class clazz, StringBuilder code) {
         // Use a Set to track already added attributes
         Set<String> addedAttributes = new HashSet<>();
 
@@ -106,7 +106,7 @@ public class CodeGenerator {
     }
 
 
-    private void addMethods(models.classdiagram.Class clazz, StringBuilder code) {
+    private static void addMethods(models.classdiagram.Class clazz, StringBuilder code) {
         // Use a Set to track already added methods
         Set<String> addedMethods = new HashSet<>();
 
@@ -136,7 +136,7 @@ public class CodeGenerator {
     }
 
 
-    private void addRelationships(models.classdiagram.Class clazz, DiagramModel diagramModel, StringBuilder code) {
+    private static void addRelationships(models.classdiagram.Class clazz, DiagramModel diagramModel, StringBuilder code) {
         // Handle Association, Aggregation, and Composition
         System.out.println("Inside addRelationship");
         for (Relationship relationship : diagramModel.getRelationships()) {
@@ -163,7 +163,7 @@ public class CodeGenerator {
         }
     }
 
-    private void clearConsole() {
+    private static void clearConsole() {
         // Attempt to clear the console (platform-dependent)
         try {
             if (System.getProperty("os.name").contains("Windows")) {

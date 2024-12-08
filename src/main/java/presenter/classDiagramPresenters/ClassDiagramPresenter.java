@@ -3,10 +3,7 @@ package presenter.classDiagramPresenters;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import controllers.ViewIController;
 import data.DiagramSerializer;
-import models.DiagramModel;
-import models.IModel;
-import models.Component;
-import models.Relationship;
+import models.*;
 import models.classdiagram.Aggregation;
 import models.classdiagram.Class;
 import models.classdiagram.Association;
@@ -699,6 +696,11 @@ public void updateComposition(String oldClassName1, String newClassName1, String
         {
             System.err.println("File path doesn't ends with .json extension!");
         }
+    }
+
+    public String generateJavaCodeFromClassDiagram() {
+        String javaCode = CodeGenerator.generateCode(model);
+        return javaCode;
     }
 }
 

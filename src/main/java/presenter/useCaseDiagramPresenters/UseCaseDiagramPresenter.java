@@ -91,7 +91,7 @@ public class UseCaseDiagramPresenter{
 
     public void setActorCoordinates(String ActorName, double x, double y) {
         for (models.Component component : model.getComponents()) {
-            if (component instanceof models.usecase.Actor && component.getDetails().equals(ActorName)) {
+            if (component instanceof models.usecase.Actor && component.getName().equals(ActorName)) {
                 models.usecase.Actor actor1 = (models.usecase.Actor) component;
                 actor1.setX(x);
                 actor1.setY(y);
@@ -143,7 +143,7 @@ public class UseCaseDiagramPresenter{
 
     public void setUseCaseCoordinates(String usecaseName, double x, double y) {
         for (models.Component component : model.getComponents()) {
-            if (component instanceof models.usecase.UseCase && component.getDetails().equals(usecaseName)) {
+            if (component instanceof models.usecase.UseCase && component.getName().equals(usecaseName)) {
                 models.usecase.UseCase useCase1 = (models.usecase.UseCase) component;
                 useCase1.setX(x);
                 useCase1.setY(y);
