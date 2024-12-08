@@ -10,7 +10,7 @@ public class Extend extends Relationship {
     {
         super(type);
     }
-    public Extend(Component from, Component to, String label,int x,int y) {
+    public Extend(Component from, Component to, String label,double x,double y) {
         super(from, to, "Extend", label,x,y);
     }
 

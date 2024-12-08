@@ -14,7 +14,7 @@ public class Association extends Relationship {
     {
         super(type);
     }
-    public Association(Component from, Component to, String label, int x, int y, String multiplicity1, String multiplicity2) {
+    public Association(Component from, Component to, String label, double x, double y, String multiplicity1, String multiplicity2) {
         super(from, to, "Association", label, x, y);
         this.multiplicity1 = multiplicity1;
         this.multiplicity2 = multiplicity2;

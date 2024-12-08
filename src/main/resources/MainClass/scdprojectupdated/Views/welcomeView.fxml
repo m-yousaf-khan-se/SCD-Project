@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.CubicCurve?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="733.0" prefWidth="903.0" stylesheets="@styles/welcomePage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WelcomeViewIController">
+   <children>
+      <Text fx:id="firstText" layoutX="292.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to UML Editor" wrappingWidth="363.46087646484375" />
+      <Text fx:id="secondText" layoutX="375.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading Application . . ." wrappingWidth="209.0609130859375" />
+      <CubicCurve controlX1="-75.80682373046875" controlX2="50.0" controlY1="-70.60687255859375" controlY2="100.0" endX="157.96142578125" endY="30.0" fill="DODGERBLUE" layoutX="173.0" layoutY="703.0" startX="-173.0" startY="30.0" stroke="BLACK" />
+      <CubicCurve controlX1="-75.80682373046875" controlX2="50.0" controlY1="-70.60687255859375" controlY2="100.0" endX="204.39300537109375" endY="37.0" fill="DODGERBLUE" layoutX="380.0" layoutY="696.0" startX="-178.0070037841797" startY="43.20208740234375" stroke="BLACK" />
+      <CubicCurve controlX1="-75.80682373046875" controlX2="50.0" controlY1="-70.60687255859375" controlY2="100.0" endX="202.593017578125" endY="37.0" fill="DODGERBLUE" layoutX="577.0" layoutY="696.0" startX="-171.80703735351562" startY="41.60205078125" stroke="BLACK" />
+      <CubicCurve controlX1="-75.80682373046875" controlX2="50.0" controlY1="-70.60687255859375" controlY2="100.0" endX="123.23345947265625" endY="37.0" fill="DODGERBLUE" layoutX="786.0" layoutY="696.0" startX="-172.63861083984375" startY="44.6837158203125" stroke="BLACK" />
+      <CubicCurve controlX1="-75.80682373046875" controlX2="50.0" controlY1="-70.60687255859375" controlY2="100.0" endX="-184.03857421875" endY="38.60205078125" fill="DODGERBLUE" layoutX="955.0" layoutY="699.0" startX="-175.2386474609375" startY="38.60205078125" stroke="BLACK" />
+   </children>
+</AnchorPane>
