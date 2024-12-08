@@ -1,5 +1,6 @@
 package controllers.useCaseDiagramControllers;
 
+import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -11,8 +12,10 @@ import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.text.Text;
 
 public class includeIController extends ViewIController implements IController {
@@ -52,6 +55,10 @@ public class includeIController extends ViewIController implements IController {
 
     @FXML
     void initialize() {
+        // Set the stroke dash array for the includeLine
+        includeLine.getStrokeDashArray().addAll(5.0, 5.0); // Equivalent to dashes of 5px with 5px gaps
+        includeLine.setStrokeWidth(2.0); // Set the stroke width
+        includeLine.setStrokeLineCap(StrokeLineCap.ROUND); // Set the cap style for dashes
         setupAssociationLineBindings();
         setupDragHandlers();
     }
