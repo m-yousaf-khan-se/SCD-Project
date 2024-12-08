@@ -6,6 +6,10 @@ import models.Relationship;
 public class Include extends Relationship {
 
     public Include(){};
+    public Include(String type)
+    {
+        super(type);
+    }
     public Include(Component from, Component to, String label,int x,int y) {
         super(from, to, "Include", label,x,y);
     }

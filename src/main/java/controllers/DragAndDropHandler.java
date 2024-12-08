@@ -5,7 +5,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.Node;
 import java.util.List;
 
-public class DragAndDropHandler extends ControllerClass {
+public class DragAndDropHandler{
 
     // Static method to add drag-and-drop functionality to a single node
     public static void add(Node node) {

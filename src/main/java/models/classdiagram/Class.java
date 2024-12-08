@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Class implements Component, Serializable {
     private String name;
@@ -32,6 +33,7 @@ public class Class implements Component, Serializable {
         this.name=name;
         System.out.println("Setting the name of class ");
     }
+    @Override
     public String getName()
     {
         System.out.println("Getting the name of class ");
@@ -115,4 +117,17 @@ public class Class implements Component, Serializable {
         this.x = x;
         this.y = y;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true; // Same reference
+        if (obj == null || getClass() != obj.getClass()) return false; // Null or different class
+        models.classdiagram.Class other = (models.classdiagram.Class) obj;
+        return this.name.equals(other.name); // Compare based on class name
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name); // Hash based on class name
+    }
+
 }

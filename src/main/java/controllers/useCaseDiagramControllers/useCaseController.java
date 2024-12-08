@@ -57,7 +57,7 @@ public  class useCaseController extends ViewIController implements IController {
                     if(textField.getPromptText().contains("usecase name"))
                     {
                         useCaseName = textField.getText();
-                        addOrUpdateActorName(initialText, useCaseName);
+                        addOrUpdateUseCaseName(initialText, useCaseName);
                     }
 
                     System.out.println("Text changed in: " + textField.getPromptText() + " (of the useCase: " + useCaseName + ")");

@@ -6,4 +6,6 @@ public interface Component {
     void setCoordinates(int x, int y); // Set the position of the component
     int getX(); // Get the X coordinate
     int getY();
+    public String getName();
+
 }
