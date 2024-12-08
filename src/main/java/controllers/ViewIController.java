@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import controllers.classDiagramControllers.*;
@@ -62,6 +63,8 @@ public class ViewIController{
     private static UseCaseDiagramPresenter useCaseDiagramPresenter;
 
     private static Stage OwnerWin;
+
+    boolean CurrentDiagramSaved = false;
 
     private void bindCanvasToScrollPane() {
         // Bind the width and height of the canvas to the viewport of the ScrollPane
@@ -307,7 +310,7 @@ public class ViewIController{
     @FXML
     private void createNewClassDiagramListener(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("Views/umlClassViews/ClassDiagramTools.fxml"));
-        MainViewRightBorderArea.setContent(loader.load());
+        instance.MainViewRightBorderArea.setContent(loader.load());
     }
 
     @FXML
@@ -350,6 +353,69 @@ public class ViewIController{
     @FXML
     private void loadExistingProject(ActionEvent event) {
 
+        if(!paneCanvas.getChildren().isEmpty() && !CurrentDiagramSaved)
+        {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Information");
+            alert.setContentText("Your current project is not saved. If you load a new project, the current project will be lost!");
+
+            // Show the alert and wait for a response
+            Optional<ButtonType> result = alert.showAndWait();
+
+            // Handle the result
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                System.out.println("User chose OK - proceed to load the new project.");
+                paneCanvas.getChildren().clear();
+                canvasClassNodes.clear();
+                canvasUseCaseNodes.clear();
+
+            } else if (result.isPresent() && result.get() == ButtonType.CANCEL) {
+                System.out.println("User chose Cancel - keep the current project.");
+                return;
+            }
+        }
+
+        //Create a file Chooser
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Loading Project");
+
+        // Set extension filter to .json
+        FileChooser.ExtensionFilter jsonFilter = new FileChooser.ExtensionFilter("JSON Files (*.json)", "*.json");
+        fileChooser.getExtensionFilters().add(jsonFilter);
+
+        // Open the save dialog
+        File file = fileChooser.showSaveDialog(OwnerWin);
+
+        if (file != null) {
+
+            if (!file.getName().endsWith(".json")) {
+                file = new File(file.getAbsolutePath() + ".json");
+            }
+
+            System.out.println("File path to load project is set successfully!");
+
+            if(!generateJavaCodeFromClassDiagramMenuItem.isDisable()) //if the option to generate Java code is available this means that the user was creating class Diagram
+            {
+                System.out.println("Passing the follwing path to class Presenter to load project from file: "+ file.getPath().toString());
+                if(!classDiagramPresenter.loadClassDiagram(file)){
+                    showAlert(Alert.AlertType.ERROR, "Error", "Unable to load project from this file!");
+                    return;
+                }
+            }
+            else // when user was making a Use Case Diagram
+            {
+                System.out.println("Passing the follwing path to useCase Presenter to load project from file: "+ file.getPath().toString());
+                if(!useCaseDiagramPresenter.loadUseCaseDiagram(file)){
+                    showAlert(Alert.AlertType.ERROR, "Error", "Unable to load project from this file!");
+                    return;
+                }
+            }
+        }
+        else
+        {
+            System.err.println("File is not set!");
+        }
     }
 
     @FXML
@@ -418,7 +484,7 @@ public class ViewIController{
             }
 
             System.out.println("File path to save project is set successfully!");
-//            classDiagramPresenter.saveClassDiagramProject(file);
+//            classDiagramPresenter.saveDiagramProject(file);
 
             if(!generateJavaCodeFromClassDiagramMenuItem.isDisable()) //if the option to generate Java code is available this means that the user was creating class Diagram
             {
@@ -431,11 +497,12 @@ public class ViewIController{
                         UMLClassIController ctrler = (UMLClassIController)entry.getValue();
                         Double []coordinates = ctrler.getCoordinates();
                         String className = ctrler.getUMLClassName();
-                        instance.classDiagramPresenter.setClassCoordinates(className, coordinates[0], coordinates[1]);
+                        classDiagramPresenter.setClassCoordinates(className, coordinates[0], coordinates[1]);
                     }
                 }
                 System.out.println("Passing the follwing path to Presenter to save file: "+ file.getPath().toString());
-                instance.classDiagramPresenter.saveClassDiagramProject(file);
+                CurrentDiagramSaved = classDiagramPresenter.saveClassDiagramProject(file);
+
             }
             else // when user was making a Use Case Diagram
             {
@@ -449,7 +516,7 @@ public class ViewIController{
                         useCaseController ctrler = (useCaseController)entry.getValue();
                         Double []coordinates = ctrler.getCoordinates();
                         String useCaseName = ctrler.getUseCaseName();
-                        instance.useCaseDiagramPresenter.setUseCaseCoordinates(useCaseName, coordinates[0], coordinates[1]);
+                        useCaseDiagramPresenter.setUseCaseCoordinates(useCaseName, coordinates[0], coordinates[1]);
                     }
                 }
                 //For Actors
@@ -460,13 +527,13 @@ public class ViewIController{
                         ActorController ctrler = (ActorController)entry.getValue();
                         Double []coordinates = ctrler.getCoordinates();
                         String actorName = ctrler.getActorName();
-                        instance.useCaseDiagramPresenter.setActorCoordinates(actorName, coordinates[0], coordinates[1]);
+                        useCaseDiagramPresenter.setActorCoordinates(actorName, coordinates[0], coordinates[1]);
                     }
                 }
 
 
                 System.out.println("Passing the follwing path to Presenter to save file: "+ file.getPath().toString());
-                instance.useCaseDiagramPresenter.saveClassDiagramProject(file);
+                CurrentDiagramSaved = useCaseDiagramPresenter.saveDiagramProject(file);
             }
         }
         else
@@ -475,7 +542,7 @@ public class ViewIController{
         }
     }
 
-    public static void setOwnerWindow(Stage stage)
+    public void setOwnerWindow(Stage stage)
     {
         OwnerWin = stage;
     }
@@ -542,4 +609,8 @@ public class ViewIController{
     }
 
 
+    //------------------------------------Data Loading from class models --------------------------------
+    public static void loadClass(){
+
+    }
 }
